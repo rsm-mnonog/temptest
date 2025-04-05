@@ -1,0 +1,14 @@
+---
+title: "Mario P. Nonog Jr."
+image: "images/HEADSHOT.jpeg"
+about:
+    template: jolla
+    links:
+        - icon: envelope
+          href: mailto:mariononog@gmail.com
+        - icon: linkedin
+          href: https://www.linkedin.com/in/mnonog/
+
+---
+
+Navy Veteran Officer and Business Analyst Graduate Student with expertise in Statistical Forecasting, Planning and technical data expertise.  Skilled in Mathematical Instrument such as python (pandas, numpy), MATLAB, and Excel to deliver insights, statistical models, and solutions of complex problems through integration and regression testing. 
