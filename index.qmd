@@ -6,7 +6,7 @@ about:
     links:
         - icon: envelope
           href: mailto:mariononog@gmail.com
-        - icon: linkedin
+        - icon: linkedin  ##getbootstrap.com
           href: https://www.linkedin.com/in/mnonog/
 
 ---

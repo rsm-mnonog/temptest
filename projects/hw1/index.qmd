@@ -1,0 +1,13 @@
+---
+title: Homework 1
+author: Mario Nonog
+---
+
+# Question 1
+
+Prof says make a chart.
+
+``` {r}
+
+
+```
