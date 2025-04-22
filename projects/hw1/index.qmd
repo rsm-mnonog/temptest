@@ -7,7 +7,17 @@ author: Mario Nonog
 
 Prof says make a chart.
 
-``` {r}
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
 
+# Generate random data
+data = np.random.randn(1000)
 
-```
+# Create histogram
+plt.hist(data, bins=30, color='skyblue', edgecolor='black')
+plt.title("Histogram of Random Data")
+plt.xlabel("Value")
+plt.ylabel("Frequency")
+plt.grid(True)
+plt.show()
