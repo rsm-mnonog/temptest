@@ -1,0 +1,51 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: Homework 1\n",
+        "author: Mario Nonog\n",
+        "---\n",
+        "\n",
+        "# Question 1\n",
+        "\n",
+        "Prof says make a chart."
+      ],
+      "id": "cbf8faef"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "import numpy as np\n",
+        "\n",
+        "# Generate random data\n",
+        "data = np.random.randn(1000)\n",
+        "\n",
+        "# Create histogram\n",
+        "plt.hist(data, bins=30, color='skyblue', edgecolor='black')\n",
+        "plt.title(\"Histogram of Random Data\")\n",
+        "plt.xlabel(\"Value\")\n",
+        "plt.ylabel(\"Frequency\")\n",
+        "plt.grid(True)\n",
+        "plt.show()"
+      ],
+      "id": "21432489",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
+
