@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Your Name">
+<meta name="author" content="Mario Nonog">
 <meta name="dcterms.date" content="2025-04-22">
 
 <title>A Replication of Karlan and List (2007) – Mario</title>
@@ -153,7 +153,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Your Name </p>
+             <p>Mario Nonog </p>
           </div>
   </div>
     
@@ -175,14 +175,18 @@ ul.task-list li input[type="checkbox"] {
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Dean Karlan at Yale and John List at the University of Chicago conducted a field experiment to test the effectiveness of different fundraising letters. They sent out 50,000 fundraising letters to potential donors, randomly assigning each letter to one of three treatments: a standard letter, a matching grant letter, or a challenge grant letter. They published the results of this experiment in the <em>American Economic Review</em> in 2007. The article and supporting data are available from the <a href="https://www.aeaweb.org/articles?id=10.1257/aer.97.5.1774">AEA website</a> and from Innovations for Poverty Action as part of <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/27853&amp;version=4.2">Harvard’s Dataverse</a>.</p>
-<p><em>to do: expand on the description of the experiment.</em></p>
+<p>In their 2007 paper published in the American Economic Review, Dean Karlan and John List explored the behavioral economics of charitable giving through a large-scale natural field experiment. They sought to answer a core question in fundraising strategy: Does the way a donation appeal is framed—particularly with the use of matching grants—significantly influence donor behavior? While prior research had focused heavily on tax incentives and the “supply side” of giving, Karlan and List shifted attention to the “demand side,” providing some of the first rigorous evidence on how potential donors respond to price-like mechanisms in real-world charitable campaigns.</p>
 <p>This project seeks to replicate their results.</p>
 </section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>Sample Size: 50,083 prior donors were included in the study. Treatment Group: 33,396 (67%) Control Group: 16,687 (33%) Overall Giving: Total raised: $45,860 Control group: $13,566 Treatment group: $32,294 Average revenue per letter: Control: $0.81 Treatment: $0.97 (excluding match funds) Effect of Matching Grants: Response Rate: Increased by 22% in the treatment group Revenue per solicitation: Increased by 19% Higher match ratios ($2:$1 and $3:$1) did not outperform the basic $1:$1 match Conditional Giving (among those who donated): Average gift size remained largely unchanged across treatments Political Geography Effects: In red states (voted for Bush in 2004), match letters raised 55% more per solicitation In blue states, the match had no statistically significant effect Elasticity Estimate: The implied price elasticity of giving due to matching (not tax deductibility) was estimated at –0.30, aligning with or slightly lower than tax-related elasticities found in other literature</p>
 <section id="description" class="level3">
 <h3 class="anchored" data-anchor-id="description">Description</h3>
-<p><em>todo: Read the data into R/Python and describe the data</em></p>
+<p><em>todo: Read the data into R/Python and describe the data</em> The experiment was conducted in collaboration with a liberal nonprofit organization in the United States that focuses on civil liberties. The researchers utilized a direct mail fundraising campaign, sending letters to over 50,000 prior donors from the organization’s database. Each recipient received a four-page fundraising letter that was identical in content, except for three randomized elements in the treatment group.</p>
+<p>The individuals were divided into:</p>
+<p>Control Group: Received a standard donation request letter, with no mention of a matching grant. Treatment Group: Received a letter including a paragraph that announced a matching grant from a “concerned fellow member.” Within the treatment group, letters were further randomized across three dimensions:</p>
+<p>Match Ratio: $1:$1 (every dollar donated is matched with $1) $2:$1 (every dollar is matched with $2) $3:$1 (every dollar is matched with $3) Maximum Match Amount: $25,000, $50,000, $100,000, or left unstated Suggested Donation Amounts: Based on the recipient’s previous highest donation, the reply card listed either the same amount, 1.25×, or 1.5× that amount The match offer was framed both in the text of the letter and visually highlighted on the reply card included in the envelope. The control group’s reply card featured only the organization’s logo.</p>
 <div class="callout callout-style-simple callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
