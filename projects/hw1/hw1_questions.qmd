@@ -233,7 +233,6 @@ reg_table = pd.DataFrame({
 
 print("\n📉 Linear Regression Summary:\n")
 print(reg_table.round(4))
-
 ```
 What This Means About Human Behavior
 We’ve learned that people are more likely to give when they know their donation will be matched. Even though the increase might seem small numerically, the effect is meaningful: simply mentioning a matching gift nudges more people into taking action.
