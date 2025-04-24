@@ -1,6 +1,6 @@
 ---
 title: "Homework 1"
-description: "dabfliefqe;wd"
+description: Reproducing "Does Price Matter in Charitable Giving? Evudence from a Large Scale Natural Field Experiment by Dean Karlan and John List"
 author: "Mario Nonog"
 date: today
 callout-appearance: minimal # this hides the blue "i" icon on .callout-notes
