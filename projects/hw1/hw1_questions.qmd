@@ -197,42 +197,50 @@ Next step, we're comparing **donation rates** between the treatment and control 
 
 ```{python}
 import pandas as pd
+import numpy as np
 from scipy import stats
 import statsmodels.formula.api as smf
 
-# Split groups
+# --- Step 1: Split groups ---
 treated = df[df['treatment'] == 1]['gave']
 control = df[df['treatment'] == 0]['gave']
 
-# --- T-Test ---
+# --- Step 2: T-Test ---
 t_stat, p_value = stats.ttest_ind(treated, control, equal_var=False)
 
-# Create a clean summary table for T-Test
+# --- Step 3: Create a clean summary table for T-Test ---
 t_test_table = pd.DataFrame({
     'Group': ['Treatment', 'Control'],
     'Mean (gave)': [treated.mean(), control.mean()],
-    'Standard Error': [treated.std()/len(treated)**0.5, control.std()/len(control)**0.5]
+    'Standard Error': [
+        treated.std(ddof=1) / np.sqrt(len(treated)),
+        control.std(ddof=1) / np.sqrt(len(control))
+    ]
 })
-t_test_table.loc[2] = ['Difference', treated.mean() - control.mean(), None]
+
+# Add difference row with np.nan for missing Std. Error (to avoid FutureWarning)
+t_test_table.loc[2] = ['Difference', treated.mean() - control.mean(), np.nan]
 
 print("📊 T-Test Summary:\n")
 print(t_test_table.round(4))
-print(f"\nt-statistic: {t_stat:.4f}")
-print(f"p-value: {p_value:.4f}")
 
-# --- Linear Regression ---
+print(f"\nt-statistic: {t_stat:.4f}")
+print(f"p-value:     {p_value:.4f}")
+
+# --- Step 4: Linear Regression ---
 model = smf.ols('gave ~ treatment', data=df).fit()
 
-# Format regression summary into a table
+# --- Step 5: Format regression summary into a table ---
 reg_table = pd.DataFrame({
     'Coefficient': model.params,
     'Std. Error': model.bse,
     't-Statistic': model.tvalues,
     'P-Value': model.pvalues
-})
+}).round(4)
 
 print("\n📉 Linear Regression Summary:\n")
-print(reg_table.round(4))
+print(reg_table)
+
 ```
 What This Means About Human Behavior
 We’ve learned that people are more likely to give when they know their donation will be matched. Even though the increase might seem small numerically, the effect is meaningful: simply mentioning a matching gift nudges more people into taking action.
