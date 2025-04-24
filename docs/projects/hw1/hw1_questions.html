@@ -464,7 +464,7 @@ Variable Definitions
 <h3 class="anchored" data-anchor-id="balance-test">Balance Test</h3>
 <p>As an ad hoc test of the randomization mechanism, I provide a series of tests that compare aspects of the treatment and control groups to assess whether they are statistically significantly different from one another.</p>
 <p>In this step, we’re comparing the <strong>“months since last donation” (<code>mrm2</code>)</strong> between the treatment and control groups using two different methods: a <strong>manual t-test</strong> and a <strong>linear regression</strong>. The t-test helps us determine whether there’s a statistically significant difference in the average time since last donation between the two groups. Then, we use a simple linear regression (<code>mrm2 ~ treatment</code>) to estimate the same difference — where the <code>treatment</code> variable acts as a binary indicator (1 for treatment group, 0 for control). We summarize both results in clean, readable tables to clearly report the group means, differences, and statistical significance of the treatment effect. This allows us to confirm whether the random assignment successfully balanced this pre-treatment variable, which is an important validation step in any randomized experiment.</p>
-<div id="f7fcbcec" class="cell" data-execution_count="1">
+<div id="ea0bee1b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
@@ -534,7 +534,7 @@ treatment       0.0137      0.1145       0.1195   0.9049</code></pre>
 <h3 class="anchored" data-anchor-id="charitable-contribution-made">Charitable Contribution Made</h3>
 <p>First, I analyze whether matched donations lead to an increased response rate of making a donation.</p>
 <p>Let us visualize the <strong>donation rates</strong> for the treatment and control groups. We calculate the proportion of people who donated (<code>gave == 1</code>) in each group, then create a <strong>bar plot</strong> comparing these rates side by side. Each bar shows the <strong>average donation rate</strong> for its group, and we add labels above the bars to display the exact percentages. This plot gives a quick and intuitive view of how the treatment — receiving a matching donation offer — affected the likelihood of giving. This visualization complements our statistical analysis and helps illustrate the <strong>extensive margin</strong> effect of the treatment (i.e., whether more people chose to donate).</p>
-<div id="94af1e94" class="cell" data-execution_count="2">
+<div id="ccf06dbc" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -544,7 +544,7 @@ treatment       0.0137      0.1145       0.1195   0.9049</code></pre>
 </div>
 </div>
 <p>Next step, we’re comparing <strong>donation rates</strong> between the treatment and control groups using two statistical approaches: a <strong>t-test</strong> and a <strong>simple linear regression</strong>. First, we perform an independent t-test to check if there is a statistically significant difference in the <strong>proportion of people who donated</strong> (<code>gave</code>) between the two groups. We summarize the group means, standard errors, and their difference in a clean table. Next, we run a bivariate linear regression (<code>gave ~ treatment</code>) to estimate the effect of treatment assignment on donation behavior. The <code>treatment</code> variable serves as a binary indicator (1 for treatment, 0 for control), and the coefficient tells us how much more (or less) likely someone is to donate if they were in the treatment group. Together, these analyses help us quantify and assess the <strong>causal impact</strong> of the matching donation offer on donation participation (i.e., the <strong>extensive margin</strong>).</p>
-<div id="1b9f2f90" class="cell" data-execution_count="3">
+<div id="24de65cc" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
@@ -610,7 +610,7 @@ The behavior of DataFrame concatenation with empty or all-NA entries is deprecat
 <p>This tells us that:</p>
 <p>Social cues matter. When people know others are also giving (like a “concerned member” offering a match), it makes them feel part of something. Framing matters. The idea that their donation will “go further” encourages behavior change. Behavior is not purely rational — a simple sentence in a letter changes what people do with their money. This is why Table 2A (Panel A) in the paper is so important — it quantifies how a subtle psychological nudge leads to real-world donations.</p>
 <p>Now let us estimate a <strong>probit regression model</strong> to analyze the effect of the treatment on the likelihood of making a donation. The dependent variable is <code>gave</code> (a binary indicator for whether the individual donated), and the independent variable is <code>treatment</code> (1 if the person received the matching offer, 0 otherwise). Using a <strong>probit model</strong> allows us to model the <strong>probability</strong> of donating as a nonlinear function of the treatment assignment, assuming a standard normal distribution of the error term. This method is appropriate for binary outcome variables and provides a more statistically rigorous approach than a linear probability model. The results will help us assess whether the treatment significantly increases the probability of giving, and by how much (on a latent scale).</p>
-<div id="4e24d082" class="cell" data-execution_count="4">
+<div id="01707c40" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -629,7 +629,7 @@ Dep. Variable:                   gave   No. Observations:                50083
 Model:                         Probit   Df Residuals:                    50081
 Method:                           MLE   Df Model:                            1
 Date:                Wed, 23 Apr 2025   Pseudo R-squ.:               0.0009783
-Time:                        21:59:56   Log-Likelihood:                -5030.5
+Time:                        22:02:39   Log-Likelihood:                -5030.5
 converged:                       True   LL-Null:                       -5035.4
 Covariance Type:            nonrobust   LLR p-value:                  0.001696
 ==============================================================================
@@ -645,7 +645,7 @@ treatment      0.0868      0.028      3.113      0.002       0.032       0.141
 <section id="differences-between-match-rates" class="level3">
 <h3 class="anchored" data-anchor-id="differences-between-match-rates">Differences between Match Rates</h3>
 <p>Next, I assess the effectiveness of different sizes of matched donations on the response rate.</p>
-<div id="c0e2289a" class="cell" data-execution_count="5">
+<div id="133b263d" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter treatment group only</span></span>
@@ -684,7 +684,7 @@ t-statistic = -0.0501, p-value = 0.9600</code></pre>
 <p>“While the match treatments relative to a control group increase the probability of donating, larger match ratios—$3:$1 and $2:$1—relative to a smaller match ratio ($1:$1) have no additional impact.”–from page 8</p>
 <p>Yes — the results support the “figures suggest” comment made by the authors on page 8 of the Karlan &amp; List (2007) paper. All p-values are well above 0.05, which means that none of the differences between match ratios are statistically significant. In other words, there’s no evidence that higher match ratios (like 2:1 or 3:1) increased the likelihood of giving compared to a 1:1 match.</p>
 <p>Next, we’re analyzing whether the <strong>size of the match ratio</strong> (1:1, 2:1, or 3:1) affects the likelihood that someone donates — but only among individuals who were in the <strong>treatment group</strong> (i.e., who received a match offer). We approach this in two ways: 1. <strong>Dummy variable regression:</strong> We create binary variables for each match ratio and run a regression using <code>gave</code> as the outcome and <code>ratio2</code> and <code>ratio3</code> as predictors, with <code>ratio1</code> (1:1 match) serving as the baseline. This lets us interpret the coefficients as changes in donation probability relative to the 1:1 group. 2. <strong>Categorical variable regression:</strong> We use <code>C(ratio)</code> to treat the <code>ratio</code> variable as a categorical factor. This achieves the same comparison as above but allows <code>statsmodels</code> to handle dummy coding internally. Both models help us determine whether offering a <strong>more generous match</strong> (like 2:1 or 3:1) significantly increases the probability of donation compared to a standard 1:1 match. The resulting tables summarize the estimated effects, their statistical significance, and allow us to assess whether larger match ratios are more effective. -</p>
-<div id="ba3f195a" class="cell" data-execution_count="6">
+<div id="36dbd96b" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -744,7 +744,7 @@ C(ratio)[T.3] -1.229429e+09  1.118256e+10      -0.1099   0.9125</code></pre>
 <p>Interpretation: - People in the 1:1 match group donated at a rate of about 2.07%. - Offering a more generous match — 2:1 or 3:1 — slightly increased the donation rate by about 0.2 percentage points, but this difference was not statistically significant. - The p-values for both ratio2 and ratio3 are well above 0.05, meaning we cannot conclude that these match levels had a meaningful effect on donor behavior.</p>
 <!-- _todo: Calculate the response rate difference between the 1:1 and 2:1 match ratios and the 2:1 and 3:1 ratios.  Do this directly from the data, and do it by computing the differences in the fitted coefficients of the previous regression. what do you conclude regarding the effectiveness of different sizes of matched donations?_ -->
 <p><strong>Next step:</strong> We’ll evaluate how the <strong>size of the match ratio</strong> affects donation rates by comparing the <strong>response rate differences</strong> between the 1:1 and 2:1 match groups, and between the 2:1 and 3:1 groups. We’ll do this in two ways: first, by calculating the differences <strong>directly from the observed data</strong>, and second, by comparing the <strong>coefficients from our earlier regression models</strong>. This will help us assess whether offering more generous match ratios leads to meaningfully higher donation rates. We’ll then draw conclusions about the practical effectiveness of increasing the match size.</p>
-<div id="a4fed413" class="cell" data-execution_count="7">
+<div id="2910965d" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Filter to treatment group</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>match_df <span class="op">=</span> df[df[<span class="st">'treatment'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -806,7 +806,7 @@ Predicted rate (3:1): 0.0227
 <p>In this subsection, I analyze the effect of the size of matched donation on the size of the charitable contribution.</p>
 <!-- _todo: Calculate a t-test or run a bivariate linear regression of the donation amount on the treatment status. What do we learn from doing this analysis?_ -->
 <p>*First step:<strong> Perform a t-test or simple linear regression to analyze whether being in the treatment group had an effect on the </strong>amount donated**. This helps us understand whether the matching offer influenced not just <em>whether</em> people gave, but <em>how much</em> they gave. We’ll interpret the results to assess the impact of the treatment on donation size.</p>
-<div id="a005cbab" class="cell" data-execution_count="8">
+<div id="99ddaeaa" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
@@ -874,7 +874,7 @@ treatment       0.1536      0.0826       1.8605   0.0628</code></pre>
 <p>-So far, the match offer seems to mainly help on the extensive margin — getting more people to donate. Its effect on the intensive margin — how much people give — appears small and uncertain.</p>
 <!-- _todo: now limit the data to just people who made a donation and repeat the previous analysis. This regression allows you to analyze how much respondents donate conditional on donating some positive amount. Interpret the regression coefficients -- what did we learn? Does the treatment coefficient have a causal interpretation?_  -->
 <p><strong>Next step:</strong> Focus only on individuals who actually made a donation (<code>gave == 1</code>) and re-run the previous analysis using this subset. This allows us to examine how much people donate <em>conditional on giving</em>. We’ll interpret the regression results to understand whether the treatment influenced the donation amount among donors, and consider whether the treatment effect in this case can be interpreted causally</p>
-<div id="1016129e" class="cell" data-execution_count="9">
+<div id="c373cf50" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
@@ -946,7 +946,7 @@ treatment      -1.6684      2.8724      -0.5808   0.5615</code></pre>
 <p>This introduces selection bias, so the regression tells us about differences among donors, but not about the causal effect of treatment on donation size.</p>
 <!-- _todo: Make two plots: one for the treatment group and one for the control. Each plot should be a histogram of the donation amounts only among people who donated. Add a red vertical bar or some other annotation to indicate the sample average for each plot._ -->
 <p><strong>Then:</strong> We’ll create two histograms — one for the treatment group and one for the control group — showing the distribution of donation amounts <strong>only among individuals who made a donation</strong>. We’ll also add a red vertical line to each plot to mark the <strong>average donation amount</strong>, allowing us to visually compare the giving behavior between the two groups.</p>
-<div id="12368369" class="cell" data-execution_count="10">
+<div id="f2f548ae" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -967,7 +967,7 @@ treatment      -1.6684      2.8724      -0.5808   0.5615</code></pre>
 <!-- 
 _to do:  Simulate 10,000 draws from the control distribution and 10,000 draws from the treatment distribution. You'll then calculate a vector of 10,000 differences, and then you'll plot the cumulative average of that vector of differences. This average will likely be "noisey" when only averaging a few numbers, but should "settle down" and approximate the treatment effect (0.004 = 0.022 - 0.018) as the sample size gets large. Explain the chart to the reader._ -->
 <p><strong>First:</strong> We’ll simulate 10,000 individual outcomes from both the treatment and control groups using their actual donation probabilities. For each simulated pair, we’ll compute the difference in giving behavior (1 or 0). By calculating the <strong>cumulative average</strong> of these 10,000 differences, we’ll observe how the estimated treatment effect evolves with increasing sample size. The plot will start off noisy, but it should stabilize around the true effect (~0.004) as the number of simulations grows. We’ll use this to visually demonstrate the Law of Large Numbers and explain the result to the reader.</p>
-<div id="acf5cf27" class="cell" data-execution_count="11">
+<div id="73643e84" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -983,7 +983,7 @@ _to do:  Simulate 10,000 draws from the control distribution and 10,000 draws fr
 <h3 class="anchored" data-anchor-id="central-limit-theorem">Central Limit Theorem</h3>
 <!-- _to do: Make 4 histograms at sample sizes 50, 200, 500, and 1000.  To do this for a sample size of e.g. 50, take 50 draws from each of the control and treatment distributions, and calculate the average difference between those draws. Then repeat that process 999 more times so that you have 1000 averages. Plot the histogram of those averages. The repeat for the other 3 histograms. Explain this sequence of histograms and its relationship to the central limit theorem to the reader._ -->
 <p>Now We’ll simulate sampling from the treatment and control groups at four different sample sizes: 50, 200, 500, and 1000. For each sample size, we’ll draw 50 (or more) observations from each group, calculate the average difference in donation rates, and repeat this process 1,000 times to generate a distribution of sample differences. Then, we’ll plot a histogram of those 1,000 differences for each sample size. This series of histograms will help demonstrate how, as sample size increases, the distribution of sample averages becomes narrower and more centered around the true treatment effect — a visual illustration of the <strong>Central Limit Theorem</strong>.</p>
-<div id="945a4bab" class="cell" data-execution_count="12">
+<div id="61e974ba" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
