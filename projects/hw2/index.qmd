@@ -1,8 +1,0 @@
----
-title: "Homework 2"
-author: "Mario Nonog"
-date: today
-callout-appearance: minimal # this hides the blue "i" icon on .callout-notes
-theme: cosmo
-image: "other_docs/HW_PHOTO.jpg"
----
