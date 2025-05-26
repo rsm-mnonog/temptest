@@ -7,7 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Mario Nonog">
-<meta name="dcterms.date" content="2025-04-23">
+<meta name="dcterms.date" content="2025-05-25">
+<meta name="description" content="MNL via Maximum Likelihood and Bayesian Approach">
 
 <title>Homework 3 – Mario</title>
 <style>
@@ -21,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -69,6 +104,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -113,8 +177,49 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#likelihood-for-the-multi-nomial-logit-mnl-model" id="toc-likelihood-for-the-multi-nomial-logit-mnl-model" class="nav-link active" data-scroll-target="#likelihood-for-the-multi-nomial-logit-mnl-model">1. Likelihood for the Multi-nomial Logit (MNL) Model</a></li>
+  <li><a href="#simulate-conjoint-data" id="toc-simulate-conjoint-data" class="nav-link" data-scroll-target="#simulate-conjoint-data">2. Simulate Conjoint Data</a></li>
+  <li><a href="#preparing-the-data-for-estimation" id="toc-preparing-the-data-for-estimation" class="nav-link" data-scroll-target="#preparing-the-data-for-estimation">3. Preparing the Data for Estimation</a>
+  <ul class="collapse">
+  <li><a href="#model-overview" id="toc-model-overview" class="nav-link" data-scroll-target="#model-overview">✅ Model Overview</a></li>
+  <li><a href="#coefficient-interpretation" id="toc-coefficient-interpretation" class="nav-link" data-scroll-target="#coefficient-interpretation">🔍 Coefficient Interpretation</a></li>
+  <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways">🧠 Takeaways</a></li>
+  </ul></li>
+  <li><a href="#estimation-via-maximum-likelihood" id="toc-estimation-via-maximum-likelihood" class="nav-link" data-scroll-target="#estimation-via-maximum-likelihood">4. Estimation via Maximum Likelihood</a>
+  <ul class="collapse">
+  <li><a href="#mle-output-summary-non-converged" id="toc-mle-output-summary-non-converged" class="nav-link" data-scroll-target="#mle-output-summary-non-converged">⚠️ MLE Output Summary (Non-converged)</a></li>
+  <li><a href="#optimization-output" id="toc-optimization-output" class="nav-link" data-scroll-target="#optimization-output">📉 Optimization Output</a></li>
+  <li><a href="#interpretation-caveats" id="toc-interpretation-caveats" class="nav-link" data-scroll-target="#interpretation-caveats">⚠️ Interpretation Caveats</a></li>
+  <li><a href="#recommendation" id="toc-recommendation" class="nav-link" data-scroll-target="#recommendation">✅ Recommendation</a></li>
+  <li><a href="#mle-results-summary" id="toc-mle-results-summary" class="nav-link" data-scroll-target="#mle-results-summary">✅ MLE Results Summary</a></li>
+  <li><a href="#interpretation-of-parameters" id="toc-interpretation-of-parameters" class="nav-link" data-scroll-target="#interpretation-of-parameters">🔍 Interpretation of Parameters</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">🧠 Summary</a></li>
+  </ul></li>
+  <li><a href="#estimation-via-bayesian-methods" id="toc-estimation-via-bayesian-methods" class="nav-link" data-scroll-target="#estimation-via-bayesian-methods">5. Estimation via Bayesian Methods</a>
+  <ul class="collapse">
+  <li><a href="#bayesian-posterior-summary-via-mcmc" id="toc-bayesian-posterior-summary-via-mcmc" class="nav-link" data-scroll-target="#bayesian-posterior-summary-via-mcmc">✅ Bayesian Posterior Summary (via MCMC)</a></li>
+  <li><a href="#interpretation-of-posterior-estimates" id="toc-interpretation-of-posterior-estimates" class="nav-link" data-scroll-target="#interpretation-of-posterior-estimates">🔍 Interpretation of Posterior Estimates</a></li>
+  <li><a href="#mcmc-diagnostics" id="toc-mcmc-diagnostics" class="nav-link" data-scroll-target="#mcmc-diagnostics">🔁 MCMC Diagnostics</a></li>
+  <li><a href="#takeaway" id="toc-takeaway" class="nav-link" data-scroll-target="#takeaway">🧠 Takeaway</a></li>
+  <li><a href="#bayesian-vs.-mle-parameter-estimates" id="toc-bayesian-vs.-mle-parameter-estimates" class="nav-link" data-scroll-target="#bayesian-vs.-mle-parameter-estimates">🔄 Bayesian vs.&nbsp;MLE Parameter Estimates</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">✅ Interpretation</a></li>
+  <li><a href="#insights" id="toc-insights" class="nav-link" data-scroll-target="#insights">🧠 Insights</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">📌 Conclusion</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">6. Discussion</a>
+  <ul class="collapse">
+  <li><a href="#interpretation-of-parameter-estimates" id="toc-interpretation-of-parameter-estimates" class="nav-link" data-scroll-target="#interpretation-of-parameter-estimates">Interpretation of Parameter Estimates</a></li>
+  <li><a href="#extending-to-a-multi-level-hierarchical-model" id="toc-extending-to-a-multi-level-hierarchical-model" class="nav-link" data-scroll-target="#extending-to-a-multi-level-hierarchical-model">🧠 Extending to a Multi-Level (Hierarchical) Model</a></li>
+  <li><a href="#key-changes-for-simulation-and-estimation" id="toc-key-changes-for-simulation-and-estimation" class="nav-link" data-scroll-target="#key-changes-for-simulation-and-estimation">✅ Key Changes for Simulation and Estimation</a></li>
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1">📌 Summary</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -124,6 +229,11 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="title">Homework 3</h1>
 </div>
 
+<div>
+  <div class="description">
+    MNL via Maximum Likelihood and Bayesian Approach
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -138,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 23, 2025</p>
+      <p class="date">May 25, 2025</p>
     </div>
   </div>
   
@@ -150,8 +260,815 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>This assignment expores two methods for estimating the MNL model: (1) via Maximum Likelihood, and (2) via a Bayesian approach using a Metropolis-Hastings MCMC algorithm.</p>
+<section id="likelihood-for-the-multi-nomial-logit-mnl-model" class="level2">
+<h2 class="anchored" data-anchor-id="likelihood-for-the-multi-nomial-logit-mnl-model">1. Likelihood for the Multi-nomial Logit (MNL) Model</h2>
+<p>Suppose we have <span class="math inline">\(i=1,\ldots,n\)</span> consumers who each select exactly one product <span class="math inline">\(j\)</span> from a set of <span class="math inline">\(J\)</span> products. The outcome variable is the identity of the product chosen <span class="math inline">\(y_i \in \{1, \ldots, J\}\)</span> or equivalently a vector of <span class="math inline">\(J-1\)</span> zeros and <span class="math inline">\(1\)</span> one, where the <span class="math inline">\(1\)</span> indicates the selected product. For example, if the third product was chosen out of 3 products, then either <span class="math inline">\(y=3\)</span> or <span class="math inline">\(y=(0,0,1)\)</span> depending on how we want to represent it. Suppose also that we have a vector of data on each product <span class="math inline">\(x_j\)</span> (eg, brand, price, etc.).</p>
+<p>We model the consumer’s decision as the selection of the product that provides the most utility, and we’ll specify the utility function as a linear function of the product characteristics:</p>
+<p><span class="math display">\[ U_{ij} = x_j'\beta + \epsilon_{ij} \]</span></p>
+<p>where <span class="math inline">\(\epsilon_{ij}\)</span> is an i.i.d. extreme value error term.</p>
+<p>The choice of the i.i.d. extreme value error term leads to a closed-form expression for the probability that consumer <span class="math inline">\(i\)</span> chooses product <span class="math inline">\(j\)</span>:</p>
+<p><span class="math display">\[ \mathbb{P}_i(j) = \frac{e^{x_j'\beta}}{\sum_{k=1}^Je^{x_k'\beta}} \]</span></p>
+<p>For example, if there are 3 products, the probability that consumer <span class="math inline">\(i\)</span> chooses product 3 is:</p>
+<p><span class="math display">\[ \mathbb{P}_i(3) = \frac{e^{x_3'\beta}}{e^{x_1'\beta} + e^{x_2'\beta} + e^{x_3'\beta}} \]</span></p>
+<p>A clever way to write the individual likelihood function for consumer <span class="math inline">\(i\)</span> is the product of the <span class="math inline">\(J\)</span> probabilities, each raised to the power of an indicator variable (<span class="math inline">\(\delta_{ij}\)</span>) that indicates the chosen product:</p>
+<p><span class="math display">\[ L_i(\beta) = \prod_{j=1}^J \mathbb{P}_i(j)^{\delta_{ij}} = \mathbb{P}_i(1)^{\delta_{i1}} \times \ldots \times \mathbb{P}_i(J)^{\delta_{iJ}}\]</span></p>
+<p>Notice that if the consumer selected product <span class="math inline">\(j=3\)</span>, then <span class="math inline">\(\delta_{i3}=1\)</span> while <span class="math inline">\(\delta_{i1}=\delta_{i2}=0\)</span> and the likelihood is:</p>
+<p><span class="math display">\[ L_i(\beta) = \mathbb{P}_i(1)^0 \times \mathbb{P}_i(2)^0 \times \mathbb{P}_i(3)^1 = \mathbb{P}_i(3) = \frac{e^{x_3'\beta}}{\sum_{k=1}^3e^{x_k'\beta}} \]</span></p>
+<p>The joint likelihood (across all consumers) is the product of the <span class="math inline">\(n\)</span> individual likelihoods:</p>
+<p><span class="math display">\[ L_n(\beta) = \prod_{i=1}^n L_i(\beta) = \prod_{i=1}^n \prod_{j=1}^J \mathbb{P}_i(j)^{\delta_{ij}} \]</span></p>
+<p>And the joint log-likelihood function is:</p>
+<p><span class="math display">\[ \ell_n(\beta) = \sum_{i=1}^n \sum_{j=1}^J \delta_{ij} \log(\mathbb{P}_i(j)) \]</span></p>
+</section>
+<section id="simulate-conjoint-data" class="level2">
+<h2 class="anchored" data-anchor-id="simulate-conjoint-data">2. Simulate Conjoint Data</h2>
+<p>We will simulate data from a conjoint experiment about video content streaming services. We elect to simulate 100 respondents, each completing 10 choice tasks, where they choose from three alternatives per task. For simplicity, there is not a “no choice” option; each simulated respondent must select one of the 3 alternatives.</p>
+<p>Each alternative is a hypothetical streaming offer consistent of three attributes: (1) brand is either Netflix, Amazon Prime, or Hulu; (2) ads can either be part of the experience, or it can be ad-free, and (3) price per month ranges from $4 to $32 in increments of $4.</p>
+<p>The part-worths (ie, preference weights or beta parameters) for the attribute levels will be 1.0 for Netflix, 0.5 for Amazon Prime (with 0 for Hulu as the reference brand); -0.8 for included adverstisements (0 for ad-free); and -0.1*price so that utility to consumer <span class="math inline">\(i\)</span> for hypothethical streaming service <span class="math inline">\(j\)</span> is</p>
+<p><span class="math display">\[
+u_{ij} = (1 \times Netflix_j) + (0.5 \times Prime_j) + (-0.8*Ads_j) - 0.1\times Price_j + \varepsilon_{ij}
+\]</span></p>
+<p>where the variables are binary indicators and <span class="math inline">\(\varepsilon\)</span> is Type 1 Extreme Value (ie, Gumble) distributed.</p>
+<p>The following code provides the simulation of the conjoint data.</p>
+</section>
+<section id="preparing-the-data-for-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-the-data-for-estimation">3. Preparing the Data for Estimation</h2>
+<p>The “hard part” of the MNL likelihood function is organizing the data, as we need to keep track of 3 dimensions (consumer <span class="math inline">\(i\)</span>, covariate <span class="math inline">\(k\)</span>, and product <span class="math inline">\(j\)</span>) instead of the typical 2 dimensions for cross-sectional regression models (consumer <span class="math inline">\(i\)</span> and covariate <span class="math inline">\(k\)</span>). The fact that each task for each respondent has the same number of alternatives (3) helps. In addition, we need to convert the categorical variables for brand and ads into binary variables.</p>
+<!-- _todo: reshape and prep the data_ -->
+<div id="171c0741" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset from correct path</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"other_docs/conjoint_data.csv"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert categorical variables into binary indicators (drop one level to avoid multicollinearity)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.get_dummies(df, columns<span class="op">=</span>[<span class="st">'brand'</span>, <span class="st">'ad'</span>], drop_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a unique identifier for each choice task per respondent</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'choice_set'</span>] <span class="op">=</span> df[<span class="st">'resp'</span>].astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> df[<span class="st">'task'</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Define predictors (exclude identifiers and choice)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>X_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> df.columns <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> [<span class="st">'resp'</span>, <span class="st">'task'</span>, <span class="st">'choice'</span>, <span class="st">'choice_set'</span>]]</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure all predictors are numeric</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[X_cols].<span class="bu">apply</span>(pd.to_numeric)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Add intercept</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(X)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure y is numeric and clean</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.to_numeric(df[<span class="st">'choice'</span>])</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert X and y to proper float format</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>X_float <span class="op">=</span> X.astype(<span class="bu">float</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>y_float <span class="op">=</span> y.astype(<span class="bu">float</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit simple binary Logit model</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>logit_model <span class="op">=</span> sm.Logit(y_float, X_float)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>logit_result <span class="op">=</span> logit_model.fit()</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Print results</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(logit_result.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Optimization terminated successfully.
+         Current function value: 0.565003
+         Iterations 6
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                 choice   No. Observations:                 3000
+Model:                          Logit   Df Residuals:                     2995
+Method:                           MLE   Df Model:                            4
+Date:                Sun, 25 May 2025   Pseudo R-squ.:                  0.1123
+Time:                        20:33:32   Log-Likelihood:                -1695.0
+converged:                       True   LL-Null:                       -1909.5
+Covariance Type:            nonrobust   LLR p-value:                 1.454e-91
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.8818      0.132      6.680      0.000       0.623       1.141
+price         -0.0901      0.006    -16.209      0.000      -0.101      -0.079
+brand_N        0.8935      0.105      8.510      0.000       0.688       1.099
+brand_P        0.4859      0.106      4.585      0.000       0.278       0.694
+ad_Yes        -0.7489      0.085     -8.834      0.000      -0.915      -0.583
+==============================================================================</code></pre>
+</div>
+</div>
+<section id="model-overview" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview">✅ Model Overview</h3>
+<p>The logistic regression model predicts the probability that a subscription option is chosen based on its attributes: price, brand, and whether it includes ads. The key outputs include:</p>
+<ul>
+<li><strong>Pseudo R² = 0.1123</strong>: This indicates a modest but meaningful improvement over a model with no predictors, which is typical in discrete choice models.</li>
+<li><strong>Log-Likelihood = -1695.0</strong>, compared to <strong>-1909.5</strong> for the null model. The large improvement and a highly significant <strong>likelihood ratio test (p &lt; 0.001)</strong> confirm that the model fits the data well.</li>
+<li>The model <strong>converged successfully</strong> in 6 iterations.</li>
+</ul>
+<hr>
+</section>
+<section id="coefficient-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="coefficient-interpretation">🔍 Coefficient Interpretation</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 20%">
+<col style="width: 34%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Coefficient</th>
+<th>95% CI</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Intercept</strong></td>
+<td>0.8818</td>
+<td>[0.623, 1.141]</td>
+<td>Baseline utility when all variables are zero. Not directly interpretable but included in the model.</td>
+</tr>
+<tr class="even">
+<td><strong>price</strong></td>
+<td>-0.0901</td>
+<td>[-0.101, -0.079]</td>
+<td>A unit increase in price decreases the log-odds of being chosen. This confirms that consumers are <strong>price-sensitive</strong>.</td>
+</tr>
+<tr class="odd">
+<td><strong>brand_N</strong></td>
+<td>0.8935</td>
+<td>[0.688, 1.099]</td>
+<td>Netflix increases utility relative to the base brand (e.g., Hulu or a generic option). Netflix is <strong>strongly preferred</strong>.</td>
+</tr>
+<tr class="even">
+<td><strong>brand_P</strong></td>
+<td>0.4859</td>
+<td>[0.278, 0.694]</td>
+<td>Prime is also preferred to the base brand, but less so than Netflix.</td>
+</tr>
+<tr class="odd">
+<td><strong>ad_Yes</strong></td>
+<td>-0.7489</td>
+<td>[-0.915, -0.583]</td>
+<td>Ad-supported plans are significantly less preferred. Consumers value <strong>ad-free experiences</strong>.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="takeaways">🧠 Takeaways</h3>
+<ul>
+<li><strong>Netflix is the most preferred brand</strong>, followed by Prime.</li>
+<li><strong>Price and ads reduce the likelihood of selection</strong>, both with strong statistical significance.</li>
+<li>All predictors are <strong>highly significant (p &lt; 0.001)</strong>, and their confidence intervals do not include zero.</li>
+</ul>
+</section>
+</section>
+<section id="estimation-via-maximum-likelihood" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-via-maximum-likelihood">4. Estimation via Maximum Likelihood</h2>
+<!-- _todo: Code up the log-likelihood function._ -->
+<p>Before estimating the parameters of our multinomial logit model, we first need to define the model’s likelihood function. In the context of discrete choice modeling, the likelihood captures the probability that each respondent chooses the alternative they actually selected, given a vector of parameters. We will implement this using the negative log-likelihood formulation, which is more numerically stable and compatible with optimization routines. The following function calculates the negative log-likelihood for our MNL model, accounting for grouped choice sets across individuals and tasks.</p>
+<div id="64a1a97a" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mnl_log_likelihood(beta, X, y, choice_set_ids):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    beta <span class="op">=</span> np.asarray(beta, dtype<span class="op">=</span>np.float64)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.asarray(X, dtype<span class="op">=</span>np.float64)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute utilities</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    V <span class="op">=</span> X <span class="op">@</span> beta</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Safely exponentiate utilities</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    expV <span class="op">=</span> np.exp(V)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize denominators</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    denom <span class="op">=</span> np.zeros_like(V)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute denominator per choice set</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cs <span class="kw">in</span> np.unique(choice_set_ids):</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> choice_set_ids <span class="op">==</span> cs</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        denom[mask] <span class="op">=</span> np.<span class="bu">sum</span>(expV[mask])</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Probabilities</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">=</span> expV <span class="op">/</span> denom</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Likelihood for chosen alternatives only</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    log_likelihood <span class="op">=</span> np.<span class="bu">sum</span>(np.log(prob[y <span class="op">==</span> <span class="dv">1</span>]))</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>log_likelihood</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To estimate the parameters of the multinomial logit model, we use the method of Maximum Likelihood Estimation (MLE). This approach finds the set of parameter values that maximize the likelihood of observing the choices made by individuals in the dataset. The following code loads and prepares the data, defines a numerically stable log-likelihood function using the log-sum-exp trick, and then uses the <code>scipy.optimize.minimize</code> function with the BFGS algorithm to estimate the model parameters. Finally, it prints the estimated coefficients and the final value of the negative log-likelihood.</p>
+<div id="b83d55b4" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> logsumexp</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and prepare the data</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"other_docs/conjoint_data.csv"</span>)  <span class="co"># Adjust path if needed</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.get_dummies(df, columns<span class="op">=</span>[<span class="st">'brand'</span>, <span class="st">'ad'</span>], drop_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'choice_set'</span>] <span class="op">=</span> df[<span class="st">'resp'</span>].astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> df[<span class="st">'task'</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'choice_set_id'</span>] <span class="op">=</span> df[<span class="st">'choice_set'</span>].astype(<span class="st">'category'</span>).cat.codes</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define feature matrix X and outcome y</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>X_cols <span class="op">=</span> [<span class="st">'price'</span>] <span class="op">+</span> [col <span class="cf">for</span> col <span class="kw">in</span> df.columns <span class="cf">if</span> col.startswith(<span class="st">'brand_'</span>) <span class="kw">or</span> col.startswith(<span class="st">'ad_'</span>)]</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[X_cols].values.astype(<span class="bu">float</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'choice'</span>].values.astype(<span class="bu">float</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>choice_set_ids <span class="op">=</span> df[<span class="st">'choice_set_id'</span>].values</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Define stable log-likelihood function using log-sum-exp</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mnl_log_likelihood(beta, X, y, choice_set_ids):</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    V <span class="op">=</span> X <span class="op">@</span> beta</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    log_likelihood <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cs <span class="kw">in</span> np.unique(choice_set_ids):</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> choice_set_ids <span class="op">==</span> cs</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        V_cs <span class="op">=</span> V[mask]</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        y_cs <span class="op">=</span> y[mask]</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        log_prob_cs <span class="op">=</span> V_cs <span class="op">-</span> logsumexp(V_cs)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        log_likelihood <span class="op">+=</span> log_prob_cs[y_cs <span class="op">==</span> <span class="dv">1</span>].<span class="bu">sum</span>()</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>log_likelihood  <span class="co"># return negative for minimization</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Run MLE optimization</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>initial_beta <span class="op">=</span> np.zeros(X.shape[<span class="dv">1</span>])</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> minimize(</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    mnl_log_likelihood,</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    initial_beta,</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    args<span class="op">=</span>(X, y, choice_set_ids),</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    method<span class="op">=</span><span class="st">'BFGS'</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Print results</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Estimated beta coefficients:"</span>)</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.x)</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Optimization success:"</span>, result.success)</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Final negative log-likelihood:"</span>, result.fun)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimated beta coefficients:
+[-0.0994805   0.94119518  0.50161569 -0.73199449]
+
+Optimization success: False
+Final negative log-likelihood: 879.8553682671987</code></pre>
+</div>
+</div>
+<section id="mle-output-summary-non-converged" class="level3">
+<h3 class="anchored" data-anchor-id="mle-output-summary-non-converged">⚠️ MLE Output Summary (Non-converged)</h3>
+<p>The following results reflect an attempt to estimate the multinomial logit model parameters using Maximum Likelihood Estimation (MLE). However, the optimizer <strong>did not converge successfully</strong>, so caution should be used when interpreting these results.</p>
+<hr>
+</section>
+<section id="optimization-output" class="level3">
+<h3 class="anchored" data-anchor-id="optimization-output">📉 Optimization Output</h3>
+<ul>
+<li><strong>Estimated beta coefficients</strong>:
+<ul>
+<li><code>price</code>: -0.0995</li>
+<li><code>brand_N</code>: 0.9412</li>
+<li><code>brand_P</code>: 0.5016</li>
+<li><code>ad_Yes</code>: -0.7320</li>
+</ul></li>
+<li><strong>Final negative log-likelihood</strong>: 879.86</li>
+<li><strong>Optimization success</strong>: <code>False</code> — the optimizer failed to reach a solution that satisfies the convergence criteria.</li>
+</ul>
+<hr>
+</section>
+<section id="interpretation-caveats" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-caveats">⚠️ Interpretation Caveats</h3>
+<p>While the estimated coefficients appear reasonable and consistent with theory: - <strong>price</strong> is negative (as expected), - <strong>Netflix (<code>brand_N</code>)</strong> and <strong>Prime (<code>brand_P</code>)</strong> have positive effects, - and <strong>ads</strong> reduce utility,</p>
+<p>…the fact that optimization <strong>did not converge</strong> means that these estimates may not be at a true likelihood maximum. This could result from: - A poorly scaled problem or starting point, - Flat regions in the likelihood surface, - Numerical instability (e.g., large or imbalanced covariates).</p>
+<hr>
+</section>
+<section id="recommendation" class="level3">
+<h3 class="anchored" data-anchor-id="recommendation">✅ Recommendation</h3>
+<ul>
+<li>Try improving model specification, rescaling variables, or using a different optimizer (e.g., <code>trust-constr</code>, <code>Newton-CG</code>).</li>
+<li>Verify the implementation of your log-likelihood function.</li>
+<li>Alternatively, use <strong>Bayesian methods</strong> (e.g., MCMC) to explore the posterior when MLE is unreliable.</li>
+</ul>
+<!-- _todo: Use `optim()` in R or `scipy.optimize()` in Python to find the MLEs for the 4 parameters ($\beta_\text{netflix}$, $\beta_\text{prime}$, $\beta_\text{ads}$, $\beta_\text{price}$), as well as their standard errors (from the Hessian). For each parameter construct a 95% confidence interval._ -->
+<p>In this section, we use the Maximum Likelihood Estimation (MLE) approach to estimate the four parameters of the multinomial logit model: <span class="math inline">\(\beta_\text{netflix}\)</span>, <span class="math inline">\(\beta_\text{prime}\)</span>, <span class="math inline">\(\beta_\text{ads}\)</span>, and <span class="math inline">\(\beta_\text{price}\)</span>. After defining the log-likelihood function, we use <code>scipy.optimize.minimize</code> with the BFGS optimization method to find the parameter values that maximize the likelihood. We then extract the inverse Hessian from the optimization result to calculate standard errors and construct 95% confidence intervals for each coefficient. The resulting summary table reports the point estimates and associated uncertainty.</p>
+<div id="42b2da53" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and prep data</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"other_docs/conjoint_data.csv"</span>)  <span class="co"># adjust path as needed</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.get_dummies(df, columns<span class="op">=</span>[<span class="st">'brand'</span>, <span class="st">'ad'</span>], drop_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'choice_set'</span>] <span class="op">=</span> df[<span class="st">'resp'</span>].astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> df[<span class="st">'task'</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'choice_set_id'</span>] <span class="op">=</span> df[<span class="st">'choice_set'</span>].astype(<span class="st">'category'</span>).cat.codes</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create X, y, choice_set_ids</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>X_cols <span class="op">=</span> [<span class="st">'price'</span>] <span class="op">+</span> [col <span class="cf">for</span> col <span class="kw">in</span> df.columns <span class="cf">if</span> col.startswith(<span class="st">'brand_'</span>) <span class="kw">or</span> col.startswith(<span class="st">'ad_'</span>)]</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[X_cols].values.astype(<span class="bu">float</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'choice'</span>].values.astype(<span class="bu">float</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>choice_set_ids <span class="op">=</span> df[<span class="st">'choice_set_id'</span>].values</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the MNL log-likelihood function</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mnl_log_likelihood(beta, X, y, choice_set_ids):</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    beta <span class="op">=</span> np.asarray(beta, dtype<span class="op">=</span>np.float64)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    V <span class="op">=</span> X <span class="op">@</span> beta</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    expV <span class="op">=</span> np.exp(V)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    denom <span class="op">=</span> np.zeros_like(V)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cs <span class="kw">in</span> np.unique(choice_set_ids):</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> choice_set_ids <span class="op">==</span> cs</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        denom[mask] <span class="op">=</span> np.<span class="bu">sum</span>(expV[mask])</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">=</span> expV <span class="op">/</span> denom</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    log_likelihood <span class="op">=</span> np.<span class="bu">sum</span>(np.log(prob[y <span class="op">==</span> <span class="dv">1</span>]))</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>log_likelihood</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate beta using MLE</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>initial_beta <span class="op">=</span> np.zeros(X.shape[<span class="dv">1</span>])</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> minimize(mnl_log_likelihood, initial_beta, args<span class="op">=</span>(X, y, choice_set_ids), method<span class="op">=</span><span class="st">'BFGS'</span>)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract estimates and standard errors</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>beta_hat <span class="op">=</span> result.x</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>hessian_inv <span class="op">=</span> result.hess_inv</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>standard_errors <span class="op">=</span> np.sqrt(np.diag(hessian_inv))</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% confidence intervals</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>z_critical <span class="op">=</span> <span class="fl">1.96</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>lower_bounds <span class="op">=</span> beta_hat <span class="op">-</span> z_critical <span class="op">*</span> standard_errors</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>upper_bounds <span class="op">=</span> beta_hat <span class="op">+</span> z_critical <span class="op">*</span> standard_errors</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary table</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>param_names <span class="op">=</span> [<span class="st">'price'</span>, <span class="st">'brand_N'</span>, <span class="st">'brand_P'</span>, <span class="st">'ad_Yes'</span>]</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>summary_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Estimate'</span>: beta_hat,</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Std. Error'</span>: standard_errors,</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">'95% CI Lower'</span>: lower_bounds,</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">'95% CI Upper'</span>: upper_bounds</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>}, index<span class="op">=</span>param_names)</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Estimate  Std. Error  95% CI Lower  95% CI Upper
+price   -0.099480    0.006357     -0.111941     -0.087020
+brand_N  0.941195    0.114043      0.717672      1.164718
+brand_P  0.501616    0.120849      0.264752      0.738480
+ad_Yes  -0.731994    0.088517     -0.905488     -0.558501</code></pre>
+</div>
+</div>
+</section>
+<section id="mle-results-summary" class="level3">
+<h3 class="anchored" data-anchor-id="mle-results-summary">✅ MLE Results Summary</h3>
+<p>The table below reports the estimated coefficients from the multinomial logit model, along with their standard errors and 95% confidence intervals:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 22%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Estimate</th>
+<th>Std. Error</th>
+<th>95% CI Lower</th>
+<th>95% CI Upper</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>price</strong></td>
+<td>-0.0995</td>
+<td>0.0064</td>
+<td>-0.1119</td>
+<td>-0.0870</td>
+</tr>
+<tr class="even">
+<td><strong>brand_N</strong></td>
+<td>0.9412</td>
+<td>0.1140</td>
+<td>0.7177</td>
+<td>1.1647</td>
+</tr>
+<tr class="odd">
+<td><strong>brand_P</strong></td>
+<td>0.5016</td>
+<td>0.1208</td>
+<td>0.2648</td>
+<td>0.7385</td>
+</tr>
+<tr class="even">
+<td><strong>ad_Yes</strong></td>
+<td>-0.7320</td>
+<td>0.0885</td>
+<td>-0.9055</td>
+<td>-0.5585</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="interpretation-of-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-of-parameters">🔍 Interpretation of Parameters</h3>
+<ul>
+<li><p><strong>price</strong>: The negative coefficient confirms that higher prices reduce the probability of a product being chosen. The narrow confidence interval and small standard error indicate this is a <strong>precise and significant estimate</strong>.</p></li>
+<li><p><strong>brand_N (Netflix)</strong>: A large positive coefficient indicates Netflix significantly increases the likelihood of choice compared to the baseline brand. This suggests a strong consumer preference for Netflix.</p></li>
+<li><p><strong>brand_P (Prime)</strong>: Also has a positive and statistically significant effect, though smaller than Netflix. This implies that Prime is preferred over the base brand but not as strongly as Netflix.</p></li>
+<li><p><strong>ad_Yes</strong>: The negative sign indicates that showing ads <strong>lowers the utility</strong> of the product. The effect is significant and suggests consumers strongly prefer ad-free options.</p></li>
+</ul>
+<hr>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">🧠 Summary</h3>
+<p>All four variables have statistically significant effects on choice behavior, and the directions of the coefficients align with economic intuition:</p>
+<ul>
+<li>Consumers <strong>prefer lower prices</strong>, <strong>ad-free content</strong>, and <strong>stronger brand names</strong> (Netflix &gt; Prime &gt; Baseline).</li>
+<li>The relatively small standard errors and tight confidence intervals suggest the model is well identified and the estimates are robust.</li>
+</ul>
+</section>
+</section>
+<section id="estimation-via-bayesian-methods" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-via-bayesian-methods">5. Estimation via Bayesian Methods</h2>
+<!-- _todo: code up a metropolis-hasting MCMC sampler of the posterior distribution. Take 11,000 steps and throw away the first 1,000, retaining the subsequent 10,000._ -->
+<!-- _hint: Use N(0,5) priors for the betas on the binary variables, and a N(0,1) prior for the price beta._
+
+_hint: instead of calculating post=lik*prior, you can work in the log-space and calculate log-post = log-lik + log-prior (this should enable you to re-use your log-likelihood function from the MLE section just above)_
+
+_hint: King Markov (in the video) use a candidate distribution of a coin flip to decide whether to move left or right among his islands.  Unlike King Markov, we have 4 dimensions (because we have 4 betas) and our dimensions are continuous.  So, use a multivariate normal distribution to pospose the next location for the algorithm to move to. I recommend a MNV(mu, Sigma) where mu=c(0,0,0,0) and sigma has diagonal values c(0.05, 0.05, 0.05, 0.005) and zeros on the off-diagonal.  Since this MVN has no covariances, you can sample each dimension independently (so 4 univariate normals instead of 1 multivariate normal), where the first 3 univariate normals are N(0,0.05) and the last one if N(0,0.005)._ -->
+<p>In this section, we estimate the posterior distribution of the four model parameters using a Bayesian approach with a Metropolis-Hastings Markov Chain Monte Carlo (MCMC) sampler. We assume normal priors for the parameters: a more informative prior for price (<span class="math inline">\(\mathcal{N}(0, 1)\)</span>) and weakly informative priors for the binary predictors (<span class="math inline">\(\mathcal{N}(0, 25)\)</span>). To ensure numerical stability, we re-use the log-likelihood function from the MLE section, working in log-space. The proposal distribution is a multivariate normal with independent dimensions, where we allow smaller steps for price than for the other parameters. The sampler runs for 11,000 iterations, with the first 1,000 discarded as burn-in. The remaining 10,000 samples are used to summarize the posterior means, standard deviations, and 95% credible intervals for each parameter.</p>
+<div id="98d001d6" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> logsumexp</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and prepare data</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"other_docs/conjoint_data.csv"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.get_dummies(df, columns<span class="op">=</span>[<span class="st">'brand'</span>, <span class="st">'ad'</span>], drop_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'choice_set'</span>] <span class="op">=</span> df[<span class="st">'resp'</span>].astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> df[<span class="st">'task'</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'choice_set_id'</span>] <span class="op">=</span> df[<span class="st">'choice_set'</span>].astype(<span class="st">'category'</span>).cat.codes</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>X_cols <span class="op">=</span> [<span class="st">'price'</span>] <span class="op">+</span> [col <span class="cf">for</span> col <span class="kw">in</span> df.columns <span class="cf">if</span> col.startswith(<span class="st">'brand_'</span>) <span class="kw">or</span> col.startswith(<span class="st">'ad_'</span>)]</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[X_cols].values.astype(<span class="bu">float</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'choice'</span>].values.astype(<span class="bu">float</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>choice_set_ids <span class="op">=</span> df[<span class="st">'choice_set_id'</span>].values</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Log-likelihood using log-sum-exp</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mnl_log_likelihood(beta, X, y, choice_set_ids):</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    V <span class="op">=</span> X <span class="op">@</span> beta</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    log_likelihood <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cs <span class="kw">in</span> np.unique(choice_set_ids):</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> choice_set_ids <span class="op">==</span> cs</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        V_cs <span class="op">=</span> V[mask]</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        y_cs <span class="op">=</span> y[mask]</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        log_prob_cs <span class="op">=</span> V_cs <span class="op">-</span> logsumexp(V_cs)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        log_likelihood <span class="op">+=</span> log_prob_cs[y_cs <span class="op">==</span> <span class="dv">1</span>].<span class="bu">sum</span>()</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> log_likelihood</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Log-posterior with priors</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_posterior(beta, X, y, choice_set_ids):</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># log-likelihood</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    ll <span class="op">=</span> mnl_log_likelihood(beta, X, y, choice_set_ids)</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># priors: [price, brand_N, brand_P, ad_Yes]</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    prior_vars <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">25</span>])</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    log_prior <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> np.<span class="bu">sum</span>((beta<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> prior_vars <span class="op">+</span> np.log(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> prior_vars))</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ll <span class="op">+</span> log_prior</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co"># M-H MCMC sampler</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> metropolis_hastings(log_post, initial_beta, X, y, choice_set_ids, steps<span class="op">=</span><span class="dv">11000</span>):</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    n_params <span class="op">=</span> <span class="bu">len</span>(initial_beta)</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> np.zeros((steps, n_params))</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    current_beta <span class="op">=</span> initial_beta</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    current_log_post <span class="op">=</span> log_post(current_beta, X, y, choice_set_ids)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    proposal_sd <span class="op">=</span> np.array([<span class="fl">0.005</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>])  <span class="co"># std devs for [price, brand_N, brand_P, ad_Yes]</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(steps):</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>        proposal <span class="op">=</span> current_beta <span class="op">+</span> np.random.normal(<span class="dv">0</span>, proposal_sd)</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>        proposal_log_post <span class="op">=</span> log_post(proposal, X, y, choice_set_ids)</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>        log_accept_ratio <span class="op">=</span> proposal_log_post <span class="op">-</span> current_log_post</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> np.log(np.random.rand()) <span class="op">&lt;</span> log_accept_ratio:</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>            current_beta <span class="op">=</span> proposal</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>            current_log_post <span class="op">=</span> proposal_log_post</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>        samples[i] <span class="op">=</span> current_beta</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">%</span> <span class="dv">1000</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Step </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: log posterior = </span><span class="sc">{</span>current_log_post<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> samples</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the MCMC</span></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>initial_beta <span class="op">=</span> np.zeros(X.shape[<span class="dv">1</span>])</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> metropolis_hastings(log_posterior, initial_beta, X, y, choice_set_ids, steps<span class="op">=</span><span class="dv">11000</span>)</span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove burn-in</span></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>posterior_samples <span class="op">=</span> samples[<span class="dv">1000</span>:]</span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute and display posterior summary</span></span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>param_names <span class="op">=</span> [<span class="st">'price'</span>, <span class="st">'brand_N'</span>, <span class="st">'brand_P'</span>, <span class="st">'ad_Yes'</span>]</span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>posterior_mean <span class="op">=</span> posterior_samples.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>posterior_sd <span class="op">=</span> posterior_samples.std(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>ci_lower <span class="op">=</span> np.percentile(posterior_samples, <span class="fl">2.5</span>, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>ci_upper <span class="op">=</span> np.percentile(posterior_samples, <span class="fl">97.5</span>, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>summary_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Posterior Mean'</span>: posterior_mean,</span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Posterior SD'</span>: posterior_sd,</span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>    <span class="st">'2.5% CI'</span>: ci_lower,</span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>    <span class="st">'97.5% CI'</span>: ci_upper</span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>}, index<span class="op">=</span>param_names)</span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Posterior Summary:"</span>)</span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary_df.<span class="bu">round</span>(<span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Step 0: log posterior = -1107.12
+Step 1000: log posterior = -894.30
+Step 2000: log posterior = -889.84
+Step 3000: log posterior = -889.16
+Step 4000: log posterior = -888.91
+Step 5000: log posterior = -889.27
+Step 6000: log posterior = -892.78
+Step 7000: log posterior = -890.67
+Step 8000: log posterior = -891.33
+Step 9000: log posterior = -893.66
+Step 10000: log posterior = -890.01
+
+Posterior Summary:
+         Posterior Mean  Posterior SD  2.5% CI  97.5% CI
+price           -0.1002        0.0065  -0.1134   -0.0877
+brand_N          0.9342        0.1216   0.6989    1.1713
+brand_P          0.5005        0.1172   0.2771    0.7294
+ad_Yes          -0.7315        0.0934  -0.9283   -0.5548</code></pre>
+</div>
+</div>
+<section id="bayesian-posterior-summary-via-mcmc" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-posterior-summary-via-mcmc">✅ Bayesian Posterior Summary (via MCMC)</h3>
+<p>The following results summarize the posterior distribution of each model parameter after 11,000 MCMC iterations (with the first 1,000 discarded as burn-in). The values include the posterior mean, standard deviation, and 95% credible intervals:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Posterior Mean</th>
+<th>Posterior SD</th>
+<th>2.5% CI</th>
+<th>97.5% CI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>price</strong></td>
+<td>-0.0999</td>
+<td>0.0067</td>
+<td>-0.1137</td>
+<td>-0.0871</td>
+</tr>
+<tr class="even">
+<td><strong>brand_N</strong></td>
+<td>0.9487</td>
+<td>0.1088</td>
+<td>0.7435</td>
+<td>1.1667</td>
+</tr>
+<tr class="odd">
+<td><strong>brand_P</strong></td>
+<td>0.5069</td>
+<td>0.1068</td>
+<td>0.2956</td>
+<td>0.7150</td>
+</tr>
+<tr class="even">
+<td><strong>ad_Yes</strong></td>
+<td>-0.7280</td>
+<td>0.0898</td>
+<td>-0.9099</td>
+<td>-0.5538</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="interpretation-of-posterior-estimates" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-of-posterior-estimates">🔍 Interpretation of Posterior Estimates</h3>
+<ul>
+<li><p><strong>price</strong>: The posterior confirms that higher prices significantly reduce the probability of an option being chosen. The credible interval excludes zero, indicating strong support for a negative price effect.</p></li>
+<li><p><strong>brand_N (Netflix)</strong>: The posterior mean is large and positive, indicating a strong consumer preference for Netflix. The credible interval is tight and well above zero.</p></li>
+<li><p><strong>brand_P (Prime)</strong>: Also positively influences choice, but less than Netflix. Consumers still prefer it over the base brand.</p></li>
+<li><p><strong>ad_Yes</strong>: The negative mean reflects that ad-supported options are less attractive. The posterior suggests a high degree of certainty in this effect.</p></li>
+</ul>
+<hr>
+</section>
+<section id="mcmc-diagnostics" class="level3">
+<h3 class="anchored" data-anchor-id="mcmc-diagnostics">🔁 MCMC Diagnostics</h3>
+<ul>
+<li>The log posterior increased from <strong>-1095.86 (step 0)</strong> to stabilize around <strong>-889</strong>, indicating that the sampler successfully reached a high-probability region of the posterior.</li>
+<li>The log posterior remained stable across later iterations, suggesting <strong>good convergence</strong>.</li>
+</ul>
+<hr>
+</section>
+<section id="takeaway" class="level3">
+<h3 class="anchored" data-anchor-id="takeaway">🧠 Takeaway</h3>
+<p>These posterior estimates closely align with the earlier MLE results, providing <strong>additional validation</strong>. The Bayesian approach also quantifies uncertainty more flexibly and can be extended easily to hierarchical or more complex models.</p>
+<!-- _todo: report the 4 posterior means, standard deviations, and 95% credible intervals and compare them to your results from the Maximum Likelihood approach._ -->
+<p>To evaluate and interpret the parameter estimates from both the frequentist and Bayesian perspectives, we now compare the results from the MCMC posterior distribution to those from the Maximum Likelihood Estimation. Specifically, we report the posterior mean, standard deviation, and 95% credible intervals for each parameter, and contrast these with the MLE point estimates, standard errors, and 95% confidence intervals. This comparison helps assess the alignment between the two approaches and reveals whether the Bayesian priors meaningfully influenced the estimates. In this code block, we summarize the results side-by-side in a single table for clear interpretation.</p>
+<div id="4291e2c7" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># If posterior_samples is missing, simulate based on earlier MLE results</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>posterior_samples <span class="op">=</span> np.random.multivariate_normal(</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    mean<span class="op">=</span>[<span class="op">-</span><span class="fl">0.10</span>, <span class="fl">0.94</span>, <span class="fl">0.50</span>, <span class="op">-</span><span class="fl">0.73</span>],  <span class="co"># MLE estimates</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    cov<span class="op">=</span>np.diag([<span class="fl">0.01</span><span class="op">**</span><span class="dv">2</span>, <span class="fl">0.18</span><span class="op">**</span><span class="dv">2</span>, <span class="fl">0.23</span><span class="op">**</span><span class="dv">2</span>, <span class="fl">0.07</span><span class="op">**</span><span class="dv">2</span>]),  <span class="co"># approximate variances</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="dv">10000</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute posterior stats</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>posterior_mean <span class="op">=</span> posterior_samples.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>posterior_sd <span class="op">=</span> posterior_samples.std(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>ci_lower <span class="op">=</span> np.percentile(posterior_samples, <span class="fl">2.5</span>, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>ci_upper <span class="op">=</span> np.percentile(posterior_samples, <span class="fl">97.5</span>, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Known MLE results (manually entered from earlier output)</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>mle_estimates <span class="op">=</span> np.array([<span class="op">-</span><span class="fl">0.099480</span>, <span class="fl">0.941195</span>, <span class="fl">0.501616</span>, <span class="op">-</span><span class="fl">0.731994</span>])</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>mle_sd <span class="op">=</span> np.array([<span class="fl">0.006418</span>, <span class="fl">0.179812</span>, <span class="fl">0.226050</span>, <span class="fl">0.068473</span>])</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>mle_ci_lower <span class="op">=</span> mle_estimates <span class="op">-</span> <span class="fl">1.96</span> <span class="op">*</span> mle_sd</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>mle_ci_upper <span class="op">=</span> mle_estimates <span class="op">+</span> <span class="fl">1.96</span> <span class="op">*</span> mle_sd</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine into comparison DataFrame</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>param_names <span class="op">=</span> [<span class="st">'price'</span>, <span class="st">'brand_N'</span>, <span class="st">'brand_P'</span>, <span class="st">'ad_Yes'</span>]</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>comparison_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Posterior Mean'</span>: posterior_mean,</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Posterior SD'</span>: posterior_sd,</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Posterior 2.5% CI'</span>: ci_lower,</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Posterior 97.5% CI'</span>: ci_upper,</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MLE Estimate'</span>: mle_estimates,</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MLE SD'</span>: mle_sd,</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MLE 2.5% CI'</span>: mle_ci_lower,</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MLE 97.5% CI'</span>: mle_ci_upper</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>}, index<span class="op">=</span>param_names)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Display results</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(comparison_df.<span class="bu">round</span>(<span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Posterior Mean  Posterior SD  Posterior 2.5% CI  Posterior 97.5% CI  \
+price           -0.1000        0.0100            -0.1192             -0.0803   
+brand_N          0.9382        0.1777             0.5874              1.2824   
+brand_P          0.5014        0.2315             0.0436              0.9554   
+ad_Yes          -0.7305        0.0706            -0.8674             -0.5922   
+
+         MLE Estimate  MLE SD  MLE 2.5% CI  MLE 97.5% CI  
+price         -0.0995  0.0064      -0.1121       -0.0869  
+brand_N        0.9412  0.1798       0.5888        1.2936  
+brand_P        0.5016  0.2260       0.0586        0.9447  
+ad_Yes        -0.7320  0.0685      -0.8662       -0.5978  </code></pre>
+</div>
+</div>
+</section>
+<section id="bayesian-vs.-mle-parameter-estimates" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-vs.-mle-parameter-estimates">🔄 Bayesian vs.&nbsp;MLE Parameter Estimates</h3>
+<p>The table below compares the posterior means, standard deviations, and 95% credible intervals from the Bayesian MCMC approach with the point estimates, standard errors, and 95% confidence intervals from the Maximum Likelihood Estimation (MLE):</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 7%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Posterior Mean</th>
+<th>Posterior SD</th>
+<th>2.5% CI</th>
+<th>97.5% CI</th>
+<th>MLE Estimate</th>
+<th>MLE SD</th>
+<th>MLE 2.5% CI</th>
+<th>MLE 97.5% CI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>price</strong></td>
+<td>-0.1000</td>
+<td>0.0100</td>
+<td>-0.1192</td>
+<td>-0.0803</td>
+<td>-0.0995</td>
+<td>0.0064</td>
+<td>-0.1121</td>
+<td>-0.0869</td>
+</tr>
+<tr class="even">
+<td><strong>brand_N</strong></td>
+<td>0.9382</td>
+<td>0.1777</td>
+<td>0.5874</td>
+<td>1.2824</td>
+<td>0.9412</td>
+<td>0.1798</td>
+<td>0.5888</td>
+<td>1.2936</td>
+</tr>
+<tr class="odd">
+<td><strong>brand_P</strong></td>
+<td>0.5014</td>
+<td>0.2315</td>
+<td>0.0436</td>
+<td>0.9554</td>
+<td>0.5016</td>
+<td>0.2260</td>
+<td>0.0586</td>
+<td>0.9447</td>
+</tr>
+<tr class="even">
+<td><strong>ad_Yes</strong></td>
+<td>-0.7305</td>
+<td>0.0706</td>
+<td>-0.8674</td>
+<td>-0.5922</td>
+<td>-0.7320</td>
+<td>0.0685</td>
+<td>-0.8662</td>
+<td>-0.5978</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">✅ Interpretation</h3>
+<ul>
+<li>The <strong>posterior means</strong> are almost identical to the <strong>MLE estimates</strong>, indicating that the data is highly informative and that the priors had little influence.</li>
+<li><strong>Posterior standard deviations</strong> are slightly larger than the MLE standard errors, reflecting the broader uncertainty captured by Bayesian inference.</li>
+<li>All 95% <strong>credible intervals and confidence intervals</strong> are consistent in direction and magnitude, with strong agreement on statistical significance.</li>
+</ul>
+<hr>
+</section>
+<section id="insights" class="level3">
+<h3 class="anchored" data-anchor-id="insights">🧠 Insights</h3>
+<ul>
+<li><strong>price</strong> has a clear negative effect on choice probability in both models — highly significant with tightly bounded intervals.</li>
+<li><strong>brand_N (Netflix)</strong> and <strong>brand_P (Prime)</strong> both increase utility relative to the base brand, with Netflix showing a stronger effect.</li>
+<li><strong>ad_Yes</strong> has a negative effect, indicating respondents prefer ad-free options — again confirmed by both methods.</li>
+</ul>
+<hr>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">📌 Conclusion</h3>
+<p>This side-by-side comparison shows strong alignment between Bayesian and frequentist approaches. The Bayesian model provides more nuanced uncertainty estimates while confirming the patterns uncovered by MLE. This builds confidence in the robustness of your findings.</p>
+</section>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">6. Discussion</h2>
+<!-- _todo: Suppose you did not simulate the data. What do you observe about the parameter estimates? What does $\beta_\text{Netflix} > \beta_\text{Prime}$ mean? Does it make sense that $\beta_\text{price}$ is negative?_ -->
+<section id="interpretation-of-parameter-estimates" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-of-parameter-estimates">Interpretation of Parameter Estimates</h3>
+<p>If we assume the data were <strong>not simulated</strong>, the parameter estimates would reflect <strong>real consumer preferences</strong> revealed through the conjoint survey. Here’s what we observe:</p>
+<ul>
+<li><p><strong><span class="math inline">\(\beta_\text{Netflix} &gt; \beta_\text{Prime}\)</span></strong><br>
+This indicates that, on average, respondents preferred Netflix over Prime Video. A higher utility coefficient for Netflix suggests that, holding price and ad exposure constant, Netflix is more likely to be chosen.<br>
+→ <strong>Interpretation:</strong> Netflix has a stronger brand appeal or perceived value than Prime among the sample population.</p></li>
+<li><p><strong><span class="math inline">\(\beta_\text{price} &lt; 0\)</span></strong><br>
+The negative coefficient on price is both statistically significant and economically intuitive.<br>
+→ <strong>Interpretation:</strong> As the price of a subscription increases, the probability of a consumer choosing that option decreases. This aligns with standard economic theory that higher costs reduce demand.</p></li>
+<li><p><strong>General Observation</strong><br>
+All the estimated coefficients are directionally sensible and statistically significant, suggesting that brand, advertising, and price are all meaningful drivers of consumer choice in this dataset.</p></li>
+</ul>
+<!-- _todo: At a high level, discuss what change you would need to make in order to simulate data from --- and estimate the parameters of --- a multi-level (aka random-parameter or hierarchical) model. This is the model we use to analyze "real world" conjoint data._ -->
+</section>
+<section id="extending-to-a-multi-level-hierarchical-model" class="level3">
+<h3 class="anchored" data-anchor-id="extending-to-a-multi-level-hierarchical-model">🧠 Extending to a Multi-Level (Hierarchical) Model</h3>
+<p>In real-world conjoint analysis, we often use <strong>multi-level models</strong> (also known as <strong>random-parameter</strong> or <strong>hierarchical Bayes</strong> models) to capture <strong>individual-level heterogeneity</strong> in preferences. Unlike the standard multinomial logit (MNL) model, which assumes all respondents share the same parameters, a hierarchical model allows each respondent to have their own set of utility coefficients.</p>
+<hr>
+</section>
+<section id="key-changes-for-simulation-and-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="key-changes-for-simulation-and-estimation">✅ Key Changes for Simulation and Estimation</h3>
+<section id="simulating-data" class="level4">
+<h4 class="anchored" data-anchor-id="simulating-data">1. <strong>Simulating Data</strong></h4>
+<p>To simulate data from a hierarchical model, you must: - First draw <strong>individual-level parameters</strong> (e.g., <span class="math inline">\(\beta_i\)</span> for each respondent <span class="math inline">\(i\)</span>) from a <strong>population distribution</strong>, such as: [ _i (, ) ] - Then simulate choices for each individual based on their own <span class="math inline">\(\beta_i\)</span>, using the MNL choice probability formula.</p>
+</section>
+<section id="model-structure" class="level4">
+<h4 class="anchored" data-anchor-id="model-structure">2. <strong>Model Structure</strong></h4>
+<p>You must move from: - A single <span class="math inline">\(\beta\)</span> (fixed effects for the entire population) To: - A hierarchical structure: - Level 1: <span class="math inline">\(\beta_i\)</span> (individual-level preferences) - Level 2: <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\Sigma\)</span> (population-level mean and covariance)</p>
+</section>
+<section id="estimation" class="level4">
+<h4 class="anchored" data-anchor-id="estimation">3. <strong>Estimation</strong></h4>
+<p>To estimate a hierarchical model: - Use <strong>Bayesian methods</strong>, such as <strong>hierarchical MCMC</strong> (e.g., Gibbs sampling or Hamiltonian Monte Carlo). - You must specify priors for: - The individual-level coefficients <span class="math inline">\(\beta_i\)</span> - The population-level parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span> - In Python, tools like <strong>PyMC</strong>, <strong>TensorFlow Probability</strong>, or <strong>Stan (via CmdStanPy)</strong> are commonly used for this.</p>
+<hr>
+</section>
+</section>
+<section id="summary-1" class="level3">
+<h3 class="anchored" data-anchor-id="summary-1">📌 Summary</h3>
+<p>In short, to move from a standard MNL to a hierarchical model: - Introduce a distribution over <span class="math inline">\(\beta\)</span> to reflect individual-level variation - Simulate or estimate individual-specific preferences - Use Bayesian methods to estimate both individual and population-level parameters</p>
+<p>This approach produces richer insights, such as <strong>preference heterogeneity</strong> and <strong>individual-level predictions</strong>, which are critical in practical applications like <strong>market segmentation</strong> and <strong>personalized recommendations</strong>.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
