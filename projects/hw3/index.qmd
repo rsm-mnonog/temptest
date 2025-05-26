@@ -490,6 +490,43 @@ The following results summarize the posterior distribution of each model paramet
 
 These posterior estimates closely align with the earlier MLE results, providing **additional validation**. The Bayesian approach also quantifies uncertainty more flexibly and can be extended easily to hierarchical or more complex models.
 
+<!-- 
+_todo: for at least one of the 4 parameters, show the trace plot of the algorithm, as well as the histogram of the posterior distribution._ -->
+
+### 🔍 Trace Plot and Posterior Distribution for `price` Parameter
+
+To evaluate the performance of our Metropolis-Hastings MCMC sampler and inspect the shape of the posterior distribution, we visualize the trace plot and histogram for the `price` parameter. The trace plot helps us assess **mixing** and **convergence**, while the histogram shows the **posterior uncertainty and central tendency**.
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Use the saved posterior samples from MCMC (assumed shape: [n_samples, 4])
+# Index 0 = 'price'
+samples_price = posterior_samples[:, 0]
+
+# Trace plot
+plt.figure(figsize=(12, 4))
+plt.plot(samples_price, alpha=0.7)
+plt.title("Trace Plot for 'price' Parameter")
+plt.xlabel("Iteration")
+plt.ylabel("Sampled Value")
+plt.grid(True)
+plt.show()
+
+# Histogram (posterior distribution)
+plt.figure(figsize=(6, 4))
+plt.hist(samples_price, bins=30, density=True, edgecolor='k', alpha=0.75)
+plt.title("Posterior Distribution for 'price' Parameter")
+plt.xlabel("Parameter Value")
+plt.ylabel("Density")
+plt.grid(True)
+plt.show()
+```
+
+This visualization confirms whether the sampler has explored the parameter space adequately and whether the posterior is well-behaved (e.g., unimodal, stable).
+
+
 <!-- _todo: report the 4 posterior means, standard deviations, and 95% credible intervals and compare them to your results from the Maximum Likelihood approach._ -->
 To evaluate and interpret the parameter estimates from both the frequentist and Bayesian perspectives, we now compare the results from the MCMC posterior distribution to those from the Maximum Likelihood Estimation. Specifically, we report the posterior mean, standard deviation, and 95% credible intervals for each parameter, and contrast these with the MLE point estimates, standard errors, and 95% confidence intervals. This comparison helps assess the alignment between the two approaches and reveals whether the Bayesian priors meaningfully influenced the estimates. In this code block, we summarize the results side-by-side in a single table for clear interpretation.
 
