@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Mario Nonog">
-<meta name="dcterms.date" content="2025-05-07">
+<meta name="dcterms.date" content="2025-05-25">
 <meta name="description" content="Poisson Regression Examples">
 
 <title>Homework 2 – Mario</title>
@@ -262,7 +262,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 7, 2025</p>
+      <p class="date">May 25, 2025</p>
     </div>
   </div>
   
@@ -284,7 +284,7 @@ window.Quarto = {
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
 <!-- # _todo: Read in data._ -->
-<div id="f23288e4" class="cell" data-execution_count="1">
+<div id="9faf53dd" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
@@ -339,7 +339,7 @@ Blueprinty Data Preview:
 </div>
 </div>
 <!-- _todo: Compare histograms and means of number of patents by customer status. What do you observe?_ -->
-<div id="7ca5f56e" class="cell" data-execution_count="2">
+<div id="acc06d2a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure correct type</span></span>
@@ -409,7 +409,7 @@ Name: patents, dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="region-and-age-comparison-by-customer-status">🗺️ Region and Age Comparison by Customer Status</h2>
 <section id="summary-statistics" class="level3">
 <h3 class="anchored" data-anchor-id="summary-statistics">🔢 Summary Statistics</h3>
-<div id="260efe9a" class="cell" data-execution_count="3">
+<div id="c87480ab" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grouped summary of ages</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>age_summary <span class="op">=</span> blueprinty.groupby(<span class="st">'iscustomer'</span>)[<span class="st">'age'</span>].describe()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Age Summary by Customer Status:"</span>)</span>
@@ -441,7 +441,7 @@ iscustomer
 <hr>
 <section id="age-distribution-by-customer-status" class="level3">
 <h3 class="anchored" data-anchor-id="age-distribution-by-customer-status">📊 Age Distribution by Customer Status</h3>
-<div id="d3918487" class="cell" data-execution_count="4">
+<div id="81b72ef2" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -491,7 +491,7 @@ iscustomer
 </section>
 <section id="region-breakdown-by-customer-status-1" class="level2">
 <h2 class="anchored" data-anchor-id="region-breakdown-by-customer-status-1">📊 Region Breakdown by Customer Status</h2>
-<div id="d7f521a8" class="cell" data-execution_count="5">
+<div id="c990efd4" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fix the data type and map labels</span></span>
@@ -553,7 +553,7 @@ _todo: Find the MLE by optimizing your likelihood function with optim() in R or 
 </section>
 <section id="code-poisson-log-likelihood-function" class="level3">
 <h3 class="anchored" data-anchor-id="code-poisson-log-likelihood-function">🧮 Code: Poisson Log-Likelihood Function</h3>
-<div id="21e6c4c2" class="cell" data-execution_count="6">
+<div id="167fa86b" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
@@ -580,7 +580,7 @@ _todo: Find the MLE by optimizing your likelihood function with optim() in R or 
 </section>
 <section id="plot-log-likelihood-over-lambda" class="level3">
 <h3 class="anchored" data-anchor-id="plot-log-likelihood-over-lambda">📊 Plot: Log-Likelihood over Lambda</h3>
-<div id="7f87bf1d" class="cell" data-execution_count="7">
+<div id="329fca62" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>lambda_vals <span class="op">=</span> np.linspace(<span class="fl">0.1</span>, <span class="dv">10</span>, <span class="dv">200</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>log_liks <span class="op">=</span> poisson_loglikelihood_vec(lambda_vals, Y)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -610,7 +610,7 @@ _todo: Find the MLE by optimizing your likelihood function with optim() in R or 
 </section>
 <section id="numerical-optimization" class="level3">
 <h3 class="anchored" data-anchor-id="numerical-optimization">🔧 Numerical Optimization</h3>
-<div id="216ae366" class="cell" data-execution_count="8">
+<div id="14d9d327" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative log-likelihood for optimization</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> neg_loglikelihood(lambda_):</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>poisson_loglikelihood(lambda_[<span class="dv">0</span>], Y)</span>
@@ -652,7 +652,7 @@ _todo: What do you conclude about the effect of Blueprinty's software on patent 
 </section>
 <section id="estimate-the-effect-of-blueprintys-software" class="level2">
 <h2 class="anchored" data-anchor-id="estimate-the-effect-of-blueprintys-software">🎯 Estimate the Effect of Blueprinty’s Software</h2>
-<div id="4b7e238f" class="cell" data-execution_count="9">
+<div id="3d32b8f0" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -712,7 +712,7 @@ _todo: What do you conclude about the effect of Blueprinty's software on patent 
 <section id="result" class="level3">
 <h3 class="anchored" data-anchor-id="result">✅ Result</h3>
 <p>The <strong>average treatment effect</strong> of using Blueprinty’s software is:</p>
-<div id="784257be" class="cell" data-execution_count="10">
+<div id="fe1f4d20" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Average predicted increase in patents from using Blueprinty's software: </span><span class="sc">{</span>average_treatment_effect<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Average predicted increase in patents from using Blueprinty's software: 0.793</code></pre>
@@ -767,7 +767,7 @@ Variable Definitions
 <hr>
 <section id="exploratory-data-analysis-and-cleaning" class="level3">
 <h3 class="anchored" data-anchor-id="exploratory-data-analysis-and-cleaning">🔍 Exploratory Data Analysis and Cleaning</h3>
-<div id="95cdd0f1" class="cell" data-execution_count="11">
+<div id="2ca25aea" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -821,7 +821,7 @@ Variable Definitions
 </section>
 <section id="data-preparation" class="level3">
 <h3 class="anchored" data-anchor-id="data-preparation">🧹 Data Preparation</h3>
-<div id="39545633" class="cell" data-execution_count="12">
+<div id="8a0e5364" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select and clean relevant variables</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> airbnb[[<span class="st">'number_of_reviews'</span>, <span class="st">'days'</span>, <span class="st">'room_type'</span>, <span class="st">'bathrooms'</span>, <span class="st">'bedrooms'</span>, </span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>             <span class="st">'price'</span>, <span class="st">'review_scores_cleanliness'</span>, <span class="st">'review_scores_location'</span>, </span>
@@ -852,7 +852,7 @@ Variable Definitions
 </section>
 <section id="poisson-regression-number-of-reviews" class="level3">
 <h3 class="anchored" data-anchor-id="poisson-regression-number-of-reviews">📈 Poisson Regression: Number of Reviews</h3>
-<div id="4f594cbe" class="cell" data-execution_count="13">
+<div id="9479a763" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure all variables are numeric to avoid ValueError</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> X.astype(<span class="bu">float</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> Y.astype(<span class="bu">float</span>)</span>
@@ -871,8 +871,8 @@ Model:                            GLM   Df Residuals:                    30149
 Model Family:                 Poisson   Df Model:                           10
 Link Function:                    Log   Scale:                          1.0000
 Method:                          IRLS   Log-Likelihood:            -5.2418e+05
-Date:                Wed, 07 May 2025   Deviance:                   9.2689e+05
-Time:                        21:59:27   Pearson chi2:                 1.37e+06
+Date:                Sun, 25 May 2025   Deviance:                   9.2689e+05
+Time:                        21:04:32   Pearson chi2:                 1.37e+06
 No. Iterations:                    10   Pseudo R-squ. (CS):             0.6840
 Covariance Type:            nonrobust                                         
 =============================================================================================
