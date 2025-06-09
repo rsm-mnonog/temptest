@@ -249,9 +249,17 @@ with imageio.get_writer(gif_path, mode='I', duration=0.8) as writer:
     for filename in filenames:
         image = imageio.imread(filename)
         writer.append_data(image)
+# import imageio
+# images = []
+# for filename in filenames:
+#     images.append(imageio.imread(filename))
+# imageio.mimsave('kmeans_animation.gif', images)
 
 print(f"GIF saved to {gif_path}")
 ```
+{{< video kmeans_animation.mp4 >}}
+
+<!-- ![](kmeans_animation.gif) -->
 
 <!-- ## 1b. Latent-Class MNL
 
@@ -272,6 +280,7 @@ _todo: compare the parameter estimates between (1) the aggregate MNL, and (2) th
 <!-- _todo: implement KNN by hand._ -->
 
 <!-- _todo: check your function by..._  --> 
+
 
 ## SUPERVISED MACHINE LEARNING
 

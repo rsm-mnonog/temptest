@@ -76,6 +76,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-80016ee63606a2f9ec92f99182a4ea77.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="../../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -222,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction-to-k-means-clustering" class="level3">
 <h3 class="anchored" data-anchor-id="introduction-to-k-means-clustering">🟦 Introduction to K-Means Clustering</h3>
 <p>Clustering is a fundamental unsupervised learning technique used to identify natural groupings within data. In this section, we explore the K-Means algorithm — a widely used partitioning method that aims to minimize the within-cluster variance by iteratively updating centroids. To deepen our understanding, we implement the algorithm from scratch and visualize each iterative step to observe how centroids converge. We apply our custom K-Means implementation to the Palmer Penguins dataset, focusing specifically on the bill_length_mm and flipper_length_mm features. Finally, we compare our results to the built-in KMeans function from Python’s scikit-learn library to evaluate accuracy and consistency. <!-- _todo: write your own code to implement the k-means algorithm.  Make plots of the various steps the algorithm takes so you can "see" the algorithm working.  Test your algorithm on the Palmer Penguins dataset, specifically using the bill length and flipper length variables.  Compare your results to the built-in `kmeans` function in R or Python._ --></p>
-<div id="6c1ea63b" class="cell" data-execution_count="1">
+<div id="c8a86115" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -316,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="apropriate-number-of-cluster-k" class="level3">
 <h3 class="anchored" data-anchor-id="apropriate-number-of-cluster-k">Apropriate Number of Cluster K</h3>
 <p>After implementing and testing the K-Means algorithm, the next step is to determine the most appropriate number of clusters (k) for the data. Two commonly used metrics for evaluating cluster quality are the within-cluster sum of squares (WCSS) and the silhouette score. WCSS measures the compactness of clusters — lower values indicate tighter groupings — while the silhouette score assesses how well-separated the clusters are, balancing cohesion and separation. In this section, we compute both metrics across a range of cluster counts (k = 2 to 7) using the Palmer Penguins dataset. The goal is to identify the “elbow” point in the WCSS plot and the peak silhouette value, which together guide us in selecting the optimal number of clusters that best represent the underlying structure in the data.</p>
-<div id="a33ae9e9" class="cell" data-execution_count="2">
+<div id="9b84ea31" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -380,7 +382,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="visualizing-k-means-with-animation" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-k-means-with-animation">🌀 Visualizing K-Means with Animation</h3>
 <p>To enhance interpretability and demonstrate how the K-Means algorithm converges, we create an animated visualization of the clustering process. This animation illustrates how centroids shift over iterations and how data points are reassigned until the algorithm stabilizes. By saving each iteration as an image and compiling them into a GIF, we can clearly observe the step-by-step progression of centroid movement and cluster formation. This dynamic approach offers an intuitive understanding of how K-Means operates, especially in contrast to static plots, and aligns with the spirit of interactive data storytelling.</p>
-<div id="9d7e4399" class="cell" data-execution_count="3">
+<div id="b49ee0f4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -435,12 +437,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> filename <span class="kw">in</span> filenames:</span>
 <span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>        image <span class="op">=</span> imageio.imread(filename)</span>
 <span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>        writer.append_data(image)</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"GIF saved to </span><span class="sc">{</span>gif_path<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="co"># import imageio</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co"># images = []</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="co"># for filename in filenames:</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="co">#     images.append(imageio.imread(filename))</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="co"># imageio.mimsave('kmeans_animation.gif', images)</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"GIF saved to </span><span class="sc">{</span>gif_path<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>GIF saved to kmeans_animation.gif</code></pre>
 </div>
 </div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="kmeans_animation.mp4"></video></div>
+<!-- ![](kmeans_animation.gif) -->
 <!-- ## 1b. Latent-Class MNL
 
 _todo: Use the Yogurt dataset to estimate a latent-class MNL model. This model was formally introduced in the paper by Kamakura & Russell (1989); you may want to read or reference page 2 of the pdf, which is described in the class slides, session 4, slides 56-57._
@@ -465,7 +474,7 @@ _todo: compare the parameter estimates between (1) the aggregate MNL, and (2) th
 <!-- _todo: replicate the table on slide 75 of the session 5 slides. Specifically, using the dataset provided in the file data_for_drivers_analysis.csv, calculate: pearson correlations, standardized regression coefficients, "usefulness", Shapley values for a linear regression, Johnson's relative weights, and the mean decrease in the gini coefficient from a random forest. You may use packages built into R or Python; you do not need to perform these calculations "by hand."_ -->
 <p>Understanding what drives customer satisfaction is critical for making strategic improvements in product and service delivery. In this section, we replicate the driver importance analysis shown on Slide 75 of the lecture slides using the data_for_drivers_analysis.csv dataset. Our target variable is satisfaction, and we evaluate the importance of nine key drivers using a comprehensive suite of methods. These include Pearson correlations, standardized regression coefficients, usefulness scores via permutation importance, Shapley value approximations (LMG), Johnson’s relative weights (ε), and mean decrease in Gini from a random forest. Together, these diverse techniques offer a well-rounded view of variable influence, capturing both linear associations and non-linear predictive power. This analysis not only validates the theoretical concepts covered in class but also provides a practical benchmark for feature attribution in real-world modeling.</p>
 <p>⸻</p>
-<div id="ba5ad81b" class="cell" data-execution_count="4">
+<div id="7650f9a6" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
@@ -569,316 +578,321 @@ _todo: compare the parameter estimates between (1) the aggregate MNL, and (2) th
 <span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the styled table</span></span>
 <span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>styled_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <style type="text/css">
-#T_31f9f th {
+#T_efd90 th {
   text-align: center;
 }
-#T_31f9f caption {
+#T_efd90 caption {
   caption-side: top;
   font-weight: bold;
 }
-#T_31f9f_row0_col0 {
+#T_efd90_row0_col0 {
   background-color: #0b1f5e;
   color: #f1f1f1;
   text-align: center;
 }
-#T_31f9f_row0_col1, #T_31f9f_row0_col3, #T_31f9f_row0_col4, #T_31f9f_row1_col0, #T_31f9f_row1_col2, #T_31f9f_row1_col5 {
+#T_efd90_row0_col1, #T_efd90_row0_col3, #T_efd90_row0_col4, #T_efd90_row1_col0, #T_efd90_row1_col2, #T_efd90_row1_col5 {
   background-color: #081d58;
   color: #f1f1f1;
   text-align: center;
 }
-#T_31f9f_row0_col2 {
+#T_efd90_row0_col2 {
   background-color: #2165ab;
   color: #f1f1f1;
   text-align: center;
 }
-#T_31f9f_row0_col5 {
+#T_efd90_row0_col5 {
   background-color: #2351a2;
   color: #f1f1f1;
   text-align: center;
 }
-#T_31f9f_row1_col1 {
+#T_efd90_row1_col1 {
   background-color: #1e2e85;
   color: #f1f1f1;
   text-align: center;
 }
-#T_31f9f_row1_col3, #T_31f9f_row2_col3 {
-  background-color: #182a7a;
+#T_efd90_row1_col3 {
+  background-color: #234da0;
   color: #f1f1f1;
   text-align: center;
 }
-#T_31f9f_row1_col4 {
+#T_efd90_row1_col4 {
   background-color: #23499e;
   color: #f1f1f1;
   text-align: center;
 }
-#T_31f9f_row2_col0 {
+#T_efd90_row2_col0 {
   background-color: #162874;
   color: #f1f1f1;
   text-align: center;
 }
-#T_31f9f_row2_col1 {
+#T_efd90_row2_col1 {
   background-color: #1f7ab5;
   color: #f1f1f1;
   text-align: center;
 }
-#T_31f9f_row2_col2 {
+#T_efd90_row2_col2 {
   background-color: #216bae;
   color: #f1f1f1;
   text-align: center;
 }
-#T_31f9f_row2_col4 {
+#T_efd90_row2_col3 {
+  background-color: #1e86bb;
+  color: #f1f1f1;
+  text-align: center;
+}
+#T_efd90_row2_col4 {
   background-color: #50bbc2;
   color: #000000;
   text-align: center;
 }
-#T_31f9f_row2_col5 {
+#T_efd90_row2_col5 {
   background-color: #1d90c0;
   color: #f1f1f1;
   text-align: center;
 }
-#T_31f9f_row3_col0 {
-  background-color: #61c2bf;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row3_col1 {
-  background-color: #cbebb4;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row3_col2 {
-  background-color: #d9f0b3;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row3_col3 {
-  background-color: #e8f6b1;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row3_col4 {
-  background-color: #f5fbc4;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row3_col5, #T_31f9f_row5_col2, #T_31f9f_row7_col1, #T_31f9f_row7_col4, #T_31f9f_row8_col0, #T_31f9f_row8_col3 {
-  background-color: #ffffd9;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row4_col0 {
+#T_efd90_row3_col0 {
   background-color: #c8e9b4;
   color: #000000;
   text-align: center;
 }
-#T_31f9f_row4_col1 {
+#T_efd90_row3_col1 {
   background-color: #eef8b3;
   color: #000000;
   text-align: center;
 }
-#T_31f9f_row4_col2 {
+#T_efd90_row3_col2 {
   background-color: #bde5b5;
   color: #000000;
   text-align: center;
 }
-#T_31f9f_row4_col3, #T_31f9f_row5_col3, #T_31f9f_row6_col3, #T_31f9f_row7_col3 {
-  background-color: #f5fbc2;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row4_col4 {
-  background-color: #fcfed3;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row4_col5 {
-  background-color: #ceecb3;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row5_col0 {
-  background-color: #e1f3b2;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row5_col1 {
-  background-color: #dbf1b2;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row5_col4 {
-  background-color: #f9fdcb;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row5_col5 {
-  background-color: #f7fcc7;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row6_col0 {
-  background-color: #44b7c4;
-  color: #f1f1f1;
-  text-align: center;
-}
-#T_31f9f_row6_col1 {
-  background-color: #e9f7b1;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row6_col2 {
-  background-color: #c6e9b4;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row6_col4 {
-  background-color: #fcfed1;
-  color: #000000;
-  text-align: center;
-}
-#T_31f9f_row6_col5 {
+#T_efd90_row3_col3, #T_efd90_row4_col3, #T_efd90_row5_col5 {
   background-color: #d6efb3;
   color: #000000;
   text-align: center;
 }
-#T_31f9f_row7_col0 {
+#T_efd90_row3_col4 {
+  background-color: #fcfed3;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row3_col5 {
+  background-color: #ceecb3;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row4_col0 {
+  background-color: #61c2bf;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row4_col1 {
+  background-color: #cbebb4;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row4_col2 {
+  background-color: #d9f0b3;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row4_col4 {
+  background-color: #f5fbc4;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row4_col5, #T_efd90_row6_col2, #T_efd90_row7_col1, #T_efd90_row7_col4, #T_efd90_row8_col0, #T_efd90_row8_col3 {
+  background-color: #ffffd9;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row5_col0 {
+  background-color: #44b7c4;
+  color: #f1f1f1;
+  text-align: center;
+}
+#T_efd90_row5_col1 {
+  background-color: #e9f7b1;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row5_col2 {
+  background-color: #c6e9b4;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row5_col3 {
+  background-color: #e6f5b2;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row5_col4 {
+  background-color: #fcfed1;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row6_col0 {
+  background-color: #e1f3b2;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row6_col1 {
+  background-color: #dbf1b2;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row6_col3, #T_efd90_row7_col3 {
+  background-color: #f1faba;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row6_col4 {
+  background-color: #f9fdcb;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row6_col5 {
+  background-color: #f7fcc7;
+  color: #000000;
+  text-align: center;
+}
+#T_efd90_row7_col0 {
   background-color: #b4e2b6;
   color: #000000;
   text-align: center;
 }
-#T_31f9f_row7_col2 {
+#T_efd90_row7_col2 {
   background-color: #d4eeb3;
   color: #000000;
   text-align: center;
 }
-#T_31f9f_row7_col5 {
+#T_efd90_row7_col5 {
   background-color: #d3eeb3;
   color: #000000;
   text-align: center;
 }
-#T_31f9f_row8_col1 {
+#T_efd90_row8_col1 {
   background-color: #f2fabc;
   color: #000000;
   text-align: center;
 }
-#T_31f9f_row8_col2 {
+#T_efd90_row8_col2 {
   background-color: #cfecb3;
   color: #000000;
   text-align: center;
 }
-#T_31f9f_row8_col4 {
+#T_efd90_row8_col4 {
   background-color: #fdfed5;
   color: #000000;
   text-align: center;
 }
-#T_31f9f_row8_col5 {
+#T_efd90_row8_col5 {
   background-color: #edf8b1;
   color: #000000;
   text-align: center;
 }
 </style>
 
-<div id="T_31f9f" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
+<div id="T_efd90" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_31f9f-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_efd90-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;1: 💡 Key Drivers of Customer Satisfaction (Multi-Metric Comparison)
 </figcaption>
-<div aria-describedby="T_31f9f-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_31f9f" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<div aria-describedby="T_efd90-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_efd90" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_31f9f_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Pearson Corr (%)</th>
-<th id="T_31f9f_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Std Coefficients (%)</th>
-<th id="T_31f9f_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Usefulness (Permutation) (%)</th>
-<th id="T_31f9f_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">LMG / Shapley (%)</th>
-<th id="T_31f9f_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Johnson's Epsilon (%)</th>
-<th id="T_31f9f_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">RF Gini (%)</th>
+<th id="T_efd90_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Pearson Corr (%)</th>
+<th id="T_efd90_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Std Coefficients (%)</th>
+<th id="T_efd90_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Usefulness (Permutation) (%)</th>
+<th id="T_efd90_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">LMG / Shapley (%)</th>
+<th id="T_efd90_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Johnson's Epsilon (%)</th>
+<th id="T_efd90_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">RF Gini (%)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_31f9f_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">impact</td>
-<td id="T_31f9f_row0_col0" class="data row0 col0">25.5</td>
-<td id="T_31f9f_row0_col1" class="data row0 col1">15.0</td>
-<td id="T_31f9f_row0_col2" class="data row0 col2">15.4</td>
-<td id="T_31f9f_row0_col3" class="data row0 col3">2.1</td>
-<td id="T_31f9f_row0_col4" class="data row0 col4">40.4</td>
-<td id="T_31f9f_row0_col5" class="data row0 col5">14.1</td>
+<td id="T_efd90_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">impact</td>
+<td id="T_efd90_row0_col0" class="data row0 col0">25.5</td>
+<td id="T_efd90_row0_col1" class="data row0 col1">15.0</td>
+<td id="T_efd90_row0_col2" class="data row0 col2">15.4</td>
+<td id="T_efd90_row0_col3" class="data row0 col3">2.5</td>
+<td id="T_efd90_row0_col4" class="data row0 col4">40.4</td>
+<td id="T_efd90_row0_col5" class="data row0 col5">14.1</td>
 </tr>
 <tr class="even">
-<td id="T_31f9f_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">trust</td>
-<td id="T_31f9f_row1_col0" class="data row1 col0">25.6</td>
-<td id="T_31f9f_row1_col1" class="data row1 col1">13.6</td>
-<td id="T_31f9f_row1_col2" class="data row1 col2">17.2</td>
-<td id="T_31f9f_row1_col3" class="data row1 col3">2.0</td>
-<td id="T_31f9f_row1_col4" class="data row1 col4">32.8</td>
-<td id="T_31f9f_row1_col5" class="data row1 col5">15.6</td>
+<td id="T_efd90_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">trust</td>
+<td id="T_efd90_row1_col0" class="data row1 col0">25.6</td>
+<td id="T_efd90_row1_col1" class="data row1 col1">13.6</td>
+<td id="T_efd90_row1_col2" class="data row1 col2">17.2</td>
+<td id="T_efd90_row1_col3" class="data row1 col3">2.1</td>
+<td id="T_efd90_row1_col4" class="data row1 col4">32.8</td>
+<td id="T_efd90_row1_col5" class="data row1 col5">15.6</td>
 </tr>
 <tr class="odd">
-<td id="T_31f9f_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">service</td>
-<td id="T_31f9f_row2_col0" class="data row2 col0">25.1</td>
-<td id="T_31f9f_row2_col1" class="data row2 col1">10.4</td>
-<td id="T_31f9f_row2_col2" class="data row2 col2">15.3</td>
-<td id="T_31f9f_row2_col3" class="data row2 col3">2.0</td>
-<td id="T_31f9f_row2_col4" class="data row2 col4">19.1</td>
-<td id="T_31f9f_row2_col5" class="data row2 col5">13.0</td>
+<td id="T_efd90_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">service</td>
+<td id="T_efd90_row2_col0" class="data row2 col0">25.1</td>
+<td id="T_efd90_row2_col1" class="data row2 col1">10.4</td>
+<td id="T_efd90_row2_col2" class="data row2 col2">15.3</td>
+<td id="T_efd90_row2_col3" class="data row2 col3">1.8</td>
+<td id="T_efd90_row2_col4" class="data row2 col4">19.1</td>
+<td id="T_efd90_row2_col5" class="data row2 col5">13.0</td>
 </tr>
 <tr class="even">
-<td id="T_31f9f_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">appealing</td>
-<td id="T_31f9f_row3_col0" class="data row3 col0">20.8</td>
-<td id="T_31f9f_row3_col1" class="data row3 col1">4.0</td>
-<td id="T_31f9f_row3_col2" class="data row3 col2">11.8</td>
-<td id="T_31f9f_row3_col3" class="data row3 col3">0.9</td>
-<td id="T_31f9f_row3_col4" class="data row3 col4">2.8</td>
-<td id="T_31f9f_row3_col5" class="data row3 col5">8.6</td>
+<td id="T_efd90_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">build</td>
+<td id="T_efd90_row3_col0" class="data row3 col0">19.2</td>
+<td id="T_efd90_row3_col1" class="data row3 col1">2.3</td>
+<td id="T_efd90_row3_col2" class="data row3 col2">12.3</td>
+<td id="T_efd90_row3_col3" class="data row3 col3">0.9</td>
+<td id="T_efd90_row3_col4" class="data row3 col4">1.0</td>
+<td id="T_efd90_row3_col5" class="data row3 col5">10.2</td>
 </tr>
 <tr class="odd">
-<td id="T_31f9f_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">build</td>
-<td id="T_31f9f_row4_col0" class="data row4 col0">19.2</td>
-<td id="T_31f9f_row4_col1" class="data row4 col1">2.3</td>
-<td id="T_31f9f_row4_col2" class="data row4 col2">12.3</td>
-<td id="T_31f9f_row4_col3" class="data row4 col3">0.8</td>
-<td id="T_31f9f_row4_col4" class="data row4 col4">1.0</td>
-<td id="T_31f9f_row4_col5" class="data row4 col5">10.2</td>
+<td id="T_efd90_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">appealing</td>
+<td id="T_efd90_row4_col0" class="data row4 col0">20.8</td>
+<td id="T_efd90_row4_col1" class="data row4 col1">4.0</td>
+<td id="T_efd90_row4_col2" class="data row4 col2">11.8</td>
+<td id="T_efd90_row4_col3" class="data row4 col3">0.9</td>
+<td id="T_efd90_row4_col4" class="data row4 col4">2.8</td>
+<td id="T_efd90_row4_col5" class="data row4 col5">8.6</td>
 </tr>
 <tr class="even">
-<td id="T_31f9f_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">differs</td>
-<td id="T_31f9f_row5_col0" class="data row5 col0">18.5</td>
-<td id="T_31f9f_row5_col1" class="data row5 col1">3.3</td>
-<td id="T_31f9f_row5_col2" class="data row5 col2">10.5</td>
-<td id="T_31f9f_row5_col3" class="data row5 col3">0.8</td>
-<td id="T_31f9f_row5_col4" class="data row5 col4">1.9</td>
-<td id="T_31f9f_row5_col5" class="data row5 col5">9.0</td>
+<td id="T_efd90_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">easy</td>
+<td id="T_efd90_row5_col0" class="data row5 col0">21.3</td>
+<td id="T_efd90_row5_col1" class="data row5 col1">2.6</td>
+<td id="T_efd90_row5_col2" class="data row5 col2">12.2</td>
+<td id="T_efd90_row5_col3" class="data row5 col3">0.8</td>
+<td id="T_efd90_row5_col4" class="data row5 col4">1.2</td>
+<td id="T_efd90_row5_col5" class="data row5 col5">10.0</td>
 </tr>
 <tr class="odd">
-<td id="T_31f9f_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">easy</td>
-<td id="T_31f9f_row6_col0" class="data row6 col0">21.3</td>
-<td id="T_31f9f_row6_col1" class="data row6 col1">2.6</td>
-<td id="T_31f9f_row6_col2" class="data row6 col2">12.2</td>
-<td id="T_31f9f_row6_col3" class="data row6 col3">0.8</td>
-<td id="T_31f9f_row6_col4" class="data row6 col4">1.2</td>
-<td id="T_31f9f_row6_col5" class="data row6 col5">10.0</td>
+<td id="T_efd90_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">differs</td>
+<td id="T_efd90_row6_col0" class="data row6 col0">18.5</td>
+<td id="T_efd90_row6_col1" class="data row6 col1">3.3</td>
+<td id="T_efd90_row6_col2" class="data row6 col2">10.5</td>
+<td id="T_efd90_row6_col3" class="data row6 col3">0.7</td>
+<td id="T_efd90_row6_col4" class="data row6 col4">1.9</td>
+<td id="T_efd90_row6_col5" class="data row6 col5">9.0</td>
 </tr>
 <tr class="even">
-<td id="T_31f9f_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">rewarding</td>
-<td id="T_31f9f_row7_col0" class="data row7 col0">19.5</td>
-<td id="T_31f9f_row7_col1" class="data row7 col1">0.6</td>
-<td id="T_31f9f_row7_col2" class="data row7 col2">11.9</td>
-<td id="T_31f9f_row7_col3" class="data row7 col3">0.8</td>
-<td id="T_31f9f_row7_col4" class="data row7 col4">0.1</td>
-<td id="T_31f9f_row7_col5" class="data row7 col5">10.1</td>
+<td id="T_efd90_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">rewarding</td>
+<td id="T_efd90_row7_col0" class="data row7 col0">19.5</td>
+<td id="T_efd90_row7_col1" class="data row7 col1">0.6</td>
+<td id="T_efd90_row7_col2" class="data row7 col2">11.9</td>
+<td id="T_efd90_row7_col3" class="data row7 col3">0.7</td>
+<td id="T_efd90_row7_col4" class="data row7 col4">0.1</td>
+<td id="T_efd90_row7_col5" class="data row7 col5">10.1</td>
 </tr>
 <tr class="odd">
-<td id="T_31f9f_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">popular</td>
-<td id="T_31f9f_row8_col0" class="data row8 col0">17.1</td>
-<td id="T_31f9f_row8_col1" class="data row8 col1">1.9</td>
-<td id="T_31f9f_row8_col2" class="data row8 col2">12.0</td>
-<td id="T_31f9f_row8_col3" class="data row8 col3">0.7</td>
-<td id="T_31f9f_row8_col4" class="data row8 col4">0.7</td>
-<td id="T_31f9f_row8_col5" class="data row8 col5">9.5</td>
+<td id="T_efd90_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">popular</td>
+<td id="T_efd90_row8_col0" class="data row8 col0">17.1</td>
+<td id="T_efd90_row8_col1" class="data row8 col1">1.9</td>
+<td id="T_efd90_row8_col2" class="data row8 col2">12.0</td>
+<td id="T_efd90_row8_col3" class="data row8 col3">0.5</td>
+<td id="T_efd90_row8_col4" class="data row8 col4">0.7</td>
+<td id="T_efd90_row8_col5" class="data row8 col5">9.5</td>
 </tr>
 </tbody>
 </table>
@@ -919,7 +933,7 @@ Table&nbsp;1: 💡 Key Drivers of Customer Satisfaction (Multi-Metric Comparison
 <section id="advanced-model-based-importance-measures-challenge" class="level3">
 <h3 class="anchored" data-anchor-id="advanced-model-based-importance-measures-challenge">🧠 Advanced Model-Based Importance Measures (Challenge)</h3>
 <p>To deepen the analysis and explore the consistency of feature importance across modeling techniques, we extend the key drivers table with metrics from more advanced machine learning models. Specifically, we include permutation-based importance from a neural network and attempt to incorporate feature importance from XGBoost, a powerful gradient boosting framework. These models are capable of capturing complex, non-linear relationships that traditional regression may overlook. By comparing these modern importance metrics with earlier measures such as standardized coefficients and Gini importance, we can assess the robustness of our findings and uncover deeper insights into what truly drives customer satisfaction. This enhanced table provides a more holistic view, integrating classical statistical reasoning with modern machine learning interpretability.</p>
-<div id="abeddd84" class="cell" data-execution_count="5">
+<div id="c2aeeac0" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
@@ -1033,347 +1047,352 @@ Table&nbsp;1: 💡 Key Drivers of Customer Satisfaction (Multi-Metric Comparison
 <span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: save to CSV</span></span>
 <span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a><span class="co"># results.to_csv("key_driver_importance_table.csv", index=True)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <style type="text/css">
-#T_68d4f th {
+#T_90310 th {
   text-align: center;
 }
-#T_68d4f caption {
+#T_90310 caption {
   caption-side: top;
   font-weight: bold;
   font-size: 14px;
 }
-#T_68d4f_row0_col0 {
+#T_90310_row0_col0 {
   background-color: #0b1f5e;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row0_col1, #T_68d4f_row0_col3, #T_68d4f_row0_col4, #T_68d4f_row1_col0, #T_68d4f_row1_col2, #T_68d4f_row1_col5, #T_68d4f_row2_col6 {
+#T_90310_row0_col1, #T_90310_row0_col3, #T_90310_row0_col4, #T_90310_row1_col0, #T_90310_row1_col2, #T_90310_row1_col5, #T_90310_row2_col6 {
   background-color: #081d58;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row0_col2 {
+#T_90310_row0_col2 {
   background-color: #2165ab;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row0_col5 {
+#T_90310_row0_col5 {
   background-color: #2351a2;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row0_col6, #T_68d4f_row1_col6 {
+#T_90310_row0_col6, #T_90310_row1_col6 {
   background-color: #24419a;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row1_col1 {
+#T_90310_row1_col1 {
   background-color: #1e2e85;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row1_col3 {
-  background-color: #216aad;
+#T_90310_row1_col3 {
+  background-color: #2072b1;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row1_col4 {
+#T_90310_row1_col4 {
   background-color: #23499e;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row2_col0 {
+#T_90310_row2_col0 {
   background-color: #162874;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row2_col1 {
+#T_90310_row2_col1 {
   background-color: #1f7ab5;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row2_col2 {
+#T_90310_row2_col2 {
   background-color: #216bae;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row2_col3 {
-  background-color: #1f80b8;
+#T_90310_row2_col3 {
+  background-color: #33a7c2;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row2_col4 {
+#T_90310_row2_col4 {
   background-color: #50bbc2;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row2_col5 {
+#T_90310_row2_col5 {
   background-color: #1d90c0;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row3_col0 {
-  background-color: #44b7c4;
-  color: #f1f1f1;
-  text-align: center;
-}
-#T_68d4f_row3_col1 {
-  background-color: #e9f7b1;
-  color: #000000;
-  text-align: center;
-}
-#T_68d4f_row3_col2 {
-  background-color: #c6e9b4;
-  color: #000000;
-  text-align: center;
-}
-#T_68d4f_row3_col3, #T_68d4f_row4_col3 {
-  background-color: #b7e3b6;
-  color: #000000;
-  text-align: center;
-}
-#T_68d4f_row3_col4 {
-  background-color: #fcfed1;
-  color: #000000;
-  text-align: center;
-}
-#T_68d4f_row3_col5 {
-  background-color: #d6efb3;
-  color: #000000;
-  text-align: center;
-}
-#T_68d4f_row3_col6, #T_68d4f_row5_col3, #T_68d4f_row6_col3, #T_68d4f_row6_col5, #T_68d4f_row7_col3 {
-  background-color: #f7fcc7;
-  color: #000000;
-  text-align: center;
-}
-#T_68d4f_row4_col0 {
+#T_90310_row3_col0 {
   background-color: #61c2bf;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row4_col1 {
+#T_90310_row3_col1 {
   background-color: #cbebb4;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row4_col2 {
+#T_90310_row3_col2 {
   background-color: #d9f0b3;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row4_col4 {
+#T_90310_row3_col3, #T_90310_row4_col2 {
+  background-color: #c6e9b4;
+  color: #000000;
+  text-align: center;
+}
+#T_90310_row3_col4 {
   background-color: #f5fbc4;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row4_col5, #T_68d4f_row5_col6, #T_68d4f_row6_col2, #T_68d4f_row7_col1, #T_68d4f_row7_col4, #T_68d4f_row7_col6, #T_68d4f_row8_col0, #T_68d4f_row8_col3 {
+#T_90310_row3_col5, #T_90310_row5_col6, #T_90310_row6_col2, #T_90310_row6_col3, #T_90310_row7_col1, #T_90310_row7_col3, #T_90310_row7_col4, #T_90310_row7_col6, #T_90310_row8_col0, #T_90310_row8_col3 {
   background-color: #ffffd9;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row4_col6 {
+#T_90310_row3_col6 {
   background-color: #299dc1;
   color: #f1f1f1;
   text-align: center;
 }
-#T_68d4f_row5_col0 {
+#T_90310_row4_col0 {
+  background-color: #44b7c4;
+  color: #f1f1f1;
+  text-align: center;
+}
+#T_90310_row4_col1 {
+  background-color: #e9f7b1;
+  color: #000000;
+  text-align: center;
+}
+#T_90310_row4_col3 {
+  background-color: #e6f5b2;
+  color: #000000;
+  text-align: center;
+}
+#T_90310_row4_col4 {
+  background-color: #fcfed1;
+  color: #000000;
+  text-align: center;
+}
+#T_90310_row4_col5 {
+  background-color: #d6efb3;
+  color: #000000;
+  text-align: center;
+}
+#T_90310_row4_col6, #T_90310_row6_col5 {
+  background-color: #f7fcc7;
+  color: #000000;
+  text-align: center;
+}
+#T_90310_row5_col0 {
   background-color: #c8e9b4;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row5_col1 {
+#T_90310_row5_col1 {
   background-color: #eef8b3;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row5_col2 {
+#T_90310_row5_col2 {
   background-color: #bde5b5;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row5_col4 {
+#T_90310_row5_col3 {
+  background-color: #f8fcca;
+  color: #000000;
+  text-align: center;
+}
+#T_90310_row5_col4 {
   background-color: #fcfed3;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row5_col5 {
+#T_90310_row5_col5 {
   background-color: #ceecb3;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row6_col0 {
+#T_90310_row6_col0 {
   background-color: #e1f3b2;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row6_col1 {
+#T_90310_row6_col1 {
   background-color: #dbf1b2;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row6_col4 {
+#T_90310_row6_col4 {
   background-color: #f9fdcb;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row6_col6 {
+#T_90310_row6_col6 {
   background-color: #eff9b6;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row7_col0 {
+#T_90310_row7_col0 {
   background-color: #b4e2b6;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row7_col2 {
+#T_90310_row7_col2 {
   background-color: #d4eeb3;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row7_col5 {
+#T_90310_row7_col5 {
   background-color: #d3eeb3;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row8_col1 {
+#T_90310_row8_col1 {
   background-color: #f2fabc;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row8_col2 {
+#T_90310_row8_col2 {
   background-color: #cfecb3;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row8_col4 {
+#T_90310_row8_col4 {
   background-color: #fdfed5;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row8_col5 {
+#T_90310_row8_col5 {
   background-color: #edf8b1;
   color: #000000;
   text-align: center;
 }
-#T_68d4f_row8_col6 {
+#T_90310_row8_col6 {
   background-color: #87d0ba;
   color: #000000;
   text-align: center;
 }
 </style>
 
-<div id="T_68d4f" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
+<div id="T_90310" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_68d4f-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_90310-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;2: 🔍 Key Driver Importance Metrics (Multi-Model Comparison)
 </figcaption>
-<div aria-describedby="T_68d4f-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_68d4f" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<div aria-describedby="T_90310-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_90310" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_68d4f_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Pearson Corr (%)</th>
-<th id="T_68d4f_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Std Coefficients (%)</th>
-<th id="T_68d4f_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Usefulness (Permutation) (%)</th>
-<th id="T_68d4f_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">LMG / Shapley (%)</th>
-<th id="T_68d4f_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Johnson's Epsilon (%)</th>
-<th id="T_68d4f_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">RF Gini (%)</th>
-<th id="T_68d4f_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Neural Net Permutation (%)</th>
+<th id="T_90310_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Pearson Corr (%)</th>
+<th id="T_90310_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Std Coefficients (%)</th>
+<th id="T_90310_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Usefulness (Permutation) (%)</th>
+<th id="T_90310_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">LMG / Shapley (%)</th>
+<th id="T_90310_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Johnson's Epsilon (%)</th>
+<th id="T_90310_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">RF Gini (%)</th>
+<th id="T_90310_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">Neural Net Permutation (%)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_68d4f_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">impact</td>
-<td id="T_68d4f_row0_col0" class="data row0 col0">25.5</td>
-<td id="T_68d4f_row0_col1" class="data row0 col1">15.0</td>
-<td id="T_68d4f_row0_col2" class="data row0 col2">15.4</td>
-<td id="T_68d4f_row0_col3" class="data row0 col3">2.4</td>
-<td id="T_68d4f_row0_col4" class="data row0 col4">40.4</td>
-<td id="T_68d4f_row0_col5" class="data row0 col5">14.1</td>
-<td id="T_68d4f_row0_col6" class="data row0 col6">6.3</td>
+<td id="T_90310_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">impact</td>
+<td id="T_90310_row0_col0" class="data row0 col0">25.5</td>
+<td id="T_90310_row0_col1" class="data row0 col1">15.0</td>
+<td id="T_90310_row0_col2" class="data row0 col2">15.4</td>
+<td id="T_90310_row0_col3" class="data row0 col3">2.6</td>
+<td id="T_90310_row0_col4" class="data row0 col4">40.4</td>
+<td id="T_90310_row0_col5" class="data row0 col5">14.1</td>
+<td id="T_90310_row0_col6" class="data row0 col6">6.3</td>
 </tr>
 <tr class="even">
-<td id="T_68d4f_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">trust</td>
-<td id="T_68d4f_row1_col0" class="data row1 col0">25.6</td>
-<td id="T_68d4f_row1_col1" class="data row1 col1">13.6</td>
-<td id="T_68d4f_row1_col2" class="data row1 col2">17.2</td>
-<td id="T_68d4f_row1_col3" class="data row1 col3">1.9</td>
-<td id="T_68d4f_row1_col4" class="data row1 col4">32.8</td>
-<td id="T_68d4f_row1_col5" class="data row1 col5">15.6</td>
-<td id="T_68d4f_row1_col6" class="data row1 col6">6.3</td>
+<td id="T_90310_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">trust</td>
+<td id="T_90310_row1_col0" class="data row1 col0">25.6</td>
+<td id="T_90310_row1_col1" class="data row1 col1">13.6</td>
+<td id="T_90310_row1_col2" class="data row1 col2">17.2</td>
+<td id="T_90310_row1_col3" class="data row1 col3">2.0</td>
+<td id="T_90310_row1_col4" class="data row1 col4">32.8</td>
+<td id="T_90310_row1_col5" class="data row1 col5">15.6</td>
+<td id="T_90310_row1_col6" class="data row1 col6">6.3</td>
 </tr>
 <tr class="odd">
-<td id="T_68d4f_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">service</td>
-<td id="T_68d4f_row2_col0" class="data row2 col0">25.1</td>
-<td id="T_68d4f_row2_col1" class="data row2 col1">10.4</td>
-<td id="T_68d4f_row2_col2" class="data row2 col2">15.3</td>
-<td id="T_68d4f_row2_col3" class="data row2 col3">1.8</td>
-<td id="T_68d4f_row2_col4" class="data row2 col4">19.1</td>
-<td id="T_68d4f_row2_col5" class="data row2 col5">13.0</td>
-<td id="T_68d4f_row2_col6" class="data row2 col6">6.9</td>
+<td id="T_90310_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">service</td>
+<td id="T_90310_row2_col0" class="data row2 col0">25.1</td>
+<td id="T_90310_row2_col1" class="data row2 col1">10.4</td>
+<td id="T_90310_row2_col2" class="data row2 col2">15.3</td>
+<td id="T_90310_row2_col3" class="data row2 col3">1.7</td>
+<td id="T_90310_row2_col4" class="data row2 col4">19.1</td>
+<td id="T_90310_row2_col5" class="data row2 col5">13.0</td>
+<td id="T_90310_row2_col6" class="data row2 col6">6.9</td>
 </tr>
 <tr class="even">
-<td id="T_68d4f_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">easy</td>
-<td id="T_68d4f_row3_col0" class="data row3 col0">21.3</td>
-<td id="T_68d4f_row3_col1" class="data row3 col1">2.6</td>
-<td id="T_68d4f_row3_col2" class="data row3 col2">12.2</td>
-<td id="T_68d4f_row3_col3" class="data row3 col3">1.1</td>
-<td id="T_68d4f_row3_col4" class="data row3 col4">1.2</td>
-<td id="T_68d4f_row3_col5" class="data row3 col5">10.0</td>
-<td id="T_68d4f_row3_col6" class="data row3 col6">3.5</td>
+<td id="T_90310_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">appealing</td>
+<td id="T_90310_row3_col0" class="data row3 col0">20.8</td>
+<td id="T_90310_row3_col1" class="data row3 col1">4.0</td>
+<td id="T_90310_row3_col2" class="data row3 col2">11.8</td>
+<td id="T_90310_row3_col3" class="data row3 col3">1.1</td>
+<td id="T_90310_row3_col4" class="data row3 col4">2.8</td>
+<td id="T_90310_row3_col5" class="data row3 col5">8.6</td>
+<td id="T_90310_row3_col6" class="data row3 col6">5.4</td>
 </tr>
 <tr class="odd">
-<td id="T_68d4f_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">appealing</td>
-<td id="T_68d4f_row4_col0" class="data row4 col0">20.8</td>
-<td id="T_68d4f_row4_col1" class="data row4 col1">4.0</td>
-<td id="T_68d4f_row4_col2" class="data row4 col2">11.8</td>
-<td id="T_68d4f_row4_col3" class="data row4 col3">1.1</td>
-<td id="T_68d4f_row4_col4" class="data row4 col4">2.8</td>
-<td id="T_68d4f_row4_col5" class="data row4 col5">8.6</td>
-<td id="T_68d4f_row4_col6" class="data row4 col6">5.4</td>
+<td id="T_90310_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">easy</td>
+<td id="T_90310_row4_col0" class="data row4 col0">21.3</td>
+<td id="T_90310_row4_col1" class="data row4 col1">2.6</td>
+<td id="T_90310_row4_col2" class="data row4 col2">12.2</td>
+<td id="T_90310_row4_col3" class="data row4 col3">0.9</td>
+<td id="T_90310_row4_col4" class="data row4 col4">1.2</td>
+<td id="T_90310_row4_col5" class="data row4 col5">10.0</td>
+<td id="T_90310_row4_col6" class="data row4 col6">3.5</td>
 </tr>
 <tr class="even">
-<td id="T_68d4f_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">build</td>
-<td id="T_68d4f_row5_col0" class="data row5 col0">19.2</td>
-<td id="T_68d4f_row5_col1" class="data row5 col1">2.3</td>
-<td id="T_68d4f_row5_col2" class="data row5 col2">12.3</td>
-<td id="T_68d4f_row5_col3" class="data row5 col3">0.7</td>
-<td id="T_68d4f_row5_col4" class="data row5 col4">1.0</td>
-<td id="T_68d4f_row5_col5" class="data row5 col5">10.2</td>
-<td id="T_68d4f_row5_col6" class="data row5 col6">3.3</td>
+<td id="T_90310_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">build</td>
+<td id="T_90310_row5_col0" class="data row5 col0">19.2</td>
+<td id="T_90310_row5_col1" class="data row5 col1">2.3</td>
+<td id="T_90310_row5_col2" class="data row5 col2">12.3</td>
+<td id="T_90310_row5_col3" class="data row5 col3">0.7</td>
+<td id="T_90310_row5_col4" class="data row5 col4">1.0</td>
+<td id="T_90310_row5_col5" class="data row5 col5">10.2</td>
+<td id="T_90310_row5_col6" class="data row5 col6">3.3</td>
 </tr>
 <tr class="odd">
-<td id="T_68d4f_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">differs</td>
-<td id="T_68d4f_row6_col0" class="data row6 col0">18.5</td>
-<td id="T_68d4f_row6_col1" class="data row6 col1">3.3</td>
-<td id="T_68d4f_row6_col2" class="data row6 col2">10.5</td>
-<td id="T_68d4f_row6_col3" class="data row6 col3">0.7</td>
-<td id="T_68d4f_row6_col4" class="data row6 col4">1.9</td>
-<td id="T_68d4f_row6_col5" class="data row6 col5">9.0</td>
-<td id="T_68d4f_row6_col6" class="data row6 col6">3.7</td>
+<td id="T_90310_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">differs</td>
+<td id="T_90310_row6_col0" class="data row6 col0">18.5</td>
+<td id="T_90310_row6_col1" class="data row6 col1">3.3</td>
+<td id="T_90310_row6_col2" class="data row6 col2">10.5</td>
+<td id="T_90310_row6_col3" class="data row6 col3">0.6</td>
+<td id="T_90310_row6_col4" class="data row6 col4">1.9</td>
+<td id="T_90310_row6_col5" class="data row6 col5">9.0</td>
+<td id="T_90310_row6_col6" class="data row6 col6">3.7</td>
 </tr>
 <tr class="even">
-<td id="T_68d4f_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">rewarding</td>
-<td id="T_68d4f_row7_col0" class="data row7 col0">19.5</td>
-<td id="T_68d4f_row7_col1" class="data row7 col1">0.6</td>
-<td id="T_68d4f_row7_col2" class="data row7 col2">11.9</td>
-<td id="T_68d4f_row7_col3" class="data row7 col3">0.7</td>
-<td id="T_68d4f_row7_col4" class="data row7 col4">0.1</td>
-<td id="T_68d4f_row7_col5" class="data row7 col5">10.1</td>
-<td id="T_68d4f_row7_col6" class="data row7 col6">3.3</td>
+<td id="T_90310_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">rewarding</td>
+<td id="T_90310_row7_col0" class="data row7 col0">19.5</td>
+<td id="T_90310_row7_col1" class="data row7 col1">0.6</td>
+<td id="T_90310_row7_col2" class="data row7 col2">11.9</td>
+<td id="T_90310_row7_col3" class="data row7 col3">0.6</td>
+<td id="T_90310_row7_col4" class="data row7 col4">0.1</td>
+<td id="T_90310_row7_col5" class="data row7 col5">10.1</td>
+<td id="T_90310_row7_col6" class="data row7 col6">3.3</td>
 </tr>
 <tr class="odd">
-<td id="T_68d4f_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">popular</td>
-<td id="T_68d4f_row8_col0" class="data row8 col0">17.1</td>
-<td id="T_68d4f_row8_col1" class="data row8 col1">1.9</td>
-<td id="T_68d4f_row8_col2" class="data row8 col2">12.0</td>
-<td id="T_68d4f_row8_col3" class="data row8 col3">0.6</td>
-<td id="T_68d4f_row8_col4" class="data row8 col4">0.7</td>
-<td id="T_68d4f_row8_col5" class="data row8 col5">9.5</td>
-<td id="T_68d4f_row8_col6" class="data row8 col6">4.6</td>
+<td id="T_90310_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">popular</td>
+<td id="T_90310_row8_col0" class="data row8 col0">17.1</td>
+<td id="T_90310_row8_col1" class="data row8 col1">1.9</td>
+<td id="T_90310_row8_col2" class="data row8 col2">12.0</td>
+<td id="T_90310_row8_col3" class="data row8 col3">0.6</td>
+<td id="T_90310_row8_col4" class="data row8 col4">0.7</td>
+<td id="T_90310_row8_col5" class="data row8 col5">9.5</td>
+<td id="T_90310_row8_col6" class="data row8 col6">4.6</td>
 </tr>
 </tbody>
 </table>
@@ -1835,6 +1854,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>videojs(video_shortcode_videojs_video1);</script>
 
 
 
