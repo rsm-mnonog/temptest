@@ -1,5 +1,5 @@
 ---
-title: "Homework 4"
+title: "Project 4"
 description: "Machine Learning"
 author: "Mario Nonog"
 date: today

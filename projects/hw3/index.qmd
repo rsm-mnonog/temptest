@@ -1,5 +1,5 @@
 ---
-title: "Homework 3"
+title: "Project 3"
 description: " MNL via Maximum Likelihood and Bayesian Approach"
 author: "Mario Nonog"
 date: today

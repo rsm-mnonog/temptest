@@ -1,5 +1,5 @@
 ---
-title: "Homework 1"
+title: "Project 1"
 description: Reproducing "Does Price Matter in Charitable Giving? Evudence from a Large Scale Natural Field Experiment by Dean Karlan and John List"
 author: "Mario Nonog"
 date: today
