@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Mario Nonog">
-<meta name="dcterms.date" content="2025-06-05">
+<meta name="dcterms.date" content="2025-06-17">
 <meta name="description" content="MNL via Maximum Likelihood and Bayesian Approach">
 
-<title>Homework 3 – Mario</title>
+<title>Project 3 – Mario</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -164,7 +164,7 @@ window.Quarto = {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../project.html"> 
-<span class="menu-text">Homework</span></a>
+<span class="menu-text">Projects</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -227,7 +227,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Homework 3</h1>
+<h1 class="title">Project 3</h1>
 </div>
 
 <div>
@@ -249,7 +249,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 5, 2025</p>
+      <p class="date">June 17, 2025</p>
     </div>
   </div>
   
@@ -296,7 +296,7 @@ u_{ij} = (1 \times Netflix_j) + (0.5 \times Prime_j) + (-0.8*Ads_j) - 0.1\times 
 <h2 class="anchored" data-anchor-id="preparing-the-data-for-estimation">3. Preparing the Data for Estimation</h2>
 <p>The “hard part” of the MNL likelihood function is organizing the data, as we need to keep track of 3 dimensions (consumer <span class="math inline">\(i\)</span>, covariate <span class="math inline">\(k\)</span>, and product <span class="math inline">\(j\)</span>) instead of the typical 2 dimensions for cross-sectional regression models (consumer <span class="math inline">\(i\)</span> and covariate <span class="math inline">\(k\)</span>). The fact that each task for each respondent has the same number of alternatives (3) helps. In addition, we need to convert the categorical variables for brand and ads into binary variables.</p>
 <!-- _todo: reshape and prep the data_ -->
-<div id="3ef60730" class="cell" data-execution_count="1">
+<div id="5a2c17d7" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -342,8 +342,8 @@ u_{ij} = (1 \times Netflix_j) + (0.5 \times Prime_j) + (-0.8*Ads_j) - 0.1\times 
 Dep. Variable:                 choice   No. Observations:                 3000
 Model:                          Logit   Df Residuals:                     2995
 Method:                           MLE   Df Model:                            4
-Date:                Thu, 05 Jun 2025   Pseudo R-squ.:                  0.1123
-Time:                        13:06:16   Log-Likelihood:                -1695.0
+Date:                Tue, 17 Jun 2025   Pseudo R-squ.:                  0.1123
+Time:                        18:53:36   Log-Likelihood:                -1695.0
 converged:                       True   LL-Null:                       -1909.5
 Covariance Type:            nonrobust   LLR p-value:                 1.454e-91
 ==============================================================================
@@ -432,7 +432,7 @@ ad_Yes        -0.7489      0.085     -8.834      0.000      -0.915      -0.583
 <h2 class="anchored" data-anchor-id="estimation-via-maximum-likelihood">4. Estimation via Maximum Likelihood</h2>
 <!-- _todo: Code up the log-likelihood function._ -->
 <p>Before estimating the parameters of our multinomial logit model, we first need to define the model’s likelihood function. In the context of discrete choice modeling, the likelihood captures the probability that each respondent chooses the alternative they actually selected, given a vector of parameters. We will implement this using the negative log-likelihood formulation, which is more numerically stable and compatible with optimization routines. The following function calculates the negative log-likelihood for our MNL model, accounting for grouped choice sets across individuals and tasks.</p>
-<div id="fbc52902" class="cell" data-execution_count="2">
+<div id="f0115c4a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mnl_log_likelihood(beta, X, y, choice_set_ids):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    beta <span class="op">=</span> np.asarray(beta, dtype<span class="op">=</span>np.float64)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.asarray(X, dtype<span class="op">=</span>np.float64)</span>
@@ -460,7 +460,7 @@ ad_Yes        -0.7489      0.085     -8.834      0.000      -0.915      -0.583
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>log_likelihood</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To estimate the parameters of the multinomial logit model, we use the method of Maximum Likelihood Estimation (MLE). This approach finds the set of parameter values that maximize the likelihood of observing the choices made by individuals in the dataset. The following code loads and prepares the data, defines a numerically stable log-likelihood function using the log-sum-exp trick, and then uses the <code>scipy.optimize.minimize</code> function with the BFGS algorithm to estimate the model parameters. Finally, it prints the estimated coefficients and the final value of the negative log-likelihood.</p>
-<div id="7fd0ae0f" class="cell" data-execution_count="3">
+<div id="d94899e7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
@@ -547,7 +547,7 @@ Final negative log-likelihood: 879.8553682671987</code></pre>
 </ul>
 <!-- _todo: Use `optim()` in R or `scipy.optimize()` in Python to find the MLEs for the 4 parameters ($\beta_\text{netflix}$, $\beta_\text{prime}$, $\beta_\text{ads}$, $\beta_\text{price}$), as well as their standard errors (from the Hessian). For each parameter construct a 95% confidence interval._ -->
 <p>In this section, we use the Maximum Likelihood Estimation (MLE) approach to estimate the four parameters of the multinomial logit model: <span class="math inline">\(\beta_\text{netflix}\)</span>, <span class="math inline">\(\beta_\text{prime}\)</span>, <span class="math inline">\(\beta_\text{ads}\)</span>, and <span class="math inline">\(\beta_\text{price}\)</span>. After defining the log-likelihood function, we use <code>scipy.optimize.minimize</code> with the BFGS optimization method to find the parameter values that maximize the likelihood. We then extract the inverse Hessian from the optimization result to calculate standard errors and construct 95% confidence intervals for each coefficient. The resulting summary table reports the point estimates and associated uncertainty.</p>
-<div id="844d1295" class="cell" data-execution_count="4">
+<div id="6967e978" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
@@ -693,7 +693,7 @@ _hint: instead of calculating post=lik*prior, you can work in the log-space and 
 
 _hint: King Markov (in the video) use a candidate distribution of a coin flip to decide whether to move left or right among his islands.  Unlike King Markov, we have 4 dimensions (because we have 4 betas) and our dimensions are continuous.  So, use a multivariate normal distribution to pospose the next location for the algorithm to move to. I recommend a MNV(mu, Sigma) where mu=c(0,0,0,0) and sigma has diagonal values c(0.05, 0.05, 0.05, 0.005) and zeros on the off-diagonal.  Since this MVN has no covariances, you can sample each dimension independently (so 4 univariate normals instead of 1 multivariate normal), where the first 3 univariate normals are N(0,0.05) and the last one if N(0,0.005)._ -->
 <p>In this section, we estimate the posterior distribution of the four model parameters using a Bayesian approach with a Metropolis-Hastings Markov Chain Monte Carlo (MCMC) sampler. We assume normal priors for the parameters: a more informative prior for price (<span class="math inline">\(\mathcal{N}(0, 1)\)</span>) and weakly informative priors for the binary predictors (<span class="math inline">\(\mathcal{N}(0, 25)\)</span>). To ensure numerical stability, we re-use the log-likelihood function from the MLE section, working in log-space. The proposal distribution is a multivariate normal with independent dimensions, where we allow smaller steps for price than for the other parameters. The sampler runs for 11,000 iterations, with the first 1,000 discarded as burn-in. The remaining 10,000 samples are used to summarize the posterior means, standard deviations, and 95% credible intervals for each parameter.</p>
-<div id="74fc9613" class="cell" data-execution_count="5">
+<div id="862aa65f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> logsumexp</span>
@@ -780,24 +780,24 @@ _hint: King Markov (in the video) use a candidate distribution of a coin flip to
 <span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Posterior Summary:"</span>)</span>
 <span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary_df.<span class="bu">round</span>(<span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Step 0: log posterior = -1074.02
-Step 1000: log posterior = -890.05
-Step 2000: log posterior = -889.74
-Step 3000: log posterior = -888.90
-Step 4000: log posterior = -890.00
-Step 5000: log posterior = -897.54
-Step 6000: log posterior = -891.66
-Step 7000: log posterior = -889.48
-Step 8000: log posterior = -890.99
-Step 9000: log posterior = -891.21
-Step 10000: log posterior = -888.53
+<pre><code>Step 0: log posterior = -1107.12
+Step 1000: log posterior = -892.49
+Step 2000: log posterior = -888.64
+Step 3000: log posterior = -890.44
+Step 4000: log posterior = -893.81
+Step 5000: log posterior = -889.22
+Step 6000: log posterior = -890.02
+Step 7000: log posterior = -889.13
+Step 8000: log posterior = -891.00
+Step 9000: log posterior = -889.33
+Step 10000: log posterior = -889.84
 
 Posterior Summary:
          Posterior Mean  Posterior SD  2.5% CI  97.5% CI
-price           -0.0994        0.0067  -0.1128   -0.0866
-brand_N          0.9319        0.1133   0.7148    1.1551
-brand_P          0.4871        0.1113   0.2723    0.7043
-ad_Yes          -0.7313        0.0855  -0.9025   -0.5683</code></pre>
+price           -0.0996        0.0063  -0.1124   -0.0876
+brand_N          0.9482        0.1147   0.7365    1.1731
+brand_P          0.5138        0.1094   0.3028    0.7331
+ad_Yes          -0.7310        0.0834  -0.8906   -0.5648</code></pre>
 </div>
 </div>
 <section id="bayesian-posterior-summary-via-mcmc" class="level3">
@@ -873,7 +873,7 @@ _todo: for at least one of the 4 parameters, show the trace plot of the algorith
 <section id="trace-plot-and-posterior-distribution-for-price-parameter" class="level3">
 <h3 class="anchored" data-anchor-id="trace-plot-and-posterior-distribution-for-price-parameter">🔍 Trace Plot and Posterior Distribution for <code>price</code> Parameter</h3>
 <p>To evaluate the performance of our Metropolis-Hastings MCMC sampler and inspect the shape of the posterior distribution, we visualize the trace plot and histogram for the <code>price</code> parameter. The trace plot helps us assess <strong>mixing</strong> and <strong>convergence</strong>, while the histogram shows the <strong>posterior uncertainty and central tendency</strong>.</p>
-<div id="11b5ef9e" class="cell" data-execution_count="6">
+<div id="4c40f577" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -916,7 +916,7 @@ _todo: for at least one of the 4 parameters, show the trace plot of the algorith
 <p>This visualization confirms whether the sampler has explored the parameter space adequately and whether the posterior is well-behaved (e.g., unimodal, stable).</p>
 <!-- _todo: report the 4 posterior means, standard deviations, and 95% credible intervals and compare them to your results from the Maximum Likelihood approach._ -->
 <p>To evaluate and interpret the parameter estimates from both the frequentist and Bayesian perspectives, we now compare the results from the MCMC posterior distribution to those from the Maximum Likelihood Estimation. Specifically, we report the posterior mean, standard deviation, and 95% credible intervals for each parameter, and contrast these with the MLE point estimates, standard errors, and 95% confidence intervals. This comparison helps assess the alignment between the two approaches and reveals whether the Bayesian priors meaningfully influenced the estimates. In this code block, we summarize the results side-by-side in a single table for clear interpretation.</p>
-<div id="ea687610" class="cell" data-execution_count="7">
+<div id="229effba" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
