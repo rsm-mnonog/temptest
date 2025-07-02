@@ -12,6 +12,8 @@ website:
         text: Resume
       - href: project.qmd
         text: Projects
+      - href: certificates.qmd
+        text: Certificates
 
 format:
   html:
