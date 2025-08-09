@@ -1,5 +1,5 @@
 ---
-title: "Project 2"
+title: "Poisson Regression Examples"
 description: "Poisson Regression Examples"
 author: "Mario Nonog"
 date: today

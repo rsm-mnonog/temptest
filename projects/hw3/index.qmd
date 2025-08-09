@@ -1,5 +1,5 @@
 ---
-title: "Project 3"
+title: "MNL via Maximum Likelihood and Bayesian Approach"
 description: " MNL via Maximum Likelihood and Bayesian Approach"
 author: "Mario Nonog"
 date: today
