@@ -1,0 +1,3235 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Mario Nonog">
+<meta name="dcterms.date" content="2025-08-10">
+<meta name="description" content="Logistic Regression, Permutation Importance, Prediction Plots, Pseudo R-Squared, Chi-Square Test, Correlation, Decile Analysis, Gain Curves, Confusion Matrix">
+
+<title>TZ Gaming: Optimal Targeting of Mobile Ads – Mario</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-0dddaab136aaac11b658271871f4ed01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Mario</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resume.html"> 
+<span class="menu-text">Resume</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../project.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../certificates.html"> 
+<span class="menu-text">Certificates</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../presentations.html"> 
+<span class="menu-text">Presentations</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#problem-description" id="toc-problem-description" class="nav-link active" data-scroll-target="#problem-description">Problem Description:</a></li>
+  <li><a href="#options" id="toc-options" class="nav-link" data-scroll-target="#options">Options:</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#approach" id="toc-approach" class="nav-link" data-scroll-target="#approach">Approach:</a></li>
+  <li><a href="#tz-gaming-optimal-targeting-of-mobile-ads" id="toc-tz-gaming-optimal-targeting-of-mobile-ads" class="nav-link" data-scroll-target="#tz-gaming-optimal-targeting-of-mobile-ads">TZ Gaming: Optimal Targeting of Mobile Ads</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  <li><a href="#chi-square-citical-value" id="toc-chi-square-citical-value" class="nav-link" data-scroll-target="#chi-square-citical-value">Chi-Square Citical Value</a></li>
+  <li><a href="#plot" id="toc-plot" class="nav-link" data-scroll-target="#plot">Plot</a></li>
+  <li><a href="#permutation-importance" id="toc-permutation-importance" class="nav-link" data-scroll-target="#permutation-importance">Permutation Importance</a></li>
+  <li><a href="#interpretation-1" id="toc-interpretation-1" class="nav-link" data-scroll-target="#interpretation-1">Interpretation</a></li>
+  <li><a href="#prediction-of-click-probability" id="toc-prediction-of-click-probability" class="nav-link" data-scroll-target="#prediction-of-click-probability">Prediction of Click Probability</a></li>
+  <li><a href="#logistic-regression-evar-only-rnd" id="toc-logistic-regression-evar-only-rnd" class="nav-link" data-scroll-target="#logistic-regression-evar-only-rnd">Logistic Regression (EVAR: ONLY RND)</a></li>
+  <li><a href="#prediction-of-click-probability-evar-only-rnd" id="toc-prediction-of-click-probability-evar-only-rnd" class="nav-link" data-scroll-target="#prediction-of-click-probability-evar-only-rnd">Prediction of Click Probability (EVAR: ONLY RND)</a></li>
+  <li><a href="#multicollinearity-and-omitted-variable-bias" id="toc-multicollinearity-and-omitted-variable-bias" class="nav-link" data-scroll-target="#multicollinearity-and-omitted-variable-bias">Multicollinearity and Omitted Variable Bias</a>
+  <ul class="collapse">
+  <li><a href="#chi-square-citical-value-1" id="toc-chi-square-citical-value-1" class="nav-link" data-scroll-target="#chi-square-citical-value-1">Chi-Square Citical Value</a></li>
+  <li><a href="#plot-1" id="toc-plot-1" class="nav-link" data-scroll-target="#plot-1">Plot</a></li>
+  <li><a href="#permutation-importance-1" id="toc-permutation-importance-1" class="nav-link" data-scroll-target="#permutation-importance-1">Permutation Importance</a></li>
+  <li><a href="#interpretation-2" id="toc-interpretation-2" class="nav-link" data-scroll-target="#interpretation-2">Interpretation</a></li>
+  <li><a href="#decile-analysis" id="toc-decile-analysis" class="nav-link" data-scroll-target="#decile-analysis">Decile Analysis</a></li>
+  <li><a href="#gain-curves" id="toc-gain-curves" class="nav-link" data-scroll-target="#gain-curves">Gain Curves</a></li>
+  <li><a href="#confusion-matrix" id="toc-confusion-matrix" class="nav-link" data-scroll-target="#confusion-matrix">Confusion Matrix</a></li>
+  <li><a href="#accuracy-based-on-pred_rnd-confusion-matrix" id="toc-accuracy-based-on-pred_rnd-confusion-matrix" class="nav-link" data-scroll-target="#accuracy-based-on-pred_rnd-confusion-matrix">Accuracy Based on Pred_RND Confusion Matrix</a></li>
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model Comparison</a></li>
+  <li><a href="#profit-comparison" id="toc-profit-comparison" class="nav-link" data-scroll-target="#profit-comparison">Profit Comparison</a></li>
+  <li><a href="#rome-comparison" id="toc-rome-comparison" class="nav-link" data-scroll-target="#rome-comparison">ROME Comparison</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">TZ Gaming: Optimal Targeting of Mobile Ads</h1>
+</div>
+
+<div>
+  <div class="description">
+    Logistic Regression, Permutation Importance, Prediction Plots, Pseudo R-Squared, Chi-Square Test, Correlation, Decile Analysis, Gain Curves, Confusion Matrix
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mario Nonog </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 10, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="problem-description" class="level3">
+<h3 class="anchored" data-anchor-id="problem-description">Problem Description:</h3>
+<p>As a developer of games for mobile devices, TZ gaming has achieved strong growth of its customer base. A prominent source of new customers has come from ads displayed through the Vneta ad-network. A mobile-ad network is a technology platform that serves as a broker between (1) app developers (or publishers) looking to sell ad space and (2) a group of advertisers.</p>
+<p>App developers sell “impressions”, i.e., a space where an ad can be shown, through the Vneta network to companies such as TZ gaming looking to advertise to app users. Vneta acts as a broker for 50-60 millions impressions/ads per day. TZ gaming uses ads to appeal to prospective customers for their games. They generally use short (15 sec) video ads that help to emphasize the dynamic nature of the games. In the past, TZ has been able to, approximately, break-even on ad-spend with Vneta when calculating the benefits that can be directly attributed to ad click-through. Many senior executives at TZ believe that there are additional, longer-term, benefits from these ads such as brand awareness, etc. that are harder to quantify.</p>
+<p>Currently, TZ has access to very limited data from Vneta. Matt Huateng, the CEO of TZ gaming, is intrigued by the potential for data science to enhance the efficiency of targeted advertising on mobile devices. Specifically, two options are under consideration: (1) Buy access to additional data from Vneta and use TZ’s analytics team to build targeting models or (2) Subscribe to Vneta’s analytics consultancy service, which provides impression-level click-through rate predictions based on Vneta’s proprietary data and algorithms.</p>
+<p>Vneta has shared behavioral information linked to 115,488 recent impressions used to show TZ ads and has also provided a set or predictions based on their own (proprietary) algorithm. Matt is unsure if the consulting services offered by Vneta will be worth the money for future ad campaigns and has asked you to do some initial analyses on the provided data and compare the generated predictions to Vneta’s recommendations. The following targeting options will be evaluated to determine the best path forward.</p>
+</section>
+<section id="options" class="level3">
+<h3 class="anchored" data-anchor-id="options">Options:</h3>
+<ol type="1">
+<li>Spam all prospects</li>
+<li>Continue with the current targeting approach</li>
+<li>Use predictions from a logistic regression model for ad targeting</li>
+<li>Use predictions generated by Vneta for ad targeting</li>
+</ol>
+</section>
+<section id="assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="assumptions">Assumptions</h3>
+<p>The assumptions used for the analysis are as follows: • Targeting of impressions to consumers covered by the Vneta ad-network to date has been (approximately) random • Cost per 1,000 video impressions (CPM) is $10 • Conversion to sign-up as a TZ game player after clicking on an ad is 5% • The expected CLV of customers that sign-up with TZ after clicking on an ad is approximately $25 • The price charged for the data by Vneta is $50K • The price charged for the data science consulting services by Vneta is $150K</p>
+</section>
+<section id="approach" class="level3">
+<h3 class="anchored" data-anchor-id="approach">Approach:</h3>
+<p>• Use the 87,535 rows in the data with “training == ‘train’” to estimate different models. Then generate predictions for all 115,488 rows in the dataset • Options 1-4 should be evaluated only on the predictions generated for the 27,953 rows in the data with “training == ‘test’”. These are the observations that were not used to estimate your model • Extrapolate the cost and benefits for options 1-4 above for an upcoming advertising campaign where TZ will commit to purchase 20-million impressions from Vneta</p>
+<p>TZ gaming has decided to use logistic regression for targeting. This is a powerful and widely used tool to model consumer response. It is similar to linear regression but the key difference is that the response variable (target) is binary (e.g., click or no-click) rather than continuous. For each impression, the logistic regression model will predict the probability of click-through, which can be used for ad targeting. Like linear regression, you can include both continuous and categorical predictors in your model as explanatory variables (features). Matt is eager to assess the value of logistic regression as a method to predict ad click-through and target prospects and has asked you to complete the following analyses.</p>
+</section>
+<section id="tz-gaming-optimal-targeting-of-mobile-ads" class="level3">
+<h3 class="anchored" data-anchor-id="tz-gaming-optimal-targeting-of-mobile-ads">TZ Gaming: Optimal Targeting of Mobile Ads</h3>
+<p>Each row in the <code>tz_gaming</code> dataset represents an impression. For each row (impression), we have data on 21 variables. All explanatory variables are created by Vneta based on one month tracking history of users, apps, and ads. The available variables are described in below.</p>
+<ul>
+<li><em>training</em> – Dummy variable that splits the dataset into a training (“train”) and a test (“test”) set</li>
+<li><em>inum</em> – Impression number</li>
+<li><em>click</em> – Click indicator for the TZ ad served in the impression. Equals “yes” if the ad was clicked and “no” otherwise</li>
+<li><em>time</em> – The hour of the day in which the impression occurred (1-24). For example, “2” indicates the impression occurred between 1 am and 2 am</li>
+<li><em>time_fct</em> – Same as <em>time</em> but the is coded as categorical</li>
+<li><em>app</em> – The app in which the impression was shown. Ranges from 1 to 49</li>
+<li><em>mobile_os</em> – Customer’s mobile OS</li>
+<li><em>impup</em> – Number of past impressions the user has seen in the app</li>
+<li><em>clup</em> – Number of past impressions the user has clicked on in the app</li>
+<li><em>ctrup</em> – Past CTR (Click-Through Rate) (x 100) for the user in the app</li>
+<li><em>impua</em> – Number of past impressions of the TZ ad that the user has seen across all apps</li>
+<li><em>clua</em> – Number of past impressions of the TZ ad that the user has clicked on across all apps</li>
+<li><em>ctrua</em> – Past CTR (x 100) of the TZ ad by the user across all apps</li>
+<li><em>imput</em> – Number of past impressions the user has seen within in the hour</li>
+<li><em>clut</em> – Number of past impressions the user has clicked on in the hour</li>
+<li><em>ctrut</em> – Past CTR (x 100) of the user in the hour</li>
+<li><em>imppat</em> – Number of past impressions that showed the TZ ad in the app in the hour</li>
+<li><em>clpat</em> – Number of past clicks the TZ ad has received in the app in the hour</li>
+<li><em>ctrpat</em> – Past CTR (x 100) of the TZ ad in the app in the hour</li>
+<li><em>rnd</em> – Simulated data from a normal distribution with mean 0 and a standard deviation of 1</li>
+<li><em>pred_vneta</em> – Predicted probability of click per impressions generated by Vneta’s proprietary machine learning algorithm</li>
+<li>id – Anonymized user ID</li>
+</ul>
+<p>Note that there is a clear relationship between the impressions, clicks, and ctr variables within a strata. Specifically:</p>
+<ul>
+<li>ctrup = clup/impup</li>
+<li>ctru = clu/impu</li>
+<li>ctrut = clut/imput</li>
+<li>ctrpat = clpat/impat</li>
+</ul>
+<p>The last three letters of a feature indicate the sources of variation in a variable:</p>
+<ul>
+<li>u — denotes user</li>
+<li>t — denotes time</li>
+<li>p — denotes app</li>
+<li>a — denotes ad</li>
+</ul>
+</section>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="345bb549" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tz_gaming <span class="op">=</span> pd.read_parquet(<span class="st">"data/tz_gaming.parquet"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_gaming)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       training     inum click  time time_fct    app mobile_os  impup  clup  \
+0         train       I7    no     9        9   app8       ios    439     2   
+1         train      I23    no    15       15   app1       ios     64     0   
+2         train      I28    no    12       12   app5       ios     80     0   
+3         train      I30    no    19       19   app1       ios     25     0   
+4         train      I35    no    24       24   app1   android   3834    29   
+...         ...      ...   ...   ...      ...    ...       ...    ...   ...   
+115483     test  I399982    no    21       21   app2       ios   2110     0   
+115484     test  I399986    no    17       17  app14   android    291     1   
+115485     test  I399991    no    23       23   app1   android    364     3   
+115486     test  I399992    no    20       20   app6   android     59     2   
+115487     test  I399994    no    18       18   app1       ios    498     7   
+
+           ctrup  ...     ctrua  imput  clut     ctrut  imppat  clpat  \
+0       0.455581  ...  0.000000     25     0  0.000000      71      1   
+1       0.000000  ...  0.000000      7     0  0.000000   67312   1069   
+2       0.000000  ...  6.578947     94     0  0.000000     331      1   
+3       0.000000  ...  0.000000     19     0  0.000000   71114   1001   
+4       0.756390  ...  0.689655    329     4  1.215805  183852   2317   
+...          ...  ...       ...    ...   ...       ...     ...    ...   
+115483  0.000000  ...  0.000000    158     0  0.000000   23216     19   
+115484  0.343643  ...  0.000000     74     1  1.351351    3665     14   
+115485  0.824176  ...  4.347826     19     0  0.000000  173353   2292   
+115486  3.389831  ...  0.000000     37     1  2.702703    3474     53   
+115487  1.405622  ...  4.166667     53     1  1.886792   77884   1201   
+
+          ctrpat       rnd  pred_vneta        id  
+0       1.408451 -1.207066    0.003961  id247135  
+1       1.588127  0.277429    0.003961  id245079  
+2       0.302115  1.084441    0.003961  id927245  
+3       1.407599 -2.345698    0.018965  id922188  
+4       1.260253  0.429125    0.003961  id355833  
+...          ...       ...         ...       ...  
+115483  0.081840 -1.852059    0.003961  id847352  
+115484  0.381992 -0.296415    0.003961  id457437  
+115485  1.322158  0.099201    0.003961  id792352  
+115486  1.525619 -0.186421    0.050679  id115678  
+115487  1.542037  0.857281    0.003961  id705546  
+
+[115488 rows x 22 columns]</code></pre>
+</div>
+</div>
+<div id="34da10a5" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tz_train <span class="op">=</span> tz_gaming[tz_gaming[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"train"</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_train[<span class="st">"training"</span>].head())</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>tz_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0    train
+1    train
+2    train
+3    train
+4    train
+Name: training, dtype: object</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">training</th>
+<th data-quarto-table-cell-role="th">inum</th>
+<th data-quarto-table-cell-role="th">click</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">time_fct</th>
+<th data-quarto-table-cell-role="th">app</th>
+<th data-quarto-table-cell-role="th">mobile_os</th>
+<th data-quarto-table-cell-role="th">impup</th>
+<th data-quarto-table-cell-role="th">clup</th>
+<th data-quarto-table-cell-role="th">ctrup</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">ctrua</th>
+<th data-quarto-table-cell-role="th">imput</th>
+<th data-quarto-table-cell-role="th">clut</th>
+<th data-quarto-table-cell-role="th">ctrut</th>
+<th data-quarto-table-cell-role="th">imppat</th>
+<th data-quarto-table-cell-role="th">clpat</th>
+<th data-quarto-table-cell-role="th">ctrpat</th>
+<th data-quarto-table-cell-role="th">rnd</th>
+<th data-quarto-table-cell-role="th">pred_vneta</th>
+<th data-quarto-table-cell-role="th">id</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>train</td>
+<td>I7</td>
+<td>no</td>
+<td>9</td>
+<td>9</td>
+<td>app8</td>
+<td>ios</td>
+<td>439</td>
+<td>2</td>
+<td>0.455581</td>
+<td>...</td>
+<td>0.000000</td>
+<td>25</td>
+<td>0</td>
+<td>0.000000</td>
+<td>71</td>
+<td>1</td>
+<td>1.408451</td>
+<td>-1.207066</td>
+<td>0.003961</td>
+<td>id247135</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>train</td>
+<td>I23</td>
+<td>no</td>
+<td>15</td>
+<td>15</td>
+<td>app1</td>
+<td>ios</td>
+<td>64</td>
+<td>0</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>7</td>
+<td>0</td>
+<td>0.000000</td>
+<td>67312</td>
+<td>1069</td>
+<td>1.588127</td>
+<td>0.277429</td>
+<td>0.003961</td>
+<td>id245079</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>train</td>
+<td>I28</td>
+<td>no</td>
+<td>12</td>
+<td>12</td>
+<td>app5</td>
+<td>ios</td>
+<td>80</td>
+<td>0</td>
+<td>0.000000</td>
+<td>...</td>
+<td>6.578947</td>
+<td>94</td>
+<td>0</td>
+<td>0.000000</td>
+<td>331</td>
+<td>1</td>
+<td>0.302115</td>
+<td>1.084441</td>
+<td>0.003961</td>
+<td>id927245</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>train</td>
+<td>I30</td>
+<td>no</td>
+<td>19</td>
+<td>19</td>
+<td>app1</td>
+<td>ios</td>
+<td>25</td>
+<td>0</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>19</td>
+<td>0</td>
+<td>0.000000</td>
+<td>71114</td>
+<td>1001</td>
+<td>1.407599</td>
+<td>-2.345698</td>
+<td>0.018965</td>
+<td>id922188</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>train</td>
+<td>I35</td>
+<td>no</td>
+<td>24</td>
+<td>24</td>
+<td>app1</td>
+<td>android</td>
+<td>3834</td>
+<td>29</td>
+<td>0.756390</td>
+<td>...</td>
+<td>0.689655</td>
+<td>329</td>
+<td>4</td>
+<td>1.215805</td>
+<td>183852</td>
+<td>2317</td>
+<td>1.260253</td>
+<td>0.429125</td>
+<td>0.003961</td>
+<td>id355833</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">87530</td>
+<td>train</td>
+<td>I299985</td>
+<td>no</td>
+<td>11</td>
+<td>11</td>
+<td>app2</td>
+<td>android</td>
+<td>1181</td>
+<td>0</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.840336</td>
+<td>55</td>
+<td>0</td>
+<td>0.000000</td>
+<td>9625</td>
+<td>14</td>
+<td>0.145455</td>
+<td>-0.249031</td>
+<td>0.003961</td>
+<td>id565693</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">87531</td>
+<td>train</td>
+<td>I299986</td>
+<td>no</td>
+<td>10</td>
+<td>10</td>
+<td>app33</td>
+<td>ios</td>
+<td>1885</td>
+<td>0</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>374</td>
+<td>0</td>
+<td>0.000000</td>
+<td>658</td>
+<td>1</td>
+<td>0.151976</td>
+<td>0.770718</td>
+<td>0.003961</td>
+<td>id222657</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">87532</td>
+<td>train</td>
+<td>I299990</td>
+<td>no</td>
+<td>1</td>
+<td>1</td>
+<td>app45</td>
+<td>ios</td>
+<td>8</td>
+<td>0</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>15</td>
+<td>0</td>
+<td>0.000000</td>
+<td>166</td>
+<td>7</td>
+<td>4.216867</td>
+<td>0.181559</td>
+<td>0.018965</td>
+<td>id340594</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">87533</td>
+<td>train</td>
+<td>I299991</td>
+<td>no</td>
+<td>8</td>
+<td>8</td>
+<td>app1</td>
+<td>ios</td>
+<td>113</td>
+<td>2</td>
+<td>1.769912</td>
+<td>...</td>
+<td>0.000000</td>
+<td>0</td>
+<td>0</td>
+<td>0.000000</td>
+<td>14245</td>
+<td>158</td>
+<td>1.109161</td>
+<td>-1.263831</td>
+<td>0.003961</td>
+<td>id634151</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">87534</td>
+<td>train</td>
+<td>I299995</td>
+<td>no</td>
+<td>18</td>
+<td>18</td>
+<td>app35</td>
+<td>android</td>
+<td>13</td>
+<td>0</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>14</td>
+<td>1</td>
+<td>7.142857</td>
+<td>472</td>
+<td>1</td>
+<td>0.211864</td>
+<td>-1.428302</td>
+<td>0.050679</td>
+<td>id280606</td>
+</tr>
+</tbody>
+</table>
+
+<p>87535 rows × 22 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="c1af4be8" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyrsm <span class="im">as</span> rsm</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>clf<span class="op">=</span> rsm.model.logistic(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        data<span class="op">=</span>{<span class="st">"tz_train"</span>:tz_train},</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        rvar<span class="op">=</span> <span class="st">"click"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        lev<span class="op">=</span><span class="st">"yes"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        evar<span class="op">=</span>[ <span class="st">"time_fct"</span>, <span class="st">"app"</span>, <span class="st">"mobile_os"</span>, <span class="st">"impua"</span>, <span class="st">"clua"</span>, <span class="st">"ctrua"</span>]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>clf.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Logistic regression (GLM)
+Data                 : tz_train
+Response variable    : click
+Level                : yes
+Explanatory variables: time_fct, app, mobile_os, impua, clua, ctrua
+Null hyp.: There is no effect of x on click
+Alt. hyp.: There is an effect of x on click
+
+                     OR      OR%  coefficient   std.error  z.value p.value     
+Intercept         0.029   -97.1%       -3.528       0.197  -17.936  &lt; .001  ***
+time_fct[2]       0.622   -37.8%       -0.474       0.321   -1.478   0.139     
+time_fct[3]       0.718   -28.2%       -0.332       0.454   -0.730   0.466     
+time_fct[4]       0.000  -100.0%      -23.543   42007.161   -0.001     1.0     
+time_fct[5]       0.000  -100.0%      -23.721   55229.970   -0.000     1.0     
+time_fct[6]       0.349   -65.1%       -1.052       1.021   -1.030   0.303     
+time_fct[7]       1.221    22.1%        0.200       0.426    0.468    0.64     
+time_fct[8]       1.104    10.4%        0.099       0.296    0.335   0.737     
+time_fct[9]       1.029     2.9%        0.029       0.287    0.101    0.92     
+time_fct[10]      0.830   -17.0%       -0.187       0.295   -0.633   0.527     
+time_fct[11]      0.637   -36.3%       -0.451       0.276   -1.635   0.102     
+time_fct[12]      0.874   -12.6%       -0.135       0.280   -0.483   0.629     
+time_fct[13]      0.590   -41.0%       -0.528       0.290   -1.823   0.068    .
+time_fct[14]      1.099     9.9%        0.094       0.225    0.419   0.675     
+time_fct[15]      0.986    -1.4%       -0.014       0.225   -0.062   0.951     
+time_fct[16]      1.046     4.6%        0.045       0.233    0.195   0.846     
+time_fct[17]      1.014     1.4%        0.014       0.250    0.055   0.956     
+time_fct[18]      1.061     6.1%        0.060       0.247    0.241   0.809     
+time_fct[19]      1.284    28.4%        0.250       0.233    1.072   0.284     
+time_fct[20]      1.224    22.4%        0.202       0.231    0.873   0.382     
+time_fct[21]      0.867   -13.3%       -0.142       0.244   -0.584   0.559     
+time_fct[22]      0.970    -3.0%       -0.030       0.238   -0.127   0.899     
+time_fct[23]      1.044     4.4%        0.043       0.238    0.180   0.857     
+time_fct[24]      1.099     9.9%        0.094       0.229    0.410   0.682     
+app[app2]         0.124   -87.6%       -2.091       0.229   -9.127  &lt; .001  ***
+app[app3]         0.184   -81.6%       -1.694       1.003   -1.689   0.091    .
+app[app4]         0.383   -61.7%       -0.960       0.321   -2.988   0.003   **
+app[app5]         0.282   -71.8%       -1.264       1.005   -1.258   0.208     
+app[app6]         0.651   -34.9%       -0.429       0.175   -2.457   0.014    *
+app[app7]         0.596   -40.4%       -0.517       1.007   -0.513   0.608     
+app[app8]         0.000  -100.0%      -24.374   71686.172   -0.000     1.0     
+app[app9]         0.748   -25.2%       -0.290       0.236   -1.227    0.22     
+app[app10]        0.000  -100.0%      -23.891   67058.977   -0.000     1.0     
+app[app11]        1.051     5.1%        0.050       0.719    0.069   0.945     
+app[app12]        0.713   -28.7%       -0.338       0.224   -1.504   0.133     
+app[app13]        2.131   113.1%        0.757       0.204    3.709  &lt; .001  ***
+app[app14]        0.218   -78.2%       -1.525       0.451   -3.384  &lt; .001  ***
+app[app15]        0.462   -53.8%       -0.772       0.717   -1.077   0.281     
+app[app16]        0.251   -74.9%       -1.383       0.711   -1.945   0.052    .
+app[app17]        0.882   -11.8%       -0.126       0.724   -0.174   0.862     
+app[app18]        0.075   -92.5%       -2.593       1.002   -2.586    0.01   **
+app[app19]        0.000  -100.0%      -24.366   92379.731   -0.000     1.0     
+app[app20]        0.000  -100.0%      -24.211   71551.198   -0.000     1.0     
+app[app21]        0.337   -66.3%       -1.087       0.383   -2.839   0.005   **
+app[app22]        0.321   -67.9%       -1.136       1.005   -1.130   0.258     
+app[app23]        3.111   211.1%        1.135       0.392    2.898   0.004   **
+app[app24]        1.590    59.0%        0.464       0.273    1.701   0.089    .
+app[app25]        0.975    -2.5%       -0.025       0.594   -0.042   0.966     
+app[app26]        0.000  -100.0%      -24.471   62613.516   -0.000     1.0     
+app[app27]        0.202   -79.8%       -1.601       0.711   -2.253   0.024    *
+app[app28]        0.328   -67.2%       -1.114       0.581   -1.918   0.055    .
+app[app29]        2.634   163.4%        0.969       0.345    2.805   0.005   **
+app[app30]        0.000  -100.0%      -24.385   85789.970   -0.000     1.0     
+app[app31]        0.246   -75.4%       -1.403       0.710   -1.975   0.048    *
+app[app32]        0.000  -100.0%      -23.157   46670.216   -0.000     1.0     
+app[app33]        0.513   -48.7%       -0.668       0.338   -1.974   0.048    *
+app[app34]        0.000  -100.0%      -24.221   54802.115   -0.000     1.0     
+app[app35]        0.226   -77.4%       -1.486       1.004   -1.480   0.139     
+app[app36]        0.000  -100.0%      -24.122   76747.449   -0.000     1.0     
+app[app37]        0.434   -56.6%       -0.836       0.714   -1.171   0.242     
+app[app38]        0.000  -100.0%      -23.864   53394.100   -0.000     1.0     
+app[app39]        1.741    74.1%        0.554       0.419    1.322   0.186     
+app[app40]        1.005     0.5%        0.005       0.514    0.009   0.993     
+app[app41]        0.632   -36.8%       -0.460       0.714   -0.644   0.519     
+app[app42]        2.009   100.9%        0.698       0.369    1.889   0.059    .
+app[app43]        0.000  -100.0%      -24.466   75014.775   -0.000     1.0     
+app[app44]        0.000  -100.0%      -24.238   45702.677   -0.001     1.0     
+app[app45]        1.479    47.9%        0.391       0.588    0.665   0.506     
+app[app46]        0.296   -70.4%       -1.216       1.005   -1.210   0.226     
+app[app47]        0.289   -71.1%       -1.241       1.005   -1.235   0.217     
+app[app48]        0.000  -100.0%      -24.030  101834.366   -0.000     1.0     
+app[app49]        0.241   -75.9%       -1.424       1.004   -1.418   0.156     
+mobile_os[ios]    0.450   -55.0%       -0.799       0.076  -10.440  &lt; .001  ***
+mobile_os[other]  0.719   -28.1%       -0.330       0.183   -1.801   0.072    .
+impua             0.979    -2.1%       -0.022       0.002  -11.386  &lt; .001  ***
+clua              1.295    29.5%        0.259       0.058    4.452  &lt; .001  ***
+ctrua             1.022     2.2%        0.021       0.002    9.058  &lt; .001  ***
+
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared (McFadden): 0.109
+Pseudo R-squared (McFadden adjusted): 0.092
+Area under the RO Curve (AUC): 0.792
+Log-likelihood: -3946.072, AIC: 8046.145, BIC: 8768.389
+Chi-squared: 968.279, df(76), p.value &lt; 0.001 
+Nr obs: 87,535</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<p>For OR (Odds Ratio) As another hour is added to tim_fct[2], the model suggest that the odds of clicking will decrease by a factor of 0.622 or by 37.8% that is when keeping all other variable in the model constant.</p>
+<p>For OR (Odds Ratio) As another hour is added to tim_fct[3], the model suggest that the odds of clicking will decrease by a factor of 0.718 or by 28.2% that is when keeping all other variable in the model constant.</p>
+<p>And so on for all the rest of the features.</p>
+</section>
+<section id="chi-square-citical-value" class="level3">
+<h3 class="anchored" data-anchor-id="chi-square-citical-value">Chi-Square Citical Value</h3>
+<div id="56046c08" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span><span class="dv">76</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>alpha_0_05 <span class="op">=</span> chi2.ppf(<span class="dv">1</span><span class="op">-</span><span class="fl">0.05</span>,df)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>alpha_0_01<span class="op">=</span> chi2.ppf(<span class="dv">1</span><span class="op">-</span><span class="fl">0.01</span>,df)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(alpha_0_05,alpha_0_01)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>97.35097037903296 107.58254478061235</code></pre>
+</div>
+</div>
+<p>The logistic regression chi square value (970) is so much higher than both the calculated chi-square critical value above(97, 107). Therefore, the difference between the observed data and expected data is extremely large, thus reject the null hypothesis.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Model Fit Metrics
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>McFadden Pseudo R²</td>
+<td>0.109, Indicates modest model fit (0.2–0.4 is strong)</td>
+</tr>
+<tr class="even">
+<td>Adjusted Pseudo R²</td>
+<td>0.092, Slightly adjusted down for number of predictors</td>
+</tr>
+<tr class="odd">
+<td>AUC</td>
+<td>0.792, Good discrimination power (0.7–0.8 = good)</td>
+</tr>
+<tr class="even">
+<td>Log-likelihood</td>
+<td>-3946.072 higher is better</td>
+</tr>
+<tr class="odd">
+<td>AIC</td>
+<td>8046.145, Lower = better fit</td>
+</tr>
+<tr class="even">
+<td>BIC</td>
+<td>8768.389, Penalizes complexity more than AIC</td>
+</tr>
+<tr class="odd">
+<td>Chi-squared (df=76)</td>
+<td>968.279, Strong model signal (p &lt; 0.001)</td>
+</tr>
+<tr class="even">
+<td>Number of Observations</td>
+<td>87,535,Large dataset, good statistical power</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Based on the p=value the most significant features are app2. app13, app14, mobile_os, impua,clua and ctrua. Now let use a different method to see the variable that is the most important. However, first let us see the plot of the classifier (clf)</p>
+</section>
+<section id="plot" class="level3">
+<h3 class="anchored" data-anchor-id="plot">Plot</h3>
+<div id="c1b5f3b8" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>clf.plot(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    plots<span class="op">=</span><span class="st">"pred"</span>, incl<span class="op">=</span>[ <span class="st">"time_fct"</span>, <span class="st">"app"</span>, <span class="st">"mobile_os"</span>, <span class="st">"impua"</span>, <span class="st">"clua"</span>, <span class="st">"ctrua"</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index1_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="permutation-importance" class="level3">
+<h3 class="anchored" data-anchor-id="permutation-importance">Permutation Importance</h3>
+<div id="6e0945ec" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>clf.plot(<span class="st">"vimp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index1_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretation-1" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-1">Interpretation</h3>
+<p>The app variable has the highest importance because it has the highest decrease in AUC after permutted. Impua comes second which still contributes significantly on model predictions. Then, mobile_os is next important and the last three is time_fct, clua, ctrua have way less impact on model predictions. The chi square of 968 is way above our critical value of 97 and 107, which means that there is a greater deviation between observed and expected frequencies, suggesting that more variables are more likely to be dependent or assoicated from each other, which is also supported by the p_value less than 0.001. The Pseudo R-Squared of 0.109 or 0.092 when adjusted indicates the goodness of fit for logistic regression, higher means better fit. This number shows on how well the independent variales explain the dependent variables.</p>
+</section>
+<section id="prediction-of-click-probability" class="level3">
+<h3 class="anchored" data-anchor-id="prediction-of-click-probability">Prediction of Click Probability</h3>
+<div id="645ee4a8" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"pred_logit"</span>]<span class="op">=</span> clf.predict(tz_gaming)[<span class="st">"prediction"</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_gaming.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  training inum click  time time_fct   app mobile_os  impup  clup     ctrup  \
+0    train   I7    no     9        9  app8       ios    439     2  0.455581   
+1    train  I23    no    15       15  app1       ios     64     0  0.000000   
+2    train  I28    no    12       12  app5       ios     80     0  0.000000   
+3    train  I30    no    19       19  app1       ios     25     0  0.000000   
+4    train  I35    no    24       24  app1   android   3834    29  0.756390   
+
+   ...  imput  clut     ctrut  imppat  clpat    ctrpat       rnd  pred_vneta  \
+0  ...     25     0  0.000000      71      1  1.408451 -1.207066    0.003961   
+1  ...      7     0  0.000000   67312   1069  1.588127  0.277429    0.003961   
+2  ...     94     0  0.000000     331      1  0.302115  1.084441    0.003961   
+3  ...     19     0  0.000000   71114   1001  1.407599 -2.345698    0.018965   
+4  ...    329     4  1.215805  183852   2317  1.260253  0.429125    0.003961   
+
+         id    pred_logit  
+0  id247135  3.382977e-13  
+1  id245079  1.156355e-02  
+2  id927245  2.655311e-03  
+3  id922188  1.349420e-02  
+4  id355833  1.868222e-03  
+
+[5 rows x 23 columns]</code></pre>
+</div>
+</div>
+<div id="fca9f7eb" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tz_train[<span class="st">"pred_logit"</span>]<span class="op">=</span> clf.predict(tz_train)[<span class="st">"prediction"</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_train.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  training inum click  time time_fct   app mobile_os  impup  clup     ctrup  \
+0    train   I7    no     9        9  app8       ios    439     2  0.455581   
+1    train  I23    no    15       15  app1       ios     64     0  0.000000   
+2    train  I28    no    12       12  app5       ios     80     0  0.000000   
+3    train  I30    no    19       19  app1       ios     25     0  0.000000   
+4    train  I35    no    24       24  app1   android   3834    29  0.756390   
+
+   ...  imput  clut     ctrut  imppat  clpat    ctrpat       rnd  pred_vneta  \
+0  ...     25     0  0.000000      71      1  1.408451 -1.207066    0.003961   
+1  ...      7     0  0.000000   67312   1069  1.588127  0.277429    0.003961   
+2  ...     94     0  0.000000     331      1  0.302115  1.084441    0.003961   
+3  ...     19     0  0.000000   71114   1001  1.407599 -2.345698    0.018965   
+4  ...    329     4  1.215805  183852   2317  1.260253  0.429125    0.003961   
+
+         id    pred_logit  
+0  id247135  3.382977e-13  
+1  id245079  1.156355e-02  
+2  id927245  2.655311e-03  
+3  id922188  1.349420e-02  
+4  id355833  1.868222e-03  
+
+[5 rows x 23 columns]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_45280/4094291988.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  tz_train["pred_logit"]= clf.predict(tz_train)["prediction"]</code></pre>
+</div>
+</div>
+</section>
+<section id="logistic-regression-evar-only-rnd" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression-evar-only-rnd">Logistic Regression (EVAR: ONLY RND)</h3>
+<div id="3532f9bc" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>clf_rnd<span class="op">=</span> rsm.model.logistic(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span> {<span class="st">"tz_train"</span>: tz_train},</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    rvar<span class="op">=</span> <span class="st">"click"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    lev<span class="op">=</span> <span class="st">"yes"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    evar<span class="op">=</span> <span class="st">"rnd"</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>clf_rnd.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Logistic regression (GLM)
+Data                 : tz_train
+Response variable    : click
+Level                : yes
+Explanatory variables: rnd
+Null hyp.: There is no effect of x on click
+Alt. hyp.: There is an effect of x on click
+
+              OR     OR%  coefficient  std.error  z.value p.value     
+Intercept  0.009  -99.1%       -4.720      0.036 -130.657  &lt; .001  ***
+rnd        0.965   -3.5%       -0.036      0.036   -0.986   0.324     
+
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared (McFadden): 0.0
+Pseudo R-squared (McFadden adjusted): -0.0
+Area under the RO Curve (AUC): 0.513
+Log-likelihood: -4429.726, AIC: 8863.451, BIC: 8882.211
+Chi-squared: 0.972, df(1), p.value 0.324 
+Nr obs: 87,535</code></pre>
+</div>
+</div>
+</section>
+<section id="prediction-of-click-probability-evar-only-rnd" class="level3">
+<h3 class="anchored" data-anchor-id="prediction-of-click-probability-evar-only-rnd">Prediction of Click Probability (EVAR: ONLY RND)</h3>
+<div id="e9ee9d60" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"pred_rnd"</span>]<span class="op">=</span> clf_rnd.predict(tz_gaming)[<span class="st">"prediction"</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_gaming.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  training inum click  time time_fct   app mobile_os  impup  clup     ctrup  \
+0    train   I7    no     9        9  app8       ios    439     2  0.455581   
+1    train  I23    no    15       15  app1       ios     64     0  0.000000   
+2    train  I28    no    12       12  app5       ios     80     0  0.000000   
+3    train  I30    no    19       19  app1       ios     25     0  0.000000   
+4    train  I35    no    24       24  app1   android   3834    29  0.756390   
+
+   ...  clut     ctrut  imppat  clpat    ctrpat       rnd  pred_vneta  \
+0  ...     0  0.000000      71      1  1.408451 -1.207066    0.003961   
+1  ...     0  0.000000   67312   1069  1.588127  0.277429    0.003961   
+2  ...     0  0.000000     331      1  0.302115  1.084441    0.003961   
+3  ...     0  0.000000   71114   1001  1.407599 -2.345698    0.018965   
+4  ...     4  1.215805  183852   2317  1.260253  0.429125    0.003961   
+
+         id    pred_logit  pred_rnd  
+0  id247135  3.382977e-13  0.009222  
+1  id245079  1.156355e-02  0.008751  
+2  id927245  2.655311e-03  0.008505  
+3  id922188  1.349420e-02  0.009600  
+4  id355833  1.868222e-03  0.008704  
+
+[5 rows x 24 columns]</code></pre>
+</div>
+</div>
+<div id="f4ee4acb" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>tz_train[<span class="st">"pred_rnd"</span>]<span class="op">=</span> clf_rnd.predict(tz_train)[<span class="st">"prediction"</span>]</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_train.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  training inum click  time time_fct   app mobile_os  impup  clup     ctrup  \
+0    train   I7    no     9        9  app8       ios    439     2  0.455581   
+1    train  I23    no    15       15  app1       ios     64     0  0.000000   
+2    train  I28    no    12       12  app5       ios     80     0  0.000000   
+3    train  I30    no    19       19  app1       ios     25     0  0.000000   
+4    train  I35    no    24       24  app1   android   3834    29  0.756390   
+
+   ...  clut     ctrut  imppat  clpat    ctrpat       rnd  pred_vneta  \
+0  ...     0  0.000000      71      1  1.408451 -1.207066    0.003961   
+1  ...     0  0.000000   67312   1069  1.588127  0.277429    0.003961   
+2  ...     0  0.000000     331      1  0.302115  1.084441    0.003961   
+3  ...     0  0.000000   71114   1001  1.407599 -2.345698    0.018965   
+4  ...     4  1.215805  183852   2317  1.260253  0.429125    0.003961   
+
+         id    pred_logit  pred_rnd  
+0  id247135  3.382977e-13  0.009222  
+1  id245079  1.156355e-02  0.008751  
+2  id927245  2.655311e-03  0.008505  
+3  id922188  1.349420e-02  0.009600  
+4  id355833  1.868222e-03  0.008704  
+
+[5 rows x 24 columns]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_45280/2027560838.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  tz_train["pred_rnd"]= clf_rnd.predict(tz_train)["prediction"]</code></pre>
+</div>
+</div>
+</section>
+<section id="multicollinearity-and-omitted-variable-bias" class="level2">
+<h2 class="anchored" data-anchor-id="multicollinearity-and-omitted-variable-bias">Multicollinearity and Omitted Variable Bias</h2>
+<div id="a80e04e5" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>clf_mc1 <span class="op">=</span> rsm.model.logistic(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span> {<span class="st">"tz_train"</span>:tz_train},</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    rvar<span class="op">=</span> <span class="st">"click"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    lev<span class="op">=</span> <span class="st">"yes"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    evar<span class="op">=</span> [<span class="st">"imppat"</span>, <span class="st">"clpat"</span>, <span class="st">"ctrpat"</span>]</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>clf_mc1.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Logistic regression (GLM)
+Data                 : tz_train
+Response variable    : click
+Level                : yes
+Explanatory variables: imppat, clpat, ctrpat
+Null hyp.: There is no effect of x on click
+Alt. hyp.: There is an effect of x on click
+
+              OR     OR%  coefficient  std.error  z.value p.value     
+Intercept  0.004  -99.6%       -5.419      0.073  -74.156  &lt; .001  ***
+imppat     1.000   -0.0%       -0.000      0.000   -4.802  &lt; .001  ***
+clpat      1.002    0.2%        0.002      0.000    5.713  &lt; .001  ***
+ctrpat     1.615   61.5%        0.479      0.034   13.933  &lt; .001  ***
+
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared (McFadden): 0.035
+Pseudo R-squared (McFadden adjusted): 0.035
+Area under the RO Curve (AUC): 0.676
+Log-likelihood: -4273.088, AIC: 8554.176, BIC: 8591.695
+Chi-squared: 314.248, df(3), p.value &lt; 0.001 
+Nr obs: 87,535</code></pre>
+</div>
+</div>
+<section id="chi-square-citical-value-1" class="level3">
+<h3 class="anchored" data-anchor-id="chi-square-citical-value-1">Chi-Square Citical Value</h3>
+<div id="01ba8495" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span><span class="dv">3</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>alpha_0_05 <span class="op">=</span> chi2.ppf(<span class="dv">1</span><span class="op">-</span><span class="fl">0.05</span>,df)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>alpha_0_01<span class="op">=</span> chi2.ppf(<span class="dv">1</span><span class="op">-</span><span class="fl">0.01</span>,df)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(alpha_0_05,alpha_0_01)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>7.8147279032511765 11.34486673014437</code></pre>
+</div>
+</div>
+</section>
+<section id="plot-1" class="level3">
+<h3 class="anchored" data-anchor-id="plot-1">Plot</h3>
+<div id="3a35a002" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>clf_mc1.plot(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    plots<span class="op">=</span><span class="st">"pred"</span>, incl<span class="op">=</span>[<span class="st">"imppat"</span>, <span class="st">"clpat"</span>, <span class="st">"ctrpat"</span>]</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index1_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="permutation-importance-1" class="level3">
+<h3 class="anchored" data-anchor-id="permutation-importance-1">Permutation Importance</h3>
+<div id="c7a609e1" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>clf_mc1.plot(plots<span class="op">=</span><span class="st">"vimp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index1_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretation-2" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-2">Interpretation</h3>
+<p>For Odd Ratio, when you increase the ctrpat (click throgh put rate) by one unit, the odds of the outcome which is clicking increases by a factor of 1.615 or 61.5% while other variables remain constant.Meanwhile, a unit increase only by a factor of 1.002 for clpt (past clicks in a specific hour) and no effect on odd of clicking for the feature imppat (the number of past impression that showed a TZ ad)</p>
+<p>Using the coefficient and the plot, an increase in the number of past impression that showed a TZ ad(immpat) has a insignificant negative correlation(-0.00) with odds of clicking. This shows in both regression and plot. Then, there is a slight positive coeffecient(0.00) between clpat and the odds of clicking. Finally, we have considerable positive correlation(0.48) between ctrpat and the odds of clicking. Both of these shows in the plot as well.</p>
+<p>all p_values are less than 0.05 implies on the significant effect of imppat, ctrpat and clpat on the odds of clicking. In fact, they all have three asterisk which amplifies the level of statistical significance of these three variables.</p>
+<section id="correlation" class="level4">
+<h4 class="anchored" data-anchor-id="correlation">Correlation</h4>
+<div id="31783a2b" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>tz_train[[<span class="st">'imppat'</span>, <span class="st">'clpat'</span>, <span class="st">'ctrpat'</span>]].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">imppat</th>
+<th data-quarto-table-cell-role="th">clpat</th>
+<th data-quarto-table-cell-role="th">ctrpat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">imppat</td>
+<td>1.000000</td>
+<td>0.971579</td>
+<td>0.344099</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">clpat</td>
+<td>0.971579</td>
+<td>1.000000</td>
+<td>0.460035</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">ctrpat</td>
+<td>0.344099</td>
+<td>0.460035</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="90f0e7e3" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>clf_mc2 <span class="op">=</span> rsm.model.logistic(</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span> {<span class="st">"tz_train"</span>: tz_train},</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    rvar <span class="op">=</span> <span class="st">"click"</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    lev<span class="op">=</span> <span class="st">"yes"</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    evar <span class="op">=</span>[<span class="st">"imppat"</span>, <span class="st">"ctrpat"</span>],</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>clf_mc2.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Logistic regression (GLM)
+Data                 : tz_train
+Response variable    : click
+Level                : yes
+Explanatory variables: imppat, ctrpat
+Null hyp.: There is no effect of x on click
+Alt. hyp.: There is an effect of x on click
+
+              OR     OR%  coefficient  std.error  z.value p.value     
+Intercept  0.004  -99.6%       -5.529      0.068  -80.814  &lt; .001  ***
+imppat     1.000    0.0%        0.000      0.000    5.460  &lt; .001  ***
+ctrpat     1.733   73.3%        0.550      0.030   18.422  &lt; .001  ***
+
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared (McFadden): 0.031
+Pseudo R-squared (McFadden adjusted): 0.031
+Area under the RO Curve (AUC): 0.674
+Log-likelihood: -4290.903, AIC: 8587.805, BIC: 8615.945
+Chi-squared: 278.619, df(2), p.value &lt; 0.001 
+Nr obs: 87,535</code></pre>
+</div>
+</div>
+<div id="5f88312e" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>clf_mc2.plot(<span class="st">"pred"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index1_files/figure-html/cell-19-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretation-3" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation-3">Interpretation</h4>
+<p>The coefficient of ctrpat increased from 0.48 to 0.55, and the odds ratio rose from 61.5% to 73.3%. This suggests that removing clpat revealed the true impact of the remaining explanatory variables. While Pseudo R-Squared and AUC were not significantly affected, the predicted plot now shows a clearer relationship between the odds of clicking and the variables imppat and ctrpat. Since imppat and clpat have a high correlation of 0.97, multicollinearity exists, which can make coefficient estimates unstable and affect model interpretation. By omitting one of these highly correlated variables, we mitigate this issue, leading to a more interpretable model. This is evident in the plot, where the relationship between ctrpat, imppat, and the odds of clicking is now more clearly observed.</p>
+</section>
+<section id="difference-after-adding-more-features" class="level4">
+<h4 class="anchored" data-anchor-id="difference-after-adding-more-features">Difference After Adding More Features</h4>
+<div id="0c43fa85" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>clf_mc3 <span class="op">=</span> rsm.model.logistic (</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> {<span class="st">"tz_train"</span>: tz_train},</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    rvar<span class="op">=</span> <span class="st">"click"</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    lev<span class="op">=</span> <span class="st">"yes"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    evar<span class="op">=</span>[<span class="st">"time_fct"</span>, <span class="st">"app"</span>, <span class="st">"imppat"</span>, <span class="st">"clpat"</span>, <span class="st">"ctrpat"</span>]</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>clf_mc3.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Logistic regression (GLM)
+Data                 : tz_train
+Response variable    : click
+Level                : yes
+Explanatory variables: time_fct, app, imppat, clpat, ctrpat
+Null hyp.: There is no effect of x on click
+Alt. hyp.: There is an effect of x on click
+
+                 OR      OR%  coefficient   std.error  z.value p.value     
+Intercept     0.012   -98.8%       -4.424       0.284  -15.575  &lt; .001  ***
+time_fct[2]   0.588   -41.2%       -0.532       0.323   -1.644     0.1     
+time_fct[3]   0.693   -30.7%       -0.367       0.461   -0.795   0.426     
+time_fct[4]   0.000  -100.0%      -23.834   43904.903   -0.001     1.0     
+time_fct[5]   0.000  -100.0%      -23.860   57249.164   -0.000     1.0     
+time_fct[6]   0.359   -64.1%       -1.025       1.027   -0.999   0.318     
+time_fct[7]   1.220    22.0%        0.199       0.438    0.453    0.65     
+time_fct[8]   1.135    13.5%        0.127       0.309    0.411   0.681     
+time_fct[9]   1.063     6.3%        0.061       0.299    0.203   0.839     
+time_fct[10]  0.843   -15.7%       -0.170       0.303   -0.561   0.575     
+time_fct[11]  0.637   -36.3%       -0.451       0.288   -1.565   0.118     
+time_fct[12]  0.834   -16.6%       -0.181       0.292   -0.620   0.535     
+time_fct[13]  0.535   -46.5%       -0.626       0.306   -2.047   0.041    *
+time_fct[14]  0.982    -1.8%       -0.018       0.257   -0.069   0.945     
+time_fct[15]  0.840   -16.0%       -0.174       0.272   -0.639   0.523     
+time_fct[16]  0.874   -12.6%       -0.135       0.279   -0.483   0.629     
+time_fct[17]  0.864   -13.6%       -0.146       0.296   -0.493   0.622     
+time_fct[18]  0.942    -5.8%       -0.060       0.286   -0.208   0.835     
+time_fct[19]  1.178    17.8%        0.164       0.251    0.651   0.515     
+time_fct[20]  1.188    18.8%        0.172       0.247    0.698   0.485     
+time_fct[21]  0.782   -21.8%       -0.245       0.261   -0.942   0.346     
+time_fct[22]  0.933    -6.7%       -0.069       0.259   -0.267   0.789     
+time_fct[23]  0.993    -0.7%       -0.007       0.268   -0.025    0.98     
+time_fct[24]  1.134    13.4%        0.125       0.258    0.486   0.627     
+app[app2]     0.136   -86.4%       -1.997       0.351   -5.681  &lt; .001  ***
+app[app3]     0.187   -81.3%       -1.675       1.016   -1.649   0.099    .
+app[app4]     0.487   -51.3%       -0.719       0.359   -2.004   0.045    *
+app[app5]     0.413   -58.7%       -0.883       1.011   -0.874   0.382     
+app[app6]     1.007     0.7%        0.007       0.216    0.034   0.973     
+app[app7]     0.708   -29.2%       -0.346       1.019   -0.340   0.734     
+app[app8]     0.000  -100.0%      -24.110   72717.593   -0.000     1.0     
+app[app9]     0.935    -6.5%       -0.067       0.271   -0.248   0.804     
+app[app10]    0.000  -100.0%      -24.021   75559.599   -0.000     1.0     
+app[app11]    1.365    36.5%        0.311       0.752    0.414   0.679     
+app[app12]    0.575   -42.5%       -0.553       0.274   -2.022   0.043    *
+app[app13]    2.790   179.0%        1.026       0.504    2.037   0.042    *
+app[app14]    0.246   -75.4%       -1.402       0.479   -2.927   0.003   **
+app[app15]    0.773   -22.7%       -0.258       0.723   -0.357   0.721     
+app[app16]    0.381   -61.9%       -0.965       0.733   -1.316   0.188     
+app[app17]    1.502    50.2%        0.407       0.727    0.560   0.576     
+app[app18]    0.108   -89.2%       -2.226       1.016   -2.190   0.029    *
+app[app19]    0.000  -100.0%      -24.046   93787.196   -0.000     1.0     
+app[app20]    0.000  -100.0%      -24.145   73366.877   -0.000     1.0     
+app[app21]    0.475   -52.5%       -0.744       0.416   -1.789   0.074    .
+app[app22]    0.517   -48.3%       -0.660       1.019   -0.648   0.517     
+app[app23]    3.549   254.9%        1.267       0.419    3.023   0.003   **
+app[app24]    2.411   141.1%        0.880       0.363    2.421   0.015    *
+app[app25]    1.571    57.1%        0.452       0.612    0.738    0.46     
+app[app26]    0.000  -100.0%      -24.073   63336.276   -0.000     1.0     
+app[app27]    0.292   -70.8%       -1.230       0.731   -1.683   0.092    .
+app[app28]    0.318   -68.2%       -1.144       0.603   -1.897   0.058    .
+app[app29]    2.584   158.4%        0.949       0.379    2.502   0.012    *
+app[app30]    0.000  -100.0%      -24.080   87078.077   -0.000     1.0     
+app[app31]    0.164   -83.6%       -1.808       0.735   -2.460   0.014    *
+app[app32]    0.000  -100.0%      -24.044   56046.291   -0.000     1.0     
+app[app33]    0.524   -47.6%       -0.647       0.376   -1.720   0.086    .
+app[app34]    0.000  -100.0%      -24.014   55897.140   -0.000     1.0     
+app[app35]    0.357   -64.3%       -1.030       1.019   -1.011   0.312     
+app[app36]    0.000  -100.0%      -24.001   78847.008   -0.000     1.0     
+app[app37]    0.741   -25.9%       -0.300       0.732   -0.410   0.682     
+app[app38]    0.000  -100.0%      -24.036   55273.917   -0.000     1.0     
+app[app39]    2.349   134.9%        0.854       0.449    1.904   0.057    .
+app[app40]    1.625    62.5%        0.486       0.530    0.915    0.36     
+app[app41]    0.816   -18.4%       -0.204       0.725   -0.281   0.779     
+app[app42]    2.909   190.9%        1.068       0.452    2.363   0.018    *
+app[app43]    0.000  -100.0%      -24.109   75901.133   -0.000     1.0     
+app[app44]    0.000  -100.0%      -24.047   46569.636   -0.001     1.0     
+app[app45]    1.920    92.0%        0.652       0.604    1.079   0.281     
+app[app46]    0.466   -53.4%       -0.763       1.020   -0.748   0.455     
+app[app47]    0.406   -59.4%       -0.902       1.012   -0.891   0.373     
+app[app48]    0.000  -100.0%      -24.045  106095.563   -0.000     1.0     
+app[app49]    0.259   -74.1%       -1.349       1.019   -1.324   0.185     
+imppat        1.000    -0.0%       -0.000       0.000   -1.131   0.258     
+clpat         1.001     0.1%        0.001       0.001    1.135   0.256     
+ctrpat        1.077     7.7%        0.075       0.117    0.637   0.524     
+
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared (McFadden): 0.056
+Pseudo R-squared (McFadden adjusted): 0.04
+Area under the RO Curve (AUC): 0.704
+Log-likelihood: -4180.646, AIC: 8511.292, BIC: 9214.776
+Chi-squared: 499.132, df(74), p.value &lt; 0.001 
+Nr obs: 87,535</code></pre>
+</div>
+</div>
+<div id="0b55ec1a" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>clf_mc3.plot(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    plots<span class="op">=</span><span class="st">"pred"</span>, incl<span class="op">=</span>[<span class="st">"time_fct"</span>, <span class="st">"app"</span>, <span class="st">"imppat"</span>, <span class="st">"clpat"</span>, <span class="st">"ctrpat"</span>]</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index1_files/figure-html/cell-21-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretation-4" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation-4">Interpretation</h4>
+<p>Introducing variables like time_fct and app into a logistic regression model with imppat, clpat, and ctrpat can alter prediction plots by changing the relationships between predictors and the outcome. These new variables may interact with existing ones, influencing both the direction and magnitude of effects. Additionally, they can act as confounder adjustments, revealing the true impact of imppat, clpat, and ctrpat on click likelihood by accounting for hidden biases. Conditioning effects may also emerge, as the behavior of existing predictors shifts in the presence of time_fct and app, leading to different probability estimates. Ultimately, these changes are reflected in prediction plots, which visually capture the refined relationships between predictors and the outcome, offering a clearer interpretation of the model’s dynamics.</p>
+</section>
+</section>
+<section id="decile-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="decile-analysis">Decile Analysis</h3>
+<div id="51f5f43b" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>tz_test <span class="op">=</span>tz_gaming[tz_gaming[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>]</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>tz_test[<span class="st">"pred_logit_dec"</span>] <span class="op">=</span> (tz_test.groupby(<span class="st">"training"</span>).pred_logit.transform(rsm.xtile, <span class="dv">10</span>, rev<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_test.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      training     inum click  time time_fct    app mobile_os  impup  clup  \
+87535     test  I300002    no    21       21   app1   android   1458     3   
+87536     test  I300006    no     3        3  app40       ios      3     0   
+87537     test  I300012    no     5        5  app12   android   5057     6   
+87538     test  I300015    no    10       10   app1   android   1993    10   
+87539     test  I300016    no    14       14   app1       ios    212     7   
+
+          ctrup  ...     ctrut  imppat  clpat    ctrpat       rnd  pred_vneta  \
+87535  0.205761  ...  0.000000   68113    957  1.405018  0.147891    0.003961   
+87536  0.000000  ...  0.000000      50      0  0.000000  0.383246    0.018965   
+87537  0.118647  ...  0.000000     754      8  1.061008  1.274485    0.003961   
+87538  0.501756  ...  0.000000   26537    276  1.040057  0.673022    0.003961   
+87539  3.301887  ...  5.263158   57348    874  1.524029 -0.785851    0.050679   
+
+             id    pred_logit  pred_rnd  pred_logit_dec  
+87535  id466983  1.020981e-02  0.008791               4  
+87536  id946375  8.665095e-03  0.008718               4  
+87537  id479295  1.910723e-14  0.008448              10  
+87538   id83284  6.240407e-03  0.008630               5  
+87539  id359434  1.233449e-02  0.009086               3  
+
+[5 rows x 25 columns]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_45280/1756994838.py:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  tz_test["pred_logit_dec"] = (tz_test.groupby("training").pred_logit.transform(rsm.xtile, 10, rev=True))</code></pre>
+</div>
+</div>
+<div id="c8550eb2" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>dec_tab <span class="op">=</span> (</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    tz_test.groupby(<span class="st">'pred_logit_dec'</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>        nr_impressions<span class="op">=</span> (<span class="st">"pred_logit_dec"</span>, <span class="st">"size"</span>),</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>        nr_clicks<span class="op">=</span> (<span class="st">"click"</span>, <span class="kw">lambda</span> x: (x <span class="op">==</span> <span class="st">"yes"</span>).<span class="bu">sum</span>()),</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    .assign( ctr<span class="op">=</span> <span class="kw">lambda</span> x: x.nr_clicks <span class="op">/</span> x.nr_impressions)</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>dec_tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">pred_logit_dec</th>
+<th data-quarto-table-cell-role="th">nr_impressions</th>
+<th data-quarto-table-cell-role="th">nr_clicks</th>
+<th data-quarto-table-cell-role="th">ctr</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>2796</td>
+<td>103</td>
+<td>0.036838</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>2793</td>
+<td>48</td>
+<td>0.017186</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>2788</td>
+<td>42</td>
+<td>0.015065</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>2796</td>
+<td>30</td>
+<td>0.010730</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>2802</td>
+<td>15</td>
+<td>0.005353</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>6</td>
+<td>2796</td>
+<td>7</td>
+<td>0.002504</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>7</td>
+<td>2794</td>
+<td>7</td>
+<td>0.002505</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>8</td>
+<td>2796</td>
+<td>3</td>
+<td>0.001073</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>9</td>
+<td>2796</td>
+<td>4</td>
+<td>0.001431</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>10</td>
+<td>2796</td>
+<td>12</td>
+<td>0.004292</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<section id="bar-chart" class="level4">
+<h4 class="anchored" data-anchor-id="bar-chart">Bar Chart</h4>
+<div id="7c785fe9" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>bc<span class="op">=</span> dec_tab.plot.bar(x<span class="op">=</span><span class="st">"pred_logit_dec"</span>, y<span class="op">=</span><span class="st">"ctr"</span>, legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>bc.set_xlabel(<span class="st">'Decile'</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>bc.set_ylabel (<span class="st">"click through rate (CTR)"</span>)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>bc.set_title (<span class="st">"Click Through Rate by Decile"</span>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>bc.axhline(dec_tab[<span class="st">"ctr"</span>].mean(), color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index1_files/figure-html/cell-24-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      training     inum click  time time_fct    app mobile_os  impup  clup  \
+0        train       I7    no     9        9   app8       ios    439     2   
+1        train      I23    no    15       15   app1       ios     64     0   
+2        train      I28    no    12       12   app5       ios     80     0   
+3        train      I30    no    19       19   app1       ios     25     0   
+4        train      I35    no    24       24   app1   android   3834    29   
+...        ...      ...   ...   ...      ...    ...       ...    ...   ...   
+87530    train  I299985    no    11       11   app2   android   1181     0   
+87531    train  I299986    no    10       10  app33       ios   1885     0   
+87532    train  I299990    no     1        1  app45       ios      8     0   
+87533    train  I299991    no     8        8   app1       ios    113     2   
+87534    train  I299995    no    18       18  app35   android     13     0   
+
+          ctrup  ...  clut     ctrut  imppat  clpat    ctrpat       rnd  \
+0      0.455581  ...     0  0.000000      71      1  1.408451 -1.207066   
+1      0.000000  ...     0  0.000000   67312   1069  1.588127  0.277429   
+2      0.000000  ...     0  0.000000     331      1  0.302115  1.084441   
+3      0.000000  ...     0  0.000000   71114   1001  1.407599 -2.345698   
+4      0.756390  ...     4  1.215805  183852   2317  1.260253  0.429125   
+...         ...  ...   ...       ...     ...    ...       ...       ...   
+87530  0.000000  ...     0  0.000000    9625     14  0.145455 -0.249031   
+87531  0.000000  ...     0  0.000000     658      1  0.151976  0.770718   
+87532  0.000000  ...     0  0.000000     166      7  4.216867  0.181559   
+87533  1.769912  ...     0  0.000000   14245    158  1.109161 -1.263831   
+87534  0.000000  ...     1  7.142857     472      1  0.211864 -1.428302   
+
+       pred_vneta        id    pred_logit  pred_rnd  
+0        0.003961  id247135  3.382977e-13  0.009222  
+1        0.003961  id245079  1.156355e-02  0.008751  
+2        0.003961  id927245  2.655311e-03  0.008505  
+3        0.018965  id922188  1.349420e-02  0.009600  
+4        0.003961  id355833  1.868222e-03  0.008704  
+...           ...       ...           ...       ...  
+87530    0.003961  id565693  2.353185e-04  0.008915  
+87531    0.003961  id222657  8.101551e-04  0.008600  
+87532    0.018965  id340594  1.876022e-02  0.008781  
+87533    0.003961  id634151  9.397408e-03  0.009241  
+87534    0.050679  id280606  7.000647e-03  0.009294  
+
+[87535 rows x 24 columns]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="gain-curves" class="level3">
+<h3 class="anchored" data-anchor-id="gain-curves">Gain Curves</h3>
+<div id="ee7bc54e" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>dec_tab[<span class="st">"cum_prop"</span>]<span class="op">=</span> dec_tab[<span class="st">"nr_impressions"</span>].cumsum()<span class="op">/</span>dec_tab[<span class="st">"nr_impressions"</span>].<span class="bu">sum</span>()</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>dec_tab[<span class="st">"cum_gains"</span>]<span class="op">=</span> dec_tab[<span class="st">'nr_clicks'</span>].cumsum()<span class="op">/</span>dec_tab[<span class="st">'nr_clicks'</span>].<span class="bu">sum</span>()</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>gains_tab <span class="op">=</span> dec_tab</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>gains_tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">pred_logit_dec</th>
+<th data-quarto-table-cell-role="th">nr_impressions</th>
+<th data-quarto-table-cell-role="th">nr_clicks</th>
+<th data-quarto-table-cell-role="th">ctr</th>
+<th data-quarto-table-cell-role="th">cum_prop</th>
+<th data-quarto-table-cell-role="th">cum_gains</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>2796</td>
+<td>103</td>
+<td>0.036838</td>
+<td>0.100025</td>
+<td>0.380074</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>2793</td>
+<td>48</td>
+<td>0.017186</td>
+<td>0.199943</td>
+<td>0.557196</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>2788</td>
+<td>42</td>
+<td>0.015065</td>
+<td>0.299682</td>
+<td>0.712177</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>2796</td>
+<td>30</td>
+<td>0.010730</td>
+<td>0.399707</td>
+<td>0.822878</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>2802</td>
+<td>15</td>
+<td>0.005353</td>
+<td>0.499946</td>
+<td>0.878229</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>6</td>
+<td>2796</td>
+<td>7</td>
+<td>0.002504</td>
+<td>0.599971</td>
+<td>0.904059</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>7</td>
+<td>2794</td>
+<td>7</td>
+<td>0.002505</td>
+<td>0.699925</td>
+<td>0.929889</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>8</td>
+<td>2796</td>
+<td>3</td>
+<td>0.001073</td>
+<td>0.799950</td>
+<td>0.940959</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>9</td>
+<td>2796</td>
+<td>4</td>
+<td>0.001431</td>
+<td>0.899975</td>
+<td>0.955720</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>10</td>
+<td>2796</td>
+<td>12</td>
+<td>0.004292</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="f9157aff" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>plt.plot(dec_tab[<span class="st">'cum_prop'</span>], dec_tab[<span class="st">'cum_gains'</span>], label<span class="op">=</span><span class="st">'Cumulative Gains'</span>, drawstyle<span class="op">=</span><span class="st">'steps-post'</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], <span class="st">'k--'</span>, label<span class="op">=</span><span class="st">'No Model'</span>)  </span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Labeling the plot</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Cumulative Gains Chart'</span>)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Cumulative Proportion of Impressions'</span>)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Cumulative Gains'</span>)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index1_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="confusion-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="confusion-matrix">Confusion Matrix</h3>
+<div id="7a0dc27d" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>cpm <span class="op">=</span> <span class="dv">10</span> <span class="co"># cost per 1000 video impression</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>conversion_rate<span class="op">=</span> <span class="fl">0.05</span>   <span class="co"># conversion to sign up with TZ after clicking on an ad</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>clv<span class="op">=</span> <span class="dv">25</span> <span class="co"># expected clv of customers that sign up with TZ after clicking on an ad</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>threshold<span class="op">=</span> (cpm<span class="op">/</span>(conversion_rate <span class="op">*</span> clv <span class="op">*</span><span class="dv">1000</span>))</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>threshold</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>0.008</code></pre>
+</div>
+</div>
+<div id="0d2118de" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>tz_test <span class="op">=</span> tz_gaming[tz_gaming[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>].copy()</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>tz_test[<span class="st">"click_yes"</span>]<span class="op">=</span> tz_test[<span class="st">"click"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="dv">1</span> <span class="cf">if</span> x <span class="op">==</span> <span class="st">"yes"</span> <span class="cf">else</span> <span class="dv">0</span> <span class="cf">if</span> x <span class="op">==</span> <span class="st">"no"</span> <span class="cf">else</span> np.nan)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>tz_test[<span class="st">"click_yes"</span>] <span class="op">=</span> tz_test[<span class="st">"click_yes"</span>].astype(<span class="bu">float</span>)</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>tz_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">training</th>
+<th data-quarto-table-cell-role="th">inum</th>
+<th data-quarto-table-cell-role="th">click</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">time_fct</th>
+<th data-quarto-table-cell-role="th">app</th>
+<th data-quarto-table-cell-role="th">mobile_os</th>
+<th data-quarto-table-cell-role="th">impup</th>
+<th data-quarto-table-cell-role="th">clup</th>
+<th data-quarto-table-cell-role="th">ctrup</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">ctrut</th>
+<th data-quarto-table-cell-role="th">imppat</th>
+<th data-quarto-table-cell-role="th">clpat</th>
+<th data-quarto-table-cell-role="th">ctrpat</th>
+<th data-quarto-table-cell-role="th">rnd</th>
+<th data-quarto-table-cell-role="th">pred_vneta</th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">pred_logit</th>
+<th data-quarto-table-cell-role="th">pred_rnd</th>
+<th data-quarto-table-cell-role="th">click_yes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">87535</td>
+<td>test</td>
+<td>I300002</td>
+<td>no</td>
+<td>21</td>
+<td>21</td>
+<td>app1</td>
+<td>android</td>
+<td>1458</td>
+<td>3</td>
+<td>0.205761</td>
+<td>...</td>
+<td>0.000000</td>
+<td>68113</td>
+<td>957</td>
+<td>1.405018</td>
+<td>0.147891</td>
+<td>0.003961</td>
+<td>id466983</td>
+<td>1.020981e-02</td>
+<td>0.008791</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">87536</td>
+<td>test</td>
+<td>I300006</td>
+<td>no</td>
+<td>3</td>
+<td>3</td>
+<td>app40</td>
+<td>ios</td>
+<td>3</td>
+<td>0</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>50</td>
+<td>0</td>
+<td>0.000000</td>
+<td>0.383246</td>
+<td>0.018965</td>
+<td>id946375</td>
+<td>8.665095e-03</td>
+<td>0.008718</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">87537</td>
+<td>test</td>
+<td>I300012</td>
+<td>no</td>
+<td>5</td>
+<td>5</td>
+<td>app12</td>
+<td>android</td>
+<td>5057</td>
+<td>6</td>
+<td>0.118647</td>
+<td>...</td>
+<td>0.000000</td>
+<td>754</td>
+<td>8</td>
+<td>1.061008</td>
+<td>1.274485</td>
+<td>0.003961</td>
+<td>id479295</td>
+<td>1.910723e-14</td>
+<td>0.008448</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">87538</td>
+<td>test</td>
+<td>I300015</td>
+<td>no</td>
+<td>10</td>
+<td>10</td>
+<td>app1</td>
+<td>android</td>
+<td>1993</td>
+<td>10</td>
+<td>0.501756</td>
+<td>...</td>
+<td>0.000000</td>
+<td>26537</td>
+<td>276</td>
+<td>1.040057</td>
+<td>0.673022</td>
+<td>0.003961</td>
+<td>id83284</td>
+<td>6.240407e-03</td>
+<td>0.008630</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">87539</td>
+<td>test</td>
+<td>I300016</td>
+<td>no</td>
+<td>14</td>
+<td>14</td>
+<td>app1</td>
+<td>ios</td>
+<td>212</td>
+<td>7</td>
+<td>3.301887</td>
+<td>...</td>
+<td>5.263158</td>
+<td>57348</td>
+<td>874</td>
+<td>1.524029</td>
+<td>-0.785851</td>
+<td>0.050679</td>
+<td>id359434</td>
+<td>1.233449e-02</td>
+<td>0.009086</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">115483</td>
+<td>test</td>
+<td>I399982</td>
+<td>no</td>
+<td>21</td>
+<td>21</td>
+<td>app2</td>
+<td>ios</td>
+<td>2110</td>
+<td>0</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>23216</td>
+<td>19</td>
+<td>0.081840</td>
+<td>-1.852059</td>
+<td>0.003961</td>
+<td>id847352</td>
+<td>1.093091e-03</td>
+<td>0.009435</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">115484</td>
+<td>test</td>
+<td>I399986</td>
+<td>no</td>
+<td>17</td>
+<td>17</td>
+<td>app14</td>
+<td>android</td>
+<td>291</td>
+<td>1</td>
+<td>0.343643</td>
+<td>...</td>
+<td>1.351351</td>
+<td>3665</td>
+<td>14</td>
+<td>0.381992</td>
+<td>-0.296415</td>
+<td>0.003961</td>
+<td>id457437</td>
+<td>3.609483e-03</td>
+<td>0.008930</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">115485</td>
+<td>test</td>
+<td>I399991</td>
+<td>no</td>
+<td>23</td>
+<td>23</td>
+<td>app1</td>
+<td>android</td>
+<td>364</td>
+<td>3</td>
+<td>0.824176</td>
+<td>...</td>
+<td>0.000000</td>
+<td>173353</td>
+<td>2292</td>
+<td>1.322158</td>
+<td>0.099201</td>
+<td>0.003961</td>
+<td>id792352</td>
+<td>2.052670e-02</td>
+<td>0.008806</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">115486</td>
+<td>test</td>
+<td>I399992</td>
+<td>no</td>
+<td>20</td>
+<td>20</td>
+<td>app6</td>
+<td>android</td>
+<td>59</td>
+<td>2</td>
+<td>3.389831</td>
+<td>...</td>
+<td>2.702703</td>
+<td>3474</td>
+<td>53</td>
+<td>1.525619</td>
+<td>-0.186421</td>
+<td>0.050679</td>
+<td>id115678</td>
+<td>2.192207e-02</td>
+<td>0.008896</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">115487</td>
+<td>test</td>
+<td>I399994</td>
+<td>no</td>
+<td>18</td>
+<td>18</td>
+<td>app1</td>
+<td>ios</td>
+<td>498</td>
+<td>7</td>
+<td>1.405622</td>
+<td>...</td>
+<td>1.886792</td>
+<td>77884</td>
+<td>1201</td>
+<td>1.542037</td>
+<td>0.857281</td>
+<td>0.003961</td>
+<td>id705546</td>
+<td>1.170346e-02</td>
+<td>0.008574</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>27953 rows × 25 columns</p>
+</div>
+</div>
+</div>
+<div id="c715dd55" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>TP <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_logit"</span>]<span class="op">&gt;</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">1</span>)).<span class="bu">sum</span>()</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>FP <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_logit"</span>]<span class="op">&gt;</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">0</span>)).<span class="bu">sum</span>()</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>TN <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_logit"</span>]<span class="op">&lt;=</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">0</span>)).<span class="bu">sum</span>()</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>FN <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_logit"</span>]<span class="op">&lt;=</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">1</span>)).<span class="bu">sum</span>()</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>cm_logit <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"label"</span>: [<span class="st">"TP"</span>, <span class="st">"FP"</span>, <span class="st">"TN"</span>, <span class="st">"FN"</span>],</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"nr"</span> : [TP, FP, TN, FN]<span class="co"># TP, FP, TN, and FN values in that order</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>cm_logit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">label</th>
+<th data-quarto-table-cell-role="th">nr</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>TP</td>
+<td>221</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>FP</td>
+<td>10661</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>TN</td>
+<td>17021</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>FN</td>
+<td>50</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<section id="accuracy" class="level4">
+<h4 class="anchored" data-anchor-id="accuracy">Accuracy</h4>
+<div id="083caf25" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>accuracy_logit <span class="op">=</span> (TP <span class="op">+</span> TN) <span class="op">/</span> (TP <span class="op">+</span> TN <span class="op">+</span> FP <span class="op">+</span> FN)<span class="co"># float</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>accuracy_logit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>np.float64(0.6168210925482059)</code></pre>
+</div>
+</div>
+</section>
+<section id="confusion-matrix-based-on-pred_rnd" class="level4">
+<h4 class="anchored" data-anchor-id="confusion-matrix-based-on-pred_rnd">Confusion Matrix Based on Pred_RND</h4>
+<div id="7d44c623" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>TP <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_rnd"</span>]<span class="op">&gt;</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">1</span>)).<span class="bu">sum</span>()</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>FP <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_rnd"</span>]<span class="op">&gt;</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">0</span>)).<span class="bu">sum</span>()</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>TN <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_rnd"</span>]<span class="op">&lt;=</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">0</span>)).<span class="bu">sum</span>()</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>FN <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_rnd"</span>]<span class="op">&lt;=</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">1</span>)).<span class="bu">sum</span>()</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>cm_rnd <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"label"</span>: [<span class="st">"TP"</span>, <span class="st">"FP"</span>, <span class="st">"TN"</span>, <span class="st">"FN"</span>],</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"nr"</span>: [TP, FP, TN, FN]<span class="co"># TP, FP, TN, and FN values in that order</span></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>cm_rnd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">label</th>
+<th data-quarto-table-cell-role="th">nr</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>TP</td>
+<td>271</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>FP</td>
+<td>27606</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>TN</td>
+<td>76</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>FN</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="accuracy-based-on-pred_rnd-confusion-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="accuracy-based-on-pred_rnd-confusion-matrix">Accuracy Based on Pred_RND Confusion Matrix</h3>
+<div id="b4a7f07a" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>accuracy_rnd <span class="op">=</span> (TP <span class="op">+</span> TN) <span class="op">/</span> (TP <span class="op">+</span> TN <span class="op">+</span> FP <span class="op">+</span> FN)<span class="co"># float</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>accuracy_rnd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<pre><code>np.float64(0.012413694415626229)</code></pre>
+</div>
+</div>
+<section id="summary-and-interpretation" class="level4">
+<h4 class="anchored" data-anchor-id="summary-and-interpretation">Summary and Interpretation</h4>
+<div id="6d76b042" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>first_model <span class="op">=</span> {</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TP"</span>: <span class="dv">271</span>,</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"FP"</span>: <span class="dv">27606</span>,</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TN"</span>: <span class="dv">76</span>,</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"FN"</span>: <span class="dv">0</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>rnd_model <span class="op">=</span> {</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TP"</span>: <span class="dv">0</span>,</span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"FP"</span>: <span class="dv">0</span>,</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TN"</span>: <span class="dv">27682</span>,</span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"FN"</span>: <span class="dv">271</span></span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_metrics(cm):</span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>    TP <span class="op">=</span> cm[<span class="st">"TP"</span>]</span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>    FP <span class="op">=</span> cm[<span class="st">"FP"</span>]</span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>    TN <span class="op">=</span> cm[<span class="st">"TN"</span>]</span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>    FN <span class="op">=</span> cm[<span class="st">"FN"</span>]</span>
+<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> TP <span class="op">+</span> FP <span class="op">+</span> TN <span class="op">+</span> FN</span>
+<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>    accuracy <span class="op">=</span> (TP <span class="op">+</span> TN) <span class="op">/</span> total</span>
+<span id="cb53-23"><a href="#cb53-23" aria-hidden="true" tabindex="-1"></a>    precision <span class="op">=</span> TP <span class="op">/</span> (TP <span class="op">+</span> FP) <span class="cf">if</span> (TP <span class="op">+</span> FP) <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb53-24"><a href="#cb53-24" aria-hidden="true" tabindex="-1"></a>    recall <span class="op">=</span> TP <span class="op">/</span> (TP <span class="op">+</span> FN) <span class="cf">if</span> (TP <span class="op">+</span> FN) <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb53-25"><a href="#cb53-25" aria-hidden="true" tabindex="-1"></a>    specificity <span class="op">=</span> TN <span class="op">/</span> (TN <span class="op">+</span> FP) <span class="cf">if</span> (TN <span class="op">+</span> FP) <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb53-26"><a href="#cb53-26" aria-hidden="true" tabindex="-1"></a>    f1_score <span class="op">=</span> (<span class="dv">2</span> <span class="op">*</span> precision <span class="op">*</span> recall) <span class="op">/</span> (precision <span class="op">+</span> recall) <span class="cf">if</span> (precision <span class="op">+</span> recall) <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb53-27"><a href="#cb53-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-28"><a href="#cb53-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb53-29"><a href="#cb53-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">"TP"</span>: TP,</span>
+<span id="cb53-30"><a href="#cb53-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">"FP"</span>: FP,</span>
+<span id="cb53-31"><a href="#cb53-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">"TN"</span>: TN,</span>
+<span id="cb53-32"><a href="#cb53-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">"FN"</span>: FN,</span>
+<span id="cb53-33"><a href="#cb53-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Accuracy"</span>: <span class="bu">round</span>(accuracy, <span class="dv">4</span>),</span>
+<span id="cb53-34"><a href="#cb53-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Precision"</span>: <span class="bu">round</span>(precision, <span class="dv">4</span>),</span>
+<span id="cb53-35"><a href="#cb53-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Recall"</span>: <span class="bu">round</span>(recall, <span class="dv">4</span>),</span>
+<span id="cb53-36"><a href="#cb53-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Specificity"</span>: <span class="bu">round</span>(specificity, <span class="dv">4</span>),</span>
+<span id="cb53-37"><a href="#cb53-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">"F1 Score"</span>: <span class="bu">round</span>(f1_score, <span class="dv">4</span>)</span>
+<span id="cb53-38"><a href="#cb53-38" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb53-39"><a href="#cb53-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-40"><a href="#cb53-40" aria-hidden="true" tabindex="-1"></a>first_metrics <span class="op">=</span> compute_metrics(first_model)</span>
+<span id="cb53-41"><a href="#cb53-41" aria-hidden="true" tabindex="-1"></a>rnd_metrics <span class="op">=</span> compute_metrics(rnd_model)</span>
+<span id="cb53-42"><a href="#cb53-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-43"><a href="#cb53-43" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb53-44"><a href="#cb53-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Metric"</span>: <span class="bu">list</span>(first_metrics.keys()),</span>
+<span id="cb53-45"><a href="#cb53-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"First Model"</span>: <span class="bu">list</span>(first_metrics.values()),</span>
+<span id="cb53-46"><a href="#cb53-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"RND"</span>: <span class="bu">list</span>(rnd_metrics.values())</span>
+<span id="cb53-47"><a href="#cb53-47" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb53-48"><a href="#cb53-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-49"><a href="#cb53-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results_df.to_string(index<span class="op">=</span><span class="va">False</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Metric  First Model        RND
+         TP     271.0000     0.0000
+         FP   27606.0000     0.0000
+         TN      76.0000 27682.0000
+         FN       0.0000   271.0000
+   Accuracy       0.0124     0.9903
+  Precision       0.0097     0.0000
+     Recall       1.0000     0.0000
+Specificity       0.0027     1.0000
+   F1 Score       0.0193     0.0000</code></pre>
+</div>
+</div>
+<p>The First Model correctly identified all 271 true positives, achieving 100% recall but only 0.97% precision due to 27,606 false positives. In contrast, the RND model predicted no positives, resulting in perfect specificity and 99.02% accuracy, but 0% recall and no ability to detect actual clicks. Although the First Model’s accuracy was just 1.03%, it was more useful than the RND model because it captured all true click events. However, its extremely low precision highlights inefficiency, as most predicted clicks were incorrect. This comparison shows that in imbalanced datasets, metrics like precision, recall, and F1 score are more informative than accuracy alone</p>
+</section>
+</section>
+<section id="model-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="model-comparison">Model Comparison</h3>
+<section id="cost-information" class="level4">
+<h4 class="anchored" data-anchor-id="cost-information">Cost Information</h4>
+<ul>
+<li>Cost per 1,000 video impressions (CPM) is $10</li>
+<li>Conversion to sign-up as a TZ game player after clicking on an ad is 5%</li>
+<li>The expected CLV of customers that sign-up with TZ after clicking on an ad is approximately $25</li>
+<li>The total cost of the data from Vneta is $50K</li>
+<li>The total cost charged for the data science consulting services by Vneta is $150K</li>
+</ul>
+<div id="0eb80114" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>cpm <span class="op">=</span> <span class="dv">10</span> <span class="co"># cost per 1000 video impression</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>conversion_rate<span class="op">=</span> <span class="fl">0.05</span>   <span class="co"># conversion to sign up with TZ after clicking on an ad</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>clv<span class="op">=</span> <span class="dv">25</span> <span class="co"># expected clv of customers that sign up with TZ after clicking on an ad</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>total_impressions <span class="op">=</span> <span class="dv">20_000_000</span> <span class="co"># given in the problem above</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>additional_cost_VNETA <span class="op">=</span> <span class="dv">50_000</span> <span class="co"># cost of the data from VNETA DATA</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>additional_cost_Consulting<span class="op">=</span> <span class="dv">150_000</span> <span class="co">#cost of thr consulting services by VNETA</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>additional_cost_spamming<span class="op">=</span> <span class="dv">0</span> <span class="co">#cost for spamming with no VNETA involve</span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_break_even_response_rate(cpm,conversion_rate, clv, total_impressions,additional_cost):</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>    total_cost <span class="op">=</span> (total_impressions<span class="op">/</span><span class="dv">1000</span>) <span class="op">*</span>cpm <span class="op">+</span>additional_cost</span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>    margin <span class="op">=</span> total_impressions <span class="op">*</span> conversion_rate <span class="op">*</span> clv</span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>    break_even_rate_of_response<span class="op">=</span> total_cost<span class="op">/</span>margin</span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> break_even_rate_of_response</span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>break_even_response_rate_spamming<span class="op">=</span> calculate_break_even_response_rate(cpm,conversion_rate, clv, total_impressions, additional_cost_spamming)</span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a>break_even_response_rate_spamming</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<pre><code>0.008</code></pre>
+</div>
+</div>
+<div id="cb63e226" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>tz_gaming<span class="op">=</span> tz_test</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"target_logit"</span>] <span class="op">=</span> tz_gaming[<span class="st">"pred_logit"</span>] <span class="op">&gt;</span> break_even_response_rate_spamming</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"target_rnd"</span>] <span class="op">=</span> tz_gaming[<span class="st">"pred_rnd"</span>]<span class="op">&gt;</span> break_even_response_rate_spamming</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"target_vneta"</span>]<span class="op">=</span> tz_gaming[<span class="st">"pred_vneta"</span>] <span class="op">&gt;</span>break_even_response_rate_spamming</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>tz_gaming</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">training</th>
+<th data-quarto-table-cell-role="th">inum</th>
+<th data-quarto-table-cell-role="th">click</th>
+<th data-quarto-table-cell-role="th">time</th>
+<th data-quarto-table-cell-role="th">time_fct</th>
+<th data-quarto-table-cell-role="th">app</th>
+<th data-quarto-table-cell-role="th">mobile_os</th>
+<th data-quarto-table-cell-role="th">impup</th>
+<th data-quarto-table-cell-role="th">clup</th>
+<th data-quarto-table-cell-role="th">ctrup</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">ctrpat</th>
+<th data-quarto-table-cell-role="th">rnd</th>
+<th data-quarto-table-cell-role="th">pred_vneta</th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">pred_logit</th>
+<th data-quarto-table-cell-role="th">pred_rnd</th>
+<th data-quarto-table-cell-role="th">click_yes</th>
+<th data-quarto-table-cell-role="th">target_logit</th>
+<th data-quarto-table-cell-role="th">target_rnd</th>
+<th data-quarto-table-cell-role="th">target_vneta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">87535</td>
+<td>test</td>
+<td>I300002</td>
+<td>no</td>
+<td>21</td>
+<td>21</td>
+<td>app1</td>
+<td>android</td>
+<td>1458</td>
+<td>3</td>
+<td>0.205761</td>
+<td>...</td>
+<td>1.405018</td>
+<td>0.147891</td>
+<td>0.003961</td>
+<td>id466983</td>
+<td>1.020981e-02</td>
+<td>0.008791</td>
+<td>0.0</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">87536</td>
+<td>test</td>
+<td>I300006</td>
+<td>no</td>
+<td>3</td>
+<td>3</td>
+<td>app40</td>
+<td>ios</td>
+<td>3</td>
+<td>0</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.000000</td>
+<td>0.383246</td>
+<td>0.018965</td>
+<td>id946375</td>
+<td>8.665095e-03</td>
+<td>0.008718</td>
+<td>0.0</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">87537</td>
+<td>test</td>
+<td>I300012</td>
+<td>no</td>
+<td>5</td>
+<td>5</td>
+<td>app12</td>
+<td>android</td>
+<td>5057</td>
+<td>6</td>
+<td>0.118647</td>
+<td>...</td>
+<td>1.061008</td>
+<td>1.274485</td>
+<td>0.003961</td>
+<td>id479295</td>
+<td>1.910723e-14</td>
+<td>0.008448</td>
+<td>0.0</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">87538</td>
+<td>test</td>
+<td>I300015</td>
+<td>no</td>
+<td>10</td>
+<td>10</td>
+<td>app1</td>
+<td>android</td>
+<td>1993</td>
+<td>10</td>
+<td>0.501756</td>
+<td>...</td>
+<td>1.040057</td>
+<td>0.673022</td>
+<td>0.003961</td>
+<td>id83284</td>
+<td>6.240407e-03</td>
+<td>0.008630</td>
+<td>0.0</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">87539</td>
+<td>test</td>
+<td>I300016</td>
+<td>no</td>
+<td>14</td>
+<td>14</td>
+<td>app1</td>
+<td>ios</td>
+<td>212</td>
+<td>7</td>
+<td>3.301887</td>
+<td>...</td>
+<td>1.524029</td>
+<td>-0.785851</td>
+<td>0.050679</td>
+<td>id359434</td>
+<td>1.233449e-02</td>
+<td>0.009086</td>
+<td>0.0</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">115483</td>
+<td>test</td>
+<td>I399982</td>
+<td>no</td>
+<td>21</td>
+<td>21</td>
+<td>app2</td>
+<td>ios</td>
+<td>2110</td>
+<td>0</td>
+<td>0.000000</td>
+<td>...</td>
+<td>0.081840</td>
+<td>-1.852059</td>
+<td>0.003961</td>
+<td>id847352</td>
+<td>1.093091e-03</td>
+<td>0.009435</td>
+<td>0.0</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">115484</td>
+<td>test</td>
+<td>I399986</td>
+<td>no</td>
+<td>17</td>
+<td>17</td>
+<td>app14</td>
+<td>android</td>
+<td>291</td>
+<td>1</td>
+<td>0.343643</td>
+<td>...</td>
+<td>0.381992</td>
+<td>-0.296415</td>
+<td>0.003961</td>
+<td>id457437</td>
+<td>3.609483e-03</td>
+<td>0.008930</td>
+<td>0.0</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">115485</td>
+<td>test</td>
+<td>I399991</td>
+<td>no</td>
+<td>23</td>
+<td>23</td>
+<td>app1</td>
+<td>android</td>
+<td>364</td>
+<td>3</td>
+<td>0.824176</td>
+<td>...</td>
+<td>1.322158</td>
+<td>0.099201</td>
+<td>0.003961</td>
+<td>id792352</td>
+<td>2.052670e-02</td>
+<td>0.008806</td>
+<td>0.0</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">115486</td>
+<td>test</td>
+<td>I399992</td>
+<td>no</td>
+<td>20</td>
+<td>20</td>
+<td>app6</td>
+<td>android</td>
+<td>59</td>
+<td>2</td>
+<td>3.389831</td>
+<td>...</td>
+<td>1.525619</td>
+<td>-0.186421</td>
+<td>0.050679</td>
+<td>id115678</td>
+<td>2.192207e-02</td>
+<td>0.008896</td>
+<td>0.0</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">115487</td>
+<td>test</td>
+<td>I399994</td>
+<td>no</td>
+<td>18</td>
+<td>18</td>
+<td>app1</td>
+<td>ios</td>
+<td>498</td>
+<td>7</td>
+<td>1.405622</td>
+<td>...</td>
+<td>1.542037</td>
+<td>0.857281</td>
+<td>0.003961</td>
+<td>id705546</td>
+<td>1.170346e-02</td>
+<td>0.008574</td>
+<td>0.0</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+
+<p>27953 rows × 28 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="spamming" class="level4">
+<h4 class="anchored" data-anchor-id="spamming">Spamming</h4>
+<div id="75f77be2" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks<span class="op">=</span> tz_gaming[(tz_gaming[<span class="st">"click_yes"</span>]<span class="op">==</span> <span class="dv">1</span>)].shape[<span class="dv">0</span>]</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> (tz_gaming.shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">1000</span>)<span class="op">*</span>cpm</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>total_costs</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>total_revenue<span class="op">=</span> total_succesful_clicks<span class="op">*</span>conversion_rate<span class="op">*</span>clv</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>total_revenue</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>profit_spam <span class="op">=</span>total_revenue<span class="op">-</span> total_costs</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>profit_spam</span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>rome_spam<span class="op">=</span> (profit_spam<span class="op">/</span>total_costs)</span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>rome_spam</span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(profit_spam, rome_spam)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>59.22000000000003 0.21185561478195555</code></pre>
+</div>
+</div>
+</section>
+<section id="logit" class="level4">
+<h4 class="anchored" data-anchor-id="logit">LOGIT</h4>
+<div id="5fbee52f" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks <span class="op">=</span> tz_gaming[(tz_gaming[<span class="st">"target_logit"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (tz_gaming[<span class="st">"click_yes"</span>]<span class="op">==</span> <span class="dv">1</span>)].shape[<span class="dv">0</span>]</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> (tz_gaming[(tz_gaming[<span class="st">"target_logit"</span>]<span class="op">==</span> <span class="va">True</span>)].shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">1000</span>)<span class="op">*</span>cpm</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>total_costs</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>total_revenue<span class="op">=</span> total_succesful_clicks<span class="op">*</span>conversion_rate<span class="op">*</span>clv</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>total_revenue</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>profit_logit <span class="op">=</span>total_revenue<span class="op">-</span> total_costs</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>profit_logit</span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>rome_logit<span class="op">=</span> (profit_logit<span class="op">/</span>total_costs)</span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>rome_logit</span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(profit_logit, rome_logit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>167.43 1.5385958463517737</code></pre>
+</div>
+</div>
+</section>
+<section id="rnd" class="level4">
+<h4 class="anchored" data-anchor-id="rnd">RND</h4>
+<div id="c3417b61" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks <span class="op">=</span> tz_gaming[(tz_gaming[<span class="st">"target_rnd"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (tz_gaming[<span class="st">"click_yes"</span>]<span class="op">==</span> <span class="dv">1</span>)].shape[<span class="dv">0</span>]</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> (tz_gaming[(tz_gaming[<span class="st">"target_rnd"</span>]<span class="op">==</span> <span class="va">True</span>)].shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">1000</span>)<span class="op">*</span>cpm</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>total_costs</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>total_revenue<span class="op">=</span> total_succesful_clicks<span class="op">*</span>conversion_rate<span class="op">*</span>clv</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>total_revenue</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>profit_rnd <span class="op">=</span>total_revenue<span class="op">-</span> total_costs</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>profit_rnd</span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>rome_rnd<span class="op">=</span> (profit_rnd<span class="op">/</span>total_costs)</span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>rome_rnd</span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(profit_rnd, rome_rnd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>59.98000000000002 0.21515945044301762</code></pre>
+</div>
+</div>
+</section>
+<section id="vneta" class="level4">
+<h4 class="anchored" data-anchor-id="vneta">VNETA</h4>
+<div id="8394398a" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks <span class="op">=</span> tz_gaming[(tz_gaming[<span class="st">"target_vneta"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (tz_gaming[<span class="st">"click_yes"</span>]<span class="op">==</span> <span class="dv">1</span>)].shape[<span class="dv">0</span>]</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> (tz_gaming[(tz_gaming[<span class="st">"target_vneta"</span>]<span class="op">==</span> <span class="va">True</span>)].shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">1000</span>)<span class="op">*</span>cpm</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>total_costs</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>total_revenue<span class="op">=</span> total_succesful_clicks<span class="op">*</span>conversion_rate<span class="op">*</span>clv</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>total_revenue</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>profit_vneta <span class="op">=</span>total_revenue<span class="op">-</span> total_costs</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>profit_vneta</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>rome_vneta<span class="op">=</span> (profit_vneta<span class="op">/</span>total_costs)</span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>rome_vneta</span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(profit_vneta, rome_vneta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>151.29 3.1059330732909047</code></pre>
+</div>
+</div>
+</section>
+<section id="summary" class="level4">
+<h4 class="anchored" data-anchor-id="summary">Summary</h4>
+<div id="52a6b215" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"pred_spam"</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"target_spam"</span>] <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>mod_perf <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model"</span>: [</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"logit"</span>,</span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"rnd"</span>,</span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"vneta"</span>,</span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"spam"</span>,</span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>        ],</span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"profit"</span>: [profit_logit, profit_rnd, profit_vneta, profit_spam],</span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ROME"</span>: [rome_logit, rome_rnd, rome_vneta, rome_spam],</span>
+<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a>mod_perf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">profit</th>
+<th data-quarto-table-cell-role="th">ROME</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>logit</td>
+<td>167.43</td>
+<td>1.538596</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>rnd</td>
+<td>59.98</td>
+<td>0.215159</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>vneta</td>
+<td>151.29</td>
+<td>3.105933</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>spam</td>
+<td>59.22</td>
+<td>0.211856</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="analysis" class="level4">
+<h4 class="anchored" data-anchor-id="analysis">Analysis</h4>
+<p>The Vneta model demonstrates the highest ROME at 3.105933, making it the most efficient in marketing budget utilization. It generates a profit of 151.29, slightly lower than the Logit model but still highly effective. This model is ideal for scenarios where marketing efficiency and budget allocation are top priorities. On the other hand, the Logit model achieves the highest profit of 167.43, though its ROME is lower than that of the Vneta model, indicating reduced spending efficiency. It is best suited for cases where maximizing total profit is more important than efficiency. In contrast, both the Rnd and Spam models underperform in terms of profit and ROME compared to predictive models, suggesting that predictive strategies significantly outperform non-targeted methods. Overall, the Vneta model is recommended for its superior marketing efficiency, while the Logit model is preferred for maximizing profit. The choice between these two depends on whether ROI or total profit is the primary objective.</p>
+</section>
+</section>
+<section id="profit-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="profit-comparison">Profit Comparison</h3>
+<div id="07ce52cb" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>total_impressions_purchased <span class="op">=</span> <span class="dv">20_000_000</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>test_sample<span class="op">=</span> tz_gaming.shape[<span class="dv">0</span>]</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>test_sample</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>logit <span class="op">=</span> (profit_logit <span class="op">/</span>test_sample)<span class="op">*</span> total_impressions_purchased</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>rnd<span class="op">=</span> (profit_rnd<span class="op">/</span>test_sample) <span class="op">*</span> total_impressions_purchased</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>vneta<span class="op">=</span> (profit_vneta<span class="op">/</span>test_sample) <span class="op">*</span> total_impressions_purchased</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>spam<span class="op">=</span> (profit_spam<span class="op">/</span>test_sample) <span class="op">*</span> total_impressions_purchased</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>logit, rnd, vneta, spam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<pre><code>(119793.93982756771, 42914.89285586521, 108245.98433084105, 42371.12295639111)</code></pre>
+</div>
+</div>
+</section>
+<section id="rome-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="rome-comparison">ROME Comparison</h3>
+<div id="1a2a7362" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> (tz_gaming[(tz_gaming[<span class="st">"target_logit"</span>]<span class="op">==</span> <span class="va">True</span>)].shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">1000</span>)<span class="op">*</span>cpm</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>rome_logit <span class="op">=</span> logit<span class="op">/</span>total_costs</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> (tz_gaming[(tz_gaming[<span class="st">"target_rnd"</span>]<span class="op">==</span> <span class="va">True</span>)].shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">1000</span>)<span class="op">*</span>cpm</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>rome_rnd<span class="op">=</span> logit<span class="op">/</span>total_costs</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> (tz_gaming[(tz_gaming[<span class="st">"target_vneta"</span>]<span class="op">==</span> <span class="va">True</span>)].shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">1000</span>)<span class="op">*</span>cpm</span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>rome_vneta <span class="op">=</span> vneta<span class="op">/</span>total_costs</span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> (tz_gaming.shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">1000</span>)<span class="op">*</span>cpm</span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a>rome_spam <span class="op">=</span> spam<span class="op">/</span>total_costs </span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a>rome_logit, rome_rnd, rome_vneta, rome_logit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<pre><code>(1100.8448798710506, 429.7232120657449, 2222.2538355746465, 1100.8448798710506)</code></pre>
+</div>
+</div>
+<section id="profit-and-rome-summary" class="level4">
+<h4 class="anchored" data-anchor-id="profit-and-rome-summary">Profit and ROME Summary</h4>
+<div id="8f83aad1" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>mod_perf_20M <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model"</span>: [</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">"logit"</span>,</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"rnd"</span>,</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"vneta"</span>,</span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"spam"</span>,</span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>        ],</span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"profit"</span>: [logit, rnd, vneta, spam],</span>
+<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ROME"</span>: [rome_logit, rome_rnd, rome_vneta, rome_spam],</span>
+<span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a>mod_perf_20M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="42">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">profit</th>
+<th data-quarto-table-cell-role="th">ROME</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>logit</td>
+<td>119793.939828</td>
+<td>1100.844880</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>rnd</td>
+<td>42914.892856</td>
+<td>429.723212</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>vneta</td>
+<td>108245.984331</td>
+<td>2222.253836</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>spam</td>
+<td>42371.122956</td>
+<td>151.579877</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The Logit model leads in profit generation with $119,793.94, making it the top choice for revenue maximization, though its ROME stands at 1100.84, which, while strong, is not the highest. The Rnd model lags behind with a profit of $42,914.89 and a ROME of 429.73, reflecting lower efficiency and profitability. Similarly, the Spam model records $42,371.12 in profit, closely matching the Rnd model, but has the lowest ROME at 151.579877, making it the least effective approach. The Vneta model, on the other hand, secures a high profit of $108,245.98 and boasts the highest ROME at 2222.253, demonstrating superior marketing efficiency. This makes Vneta the optimal choice for balancing profit and marketing spend efficiency. Given its outstanding ROME, the Vneta model is the primary recommendation for maximizing investment returns. However, the Logit model remains a solid alternative for cases where absolute profit takes precedence over efficiency. The new data aligns with previous recommendations, reaffirming Vneta’s leadership in efficiency despite slightly lower profits than the Logit model. The results confirm that predictive models significantly outperform non-targeted approaches like the Rnd and Spam models. Ultimately, the Vneta model is best for those prioritizing a balance of high profit and peak efficiency, while the Logit model is the go-to option for pure profit maximization.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
