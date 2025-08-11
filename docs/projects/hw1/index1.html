@@ -312,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<div id="345bb549" class="cell" data-execution_count="1">
+<div id="d5a4a908" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tz_gaming <span class="op">=</span> pd.read_parquet(<span class="st">"data/tz_gaming.parquet"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_gaming)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -359,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [115488 rows x 22 columns]</code></pre>
 </div>
 </div>
-<div id="34da10a5" class="cell" data-execution_count="2">
+<div id="499fd098" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tz_train <span class="op">=</span> tz_gaming[tz_gaming[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"train"</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_train[<span class="st">"training"</span>].head())</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -372,7 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 4    train
 Name: training, dtype: object</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="44">
 <div>
 
 
@@ -678,7 +678,7 @@ Name: training, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="c1af4be8" class="cell" data-execution_count="3">
+<div id="66417db8" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyrsm <span class="im">as</span> rsm</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>clf<span class="op">=</span> rsm.model.logistic(</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        data<span class="op">=</span>{<span class="st">"tz_train"</span>:tz_train},</span>
@@ -794,7 +794,7 @@ Nr obs: 87,535</code></pre>
 </section>
 <section id="chi-square-citical-value" class="level3">
 <h3 class="anchored" data-anchor-id="chi-square-citical-value">Chi-Square Citical Value</h3>
-<div id="56046c08" class="cell" data-execution_count="4">
+<div id="4b4eb378" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span><span class="dv">76</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>alpha_0_05 <span class="op">=</span> chi2.ppf(<span class="dv">1</span><span class="op">-</span><span class="fl">0.05</span>,df)</span>
@@ -870,7 +870,7 @@ Model Fit Metrics
 </section>
 <section id="plot" class="level3">
 <h3 class="anchored" data-anchor-id="plot">Plot</h3>
-<div id="c1b5f3b8" class="cell" data-execution_count="5">
+<div id="0390c14a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>clf.plot(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    plots<span class="op">=</span><span class="st">"pred"</span>, incl<span class="op">=</span>[ <span class="st">"time_fct"</span>, <span class="st">"app"</span>, <span class="st">"mobile_os"</span>, <span class="st">"impua"</span>, <span class="st">"clua"</span>, <span class="st">"ctrua"</span>]</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -885,7 +885,7 @@ Model Fit Metrics
 </section>
 <section id="permutation-importance" class="level3">
 <h3 class="anchored" data-anchor-id="permutation-importance">Permutation Importance</h3>
-<div id="6e0945ec" class="cell" data-execution_count="6">
+<div id="207a8a02" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>clf.plot(<span class="st">"vimp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -902,7 +902,7 @@ Model Fit Metrics
 </section>
 <section id="prediction-of-click-probability" class="level3">
 <h3 class="anchored" data-anchor-id="prediction-of-click-probability">Prediction of Click Probability</h3>
-<div id="645ee4a8" class="cell" data-execution_count="7">
+<div id="9416396a" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"pred_logit"</span>]<span class="op">=</span> clf.predict(tz_gaming)[<span class="st">"prediction"</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_gaming.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -930,7 +930,7 @@ Model Fit Metrics
 [5 rows x 23 columns]</code></pre>
 </div>
 </div>
-<div id="fca9f7eb" class="cell" data-execution_count="8">
+<div id="3d39cd76" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tz_train[<span class="st">"pred_logit"</span>]<span class="op">=</span> clf.predict(tz_train)[<span class="st">"prediction"</span>]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_train.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -969,7 +969,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </section>
 <section id="logistic-regression-evar-only-rnd" class="level3">
 <h3 class="anchored" data-anchor-id="logistic-regression-evar-only-rnd">Logistic Regression (EVAR: ONLY RND)</h3>
-<div id="3532f9bc" class="cell" data-execution_count="9">
+<div id="a32b4ae3" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>clf_rnd<span class="op">=</span> rsm.model.logistic(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span> {<span class="st">"tz_train"</span>: tz_train},</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    rvar<span class="op">=</span> <span class="st">"click"</span>,</span>
@@ -1003,7 +1003,7 @@ Nr obs: 87,535</code></pre>
 </section>
 <section id="prediction-of-click-probability-evar-only-rnd" class="level3">
 <h3 class="anchored" data-anchor-id="prediction-of-click-probability-evar-only-rnd">Prediction of Click Probability (EVAR: ONLY RND)</h3>
-<div id="e9ee9d60" class="cell" data-execution_count="10">
+<div id="ba1277ae" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"pred_rnd"</span>]<span class="op">=</span> clf_rnd.predict(tz_gaming)[<span class="st">"prediction"</span>]</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_gaming.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1031,7 +1031,7 @@ Nr obs: 87,535</code></pre>
 [5 rows x 24 columns]</code></pre>
 </div>
 </div>
-<div id="f4ee4acb" class="cell" data-execution_count="11">
+<div id="48915adc" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>tz_train[<span class="st">"pred_rnd"</span>]<span class="op">=</span> clf_rnd.predict(tz_train)[<span class="st">"prediction"</span>]</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_train.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1070,7 +1070,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </section>
 <section id="multicollinearity-and-omitted-variable-bias" class="level2">
 <h2 class="anchored" data-anchor-id="multicollinearity-and-omitted-variable-bias">Multicollinearity and Omitted Variable Bias</h2>
-<div id="a80e04e5" class="cell" data-execution_count="12">
+<div id="c7386778" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>clf_mc1 <span class="op">=</span> rsm.model.logistic(</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span> {<span class="st">"tz_train"</span>:tz_train},</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    rvar<span class="op">=</span> <span class="st">"click"</span>,</span>
@@ -1105,7 +1105,7 @@ Nr obs: 87,535</code></pre>
 </div>
 <section id="chi-square-citical-value-1" class="level3">
 <h3 class="anchored" data-anchor-id="chi-square-citical-value-1">Chi-Square Citical Value</h3>
-<div id="01ba8495" class="cell" data-execution_count="13">
+<div id="f5ca4e92" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span><span class="dv">3</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>alpha_0_05 <span class="op">=</span> chi2.ppf(<span class="dv">1</span><span class="op">-</span><span class="fl">0.05</span>,df)</span>
@@ -1118,7 +1118,7 @@ Nr obs: 87,535</code></pre>
 </section>
 <section id="plot-1" class="level3">
 <h3 class="anchored" data-anchor-id="plot-1">Plot</h3>
-<div id="3a35a002" class="cell" data-execution_count="14">
+<div id="13da865c" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>clf_mc1.plot(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    plots<span class="op">=</span><span class="st">"pred"</span>, incl<span class="op">=</span>[<span class="st">"imppat"</span>, <span class="st">"clpat"</span>, <span class="st">"ctrpat"</span>]</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1133,7 +1133,7 @@ Nr obs: 87,535</code></pre>
 </section>
 <section id="permutation-importance-1" class="level3">
 <h3 class="anchored" data-anchor-id="permutation-importance-1">Permutation Importance</h3>
-<div id="c7a609e1" class="cell" data-execution_count="15">
+<div id="0539bc2c" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>clf_mc1.plot(plots<span class="op">=</span><span class="st">"vimp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1151,9 +1151,9 @@ Nr obs: 87,535</code></pre>
 <p>all p_values are less than 0.05 implies on the significant effect of imppat, ctrpat and clpat on the odds of clicking. In fact, they all have three asterisk which amplifies the level of statistical significance of these three variables.</p>
 <section id="correlation" class="level4">
 <h4 class="anchored" data-anchor-id="correlation">Correlation</h4>
-<div id="31783a2b" class="cell" data-execution_count="16">
+<div id="5585b621" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>tz_train[[<span class="st">'imppat'</span>, <span class="st">'clpat'</span>, <span class="st">'ctrpat'</span>]].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="58">
 <div>
 
 
@@ -1191,7 +1191,7 @@ Nr obs: 87,535</code></pre>
 </div>
 </div>
 </div>
-<div id="90f0e7e3" class="cell" data-execution_count="17">
+<div id="0a6b4726" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>clf_mc2 <span class="op">=</span> rsm.model.logistic(</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span> {<span class="st">"tz_train"</span>: tz_train},</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    rvar <span class="op">=</span> <span class="st">"click"</span>,</span>
@@ -1223,7 +1223,7 @@ Chi-squared: 278.619, df(2), p.value &lt; 0.001
 Nr obs: 87,535</code></pre>
 </div>
 </div>
-<div id="5f88312e" class="cell" data-execution_count="18">
+<div id="c34fcc4b" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>clf_mc2.plot(<span class="st">"pred"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1240,7 +1240,7 @@ Nr obs: 87,535</code></pre>
 </section>
 <section id="difference-after-adding-more-features" class="level4">
 <h4 class="anchored" data-anchor-id="difference-after-adding-more-features">Difference After Adding More Features</h4>
-<div id="0c43fa85" class="cell" data-execution_count="19">
+<div id="892fc0bc" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>clf_mc3 <span class="op">=</span> rsm.model.logistic (</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> {<span class="st">"tz_train"</span>: tz_train},</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    rvar<span class="op">=</span> <span class="st">"click"</span>,</span>
@@ -1345,7 +1345,7 @@ Chi-squared: 499.132, df(74), p.value &lt; 0.001
 Nr obs: 87,535</code></pre>
 </div>
 </div>
-<div id="0b55ec1a" class="cell" data-execution_count="20">
+<div id="ba611438" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>clf_mc3.plot(</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    plots<span class="op">=</span><span class="st">"pred"</span>, incl<span class="op">=</span>[<span class="st">"time_fct"</span>, <span class="st">"app"</span>, <span class="st">"imppat"</span>, <span class="st">"clpat"</span>, <span class="st">"ctrpat"</span>]</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1365,7 +1365,7 @@ Nr obs: 87,535</code></pre>
 </section>
 <section id="decile-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="decile-analysis">Decile Analysis</h3>
-<div id="51f5f43b" class="cell" data-execution_count="21">
+<div id="8272e07d" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>tz_test <span class="op">=</span>tz_gaming[tz_gaming[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>]</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>tz_test[<span class="st">"pred_logit_dec"</span>] <span class="op">=</span> (tz_test.groupby(<span class="st">"training"</span>).pred_logit.transform(rsm.xtile, <span class="dv">10</span>, rev<span class="op">=</span><span class="va">True</span>))</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tz_test.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1402,7 +1402,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
   tz_test["pred_logit_dec"] = (tz_test.groupby("training").pred_logit.transform(rsm.xtile, 10, rev=True))</code></pre>
 </div>
 </div>
-<div id="c8550eb2" class="cell" data-execution_count="22">
+<div id="c511fd9d" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>dec_tab <span class="op">=</span> (</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    tz_test.groupby(<span class="st">'pred_logit_dec'</span>)</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
@@ -1413,7 +1413,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
 <span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>dec_tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="64">
 <div>
 
 
@@ -1506,7 +1506,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 <section id="bar-chart" class="level4">
 <h4 class="anchored" data-anchor-id="bar-chart">Bar Chart</h4>
-<div id="7c785fe9" class="cell" data-execution_count="23">
+<div id="a9cc218a" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>bc<span class="op">=</span> dec_tab.plot.bar(x<span class="op">=</span><span class="st">"pred_logit_dec"</span>, y<span class="op">=</span><span class="st">"ctr"</span>, legend<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1571,12 +1571,12 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </section>
 <section id="gain-curves" class="level3">
 <h3 class="anchored" data-anchor-id="gain-curves">Gain Curves</h3>
-<div id="ee7bc54e" class="cell" data-execution_count="24">
+<div id="fecf5540" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>dec_tab[<span class="st">"cum_prop"</span>]<span class="op">=</span> dec_tab[<span class="st">"nr_impressions"</span>].cumsum()<span class="op">/</span>dec_tab[<span class="st">"nr_impressions"</span>].<span class="bu">sum</span>()</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>dec_tab[<span class="st">"cum_gains"</span>]<span class="op">=</span> dec_tab[<span class="st">'nr_clicks'</span>].cumsum()<span class="op">/</span>dec_tab[<span class="st">'nr_clicks'</span>].<span class="bu">sum</span>()</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>gains_tab <span class="op">=</span> dec_tab</span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>gains_tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="66">
 <div>
 
 
@@ -1689,7 +1689,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 </div>
-<div id="f9157aff" class="cell" data-execution_count="25">
+<div id="44cfa4fd" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>plt.plot(dec_tab[<span class="st">'cum_prop'</span>], dec_tab[<span class="st">'cum_gains'</span>], label<span class="op">=</span><span class="st">'Cumulative Gains'</span>, drawstyle<span class="op">=</span><span class="st">'steps-post'</span>)</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], <span class="st">'k--'</span>, label<span class="op">=</span><span class="st">'No Model'</span>)  </span>
@@ -1714,18 +1714,18 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </section>
 <section id="confusion-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="confusion-matrix">Confusion Matrix</h3>
-<div id="7a0dc27d" class="cell" data-execution_count="26">
+<div id="0fc957a0" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>cpm <span class="op">=</span> <span class="dv">10</span> <span class="co"># cost per 1000 video impression</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>conversion_rate<span class="op">=</span> <span class="fl">0.05</span>   <span class="co"># conversion to sign up with TZ after clicking on an ad</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>clv<span class="op">=</span> <span class="dv">25</span> <span class="co"># expected clv of customers that sign up with TZ after clicking on an ad</span></span>
 <span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>threshold<span class="op">=</span> (cpm<span class="op">/</span>(conversion_rate <span class="op">*</span> clv <span class="op">*</span><span class="dv">1000</span>))</span>
 <span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>threshold</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
+<div class="cell-output cell-output-display" data-execution_count="68">
 <pre><code>0.008</code></pre>
 </div>
 </div>
-<div id="0d2118de" class="cell" data-execution_count="27">
+<div id="2912ff0f" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>tz_test <span class="op">=</span> tz_gaming[tz_gaming[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>].copy()</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>tz_test[<span class="st">"click_yes"</span>]<span class="op">=</span> tz_test[<span class="st">"click"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="dv">1</span> <span class="cf">if</span> x <span class="op">==</span> <span class="st">"yes"</span> <span class="cf">else</span> <span class="dv">0</span> <span class="cf">if</span> x <span class="op">==</span> <span class="st">"no"</span> <span class="cf">else</span> np.nan)</span>
@@ -1734,7 +1734,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>tz_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+<div class="cell-output cell-output-display" data-execution_count="69">
 <div>
 
 
@@ -2037,7 +2037,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 </div>
-<div id="c715dd55" class="cell" data-execution_count="28">
+<div id="310d2b99" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>TP <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_logit"</span>]<span class="op">&gt;</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">1</span>)).<span class="bu">sum</span>()</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>FP <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_logit"</span>]<span class="op">&gt;</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">0</span>)).<span class="bu">sum</span>()</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>TN <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_logit"</span>]<span class="op">&lt;=</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">0</span>)).<span class="bu">sum</span>()</span>
@@ -2050,7 +2050,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>cm_logit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="28">
+<div class="cell-output cell-output-display" data-execution_count="70">
 <div>
 
 
@@ -2091,17 +2091,17 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 <section id="accuracy" class="level4">
 <h4 class="anchored" data-anchor-id="accuracy">Accuracy</h4>
-<div id="083caf25" class="cell" data-execution_count="29">
+<div id="976235f6" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>accuracy_logit <span class="op">=</span> (TP <span class="op">+</span> TN) <span class="op">/</span> (TP <span class="op">+</span> TN <span class="op">+</span> FP <span class="op">+</span> FN)<span class="co"># float</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>accuracy_logit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="29">
+<div class="cell-output cell-output-display" data-execution_count="71">
 <pre><code>np.float64(0.6168210925482059)</code></pre>
 </div>
 </div>
 </section>
 <section id="confusion-matrix-based-on-pred_rnd" class="level4">
 <h4 class="anchored" data-anchor-id="confusion-matrix-based-on-pred_rnd">Confusion Matrix Based on Pred_RND</h4>
-<div id="7d44c623" class="cell" data-execution_count="30">
+<div id="7c5da346" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>TP <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_rnd"</span>]<span class="op">&gt;</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">1</span>)).<span class="bu">sum</span>()</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>FP <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_rnd"</span>]<span class="op">&gt;</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">0</span>)).<span class="bu">sum</span>()</span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>TN <span class="op">=</span> ((tz_test[<span class="st">"training"</span>] <span class="op">==</span> <span class="st">"test"</span>) <span class="op">&amp;</span> (tz_test[<span class="st">"pred_rnd"</span>]<span class="op">&lt;=</span> threshold) <span class="op">&amp;</span> (tz_test[<span class="st">"click_yes"</span>] <span class="op">==</span> <span class="dv">0</span>)).<span class="bu">sum</span>()</span>
@@ -2115,7 +2115,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>cm_rnd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div class="cell-output cell-output-display" data-execution_count="72">
 <div>
 
 
@@ -2158,16 +2158,16 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </section>
 <section id="accuracy-based-on-pred_rnd-confusion-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="accuracy-based-on-pred_rnd-confusion-matrix">Accuracy Based on Pred_RND Confusion Matrix</h3>
-<div id="b4a7f07a" class="cell" data-execution_count="31">
+<div id="32a7aa30" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>accuracy_rnd <span class="op">=</span> (TP <span class="op">+</span> TN) <span class="op">/</span> (TP <span class="op">+</span> TN <span class="op">+</span> FP <span class="op">+</span> FN)<span class="co"># float</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>accuracy_rnd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="31">
+<div class="cell-output cell-output-display" data-execution_count="73">
 <pre><code>np.float64(0.012413694415626229)</code></pre>
 </div>
 </div>
 <section id="summary-and-interpretation" class="level4">
 <h4 class="anchored" data-anchor-id="summary-and-interpretation">Summary and Interpretation</h4>
-<div id="6d76b042" class="cell" data-execution_count="32">
+<div id="852f03d8" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>first_model <span class="op">=</span> {</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TP"</span>: <span class="dv">271</span>,</span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"FP"</span>: <span class="dv">27606</span>,</span>
@@ -2244,7 +2244,7 @@ Specificity       0.0027     1.0000
 <li>The total cost of the data from Vneta is $50K</li>
 <li>The total cost charged for the data science consulting services by Vneta is $150K</li>
 </ul>
-<div id="0eb80114" class="cell" data-execution_count="33">
+<div id="f05da789" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>cpm <span class="op">=</span> <span class="dv">10</span> <span class="co"># cost per 1000 video impression</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>conversion_rate<span class="op">=</span> <span class="fl">0.05</span>   <span class="co"># conversion to sign up with TZ after clicking on an ad</span></span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>clv<span class="op">=</span> <span class="dv">25</span> <span class="co"># expected clv of customers that sign up with TZ after clicking on an ad</span></span>
@@ -2261,17 +2261,17 @@ Specificity       0.0027     1.0000
 <span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>break_even_response_rate_spamming<span class="op">=</span> calculate_break_even_response_rate(cpm,conversion_rate, clv, total_impressions, additional_cost_spamming)</span>
 <span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a>break_even_response_rate_spamming</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="33">
+<div class="cell-output cell-output-display" data-execution_count="75">
 <pre><code>0.008</code></pre>
 </div>
 </div>
-<div id="cb63e226" class="cell" data-execution_count="34">
+<div id="0ed94c08" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>tz_gaming<span class="op">=</span> tz_test</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"target_logit"</span>] <span class="op">=</span> tz_gaming[<span class="st">"pred_logit"</span>] <span class="op">&gt;</span> break_even_response_rate_spamming</span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"target_rnd"</span>] <span class="op">=</span> tz_gaming[<span class="st">"pred_rnd"</span>]<span class="op">&gt;</span> break_even_response_rate_spamming</span>
 <span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"target_vneta"</span>]<span class="op">=</span> tz_gaming[<span class="st">"pred_vneta"</span>] <span class="op">&gt;</span>break_even_response_rate_spamming</span>
 <span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>tz_gaming</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="34">
+<div class="cell-output cell-output-display" data-execution_count="76">
 <div>
 
 
@@ -2577,7 +2577,7 @@ Specificity       0.0027     1.0000
 </section>
 <section id="spamming" class="level4">
 <h4 class="anchored" data-anchor-id="spamming">Spamming</h4>
-<div id="75f77be2" class="cell" data-execution_count="35">
+<div id="a9056b35" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks<span class="op">=</span> tz_gaming[(tz_gaming[<span class="st">"click_yes"</span>]<span class="op">==</span> <span class="dv">1</span>)].shape[<span class="dv">0</span>]</span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks</span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> (tz_gaming.shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">1000</span>)<span class="op">*</span>cpm</span>
@@ -2596,7 +2596,7 @@ Specificity       0.0027     1.0000
 </section>
 <section id="logit" class="level4">
 <h4 class="anchored" data-anchor-id="logit">LOGIT</h4>
-<div id="5fbee52f" class="cell" data-execution_count="36">
+<div id="f38bdb58" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks <span class="op">=</span> tz_gaming[(tz_gaming[<span class="st">"target_logit"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (tz_gaming[<span class="st">"click_yes"</span>]<span class="op">==</span> <span class="dv">1</span>)].shape[<span class="dv">0</span>]</span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks</span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> (tz_gaming[(tz_gaming[<span class="st">"target_logit"</span>]<span class="op">==</span> <span class="va">True</span>)].shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">1000</span>)<span class="op">*</span>cpm</span>
@@ -2615,7 +2615,7 @@ Specificity       0.0027     1.0000
 </section>
 <section id="rnd" class="level4">
 <h4 class="anchored" data-anchor-id="rnd">RND</h4>
-<div id="c3417b61" class="cell" data-execution_count="37">
+<div id="0e6d1c72" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks <span class="op">=</span> tz_gaming[(tz_gaming[<span class="st">"target_rnd"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (tz_gaming[<span class="st">"click_yes"</span>]<span class="op">==</span> <span class="dv">1</span>)].shape[<span class="dv">0</span>]</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks</span>
 <span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> (tz_gaming[(tz_gaming[<span class="st">"target_rnd"</span>]<span class="op">==</span> <span class="va">True</span>)].shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">1000</span>)<span class="op">*</span>cpm</span>
@@ -2634,7 +2634,7 @@ Specificity       0.0027     1.0000
 </section>
 <section id="vneta" class="level4">
 <h4 class="anchored" data-anchor-id="vneta">VNETA</h4>
-<div id="8394398a" class="cell" data-execution_count="38">
+<div id="1d3ba1b3" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks <span class="op">=</span> tz_gaming[(tz_gaming[<span class="st">"target_vneta"</span>] <span class="op">==</span> <span class="va">True</span>) <span class="op">&amp;</span> (tz_gaming[<span class="st">"click_yes"</span>]<span class="op">==</span> <span class="dv">1</span>)].shape[<span class="dv">0</span>]</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>total_succesful_clicks</span>
 <span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> (tz_gaming[(tz_gaming[<span class="st">"target_vneta"</span>]<span class="op">==</span> <span class="va">True</span>)].shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">1000</span>)<span class="op">*</span>cpm</span>
@@ -2653,7 +2653,7 @@ Specificity       0.0027     1.0000
 </section>
 <section id="summary" class="level4">
 <h4 class="anchored" data-anchor-id="summary">Summary</h4>
-<div id="52a6b215" class="cell" data-execution_count="39">
+<div id="458e02f3" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"pred_spam"</span>] <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>tz_gaming[<span class="st">"target_spam"</span>] <span class="op">=</span> <span class="va">True</span></span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2670,7 +2670,7 @@ Specificity       0.0027     1.0000
 <span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a>mod_perf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="39">
+<div class="cell-output cell-output-display" data-execution_count="81">
 <div>
 
 
@@ -2722,7 +2722,7 @@ Specificity       0.0027     1.0000
 </section>
 <section id="profit-comparison" class="level3">
 <h3 class="anchored" data-anchor-id="profit-comparison">Profit Comparison</h3>
-<div id="07ce52cb" class="cell" data-execution_count="40">
+<div id="ad3f0736" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>total_impressions_purchased <span class="op">=</span> <span class="dv">20_000_000</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>test_sample<span class="op">=</span> tz_gaming.shape[<span class="dv">0</span>]</span>
 <span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>test_sample</span>
@@ -2732,14 +2732,14 @@ Specificity       0.0027     1.0000
 <span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>spam<span class="op">=</span> (profit_spam<span class="op">/</span>test_sample) <span class="op">*</span> total_impressions_purchased</span>
 <span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>logit, rnd, vneta, spam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="40">
+<div class="cell-output cell-output-display" data-execution_count="82">
 <pre><code>(119793.93982756771, 42914.89285586521, 108245.98433084105, 42371.12295639111)</code></pre>
 </div>
 </div>
 </section>
 <section id="rome-comparison" class="level3">
 <h3 class="anchored" data-anchor-id="rome-comparison">ROME Comparison</h3>
-<div id="1a2a7362" class="cell" data-execution_count="41">
+<div id="ef237c4b" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> (tz_gaming[(tz_gaming[<span class="st">"target_logit"</span>]<span class="op">==</span> <span class="va">True</span>)].shape[<span class="dv">0</span>]<span class="op">/</span><span class="dv">1000</span>)<span class="op">*</span>cpm</span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>rome_logit <span class="op">=</span> logit<span class="op">/</span>total_costs</span>
 <span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2753,13 +2753,13 @@ Specificity       0.0027     1.0000
 <span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a>rome_spam <span class="op">=</span> spam<span class="op">/</span>total_costs </span>
 <span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a>rome_logit, rome_rnd, rome_vneta, rome_logit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="41">
+<div class="cell-output cell-output-display" data-execution_count="83">
 <pre><code>(1100.8448798710506, 429.7232120657449, 2222.2538355746465, 1100.8448798710506)</code></pre>
 </div>
 </div>
 <section id="profit-and-rome-summary" class="level4">
 <h4 class="anchored" data-anchor-id="profit-and-rome-summary">Profit and ROME Summary</h4>
-<div id="8f83aad1" class="cell" data-execution_count="42">
+<div id="0deb9689" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>mod_perf_20M <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>    {</span>
 <span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model"</span>: [</span>
@@ -2773,7 +2773,7 @@ Specificity       0.0027     1.0000
 <span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a>mod_perf_20M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="42">
+<div class="cell-output cell-output-display" data-execution_count="84">
 <div>
 
 
