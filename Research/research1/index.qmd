@@ -1,0 +1,16 @@
+---
+title: "The Social Catalyst Effect of Dog Walking:
+A Causal Analysis of Verbal and Non-Verbal Interactions Across Personality Types
+"
+description: " Behavioral Experimental Research"
+---
+
+
+
+```{=html}
+<object data="/Research/other_documents/Nonog_MGTA458_Final_Paper.pdf" type="application/pdf" width="100%" height="100%" style="min-height:100vh;">
+    <p>It appears you don't have a PDF plugin for this browser.
+    No biggie... you can <a href="/Research/other_documents/Nonog_MGTA458_Final_Paper.pdf">click here to
+    download the PDF file.</a></p>
+</object>
+```

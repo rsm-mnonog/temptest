@@ -11,7 +11,7 @@
     "href": "certificates.html",
     "title": "Mario’s Certificates",
     "section": "",
-    "text": "It appears you don't have a PDF plugin for this browser.\n    No biggie... you can click here to\n    download the PDF file.\n\n\n\n    It appears you don't have a PDF plugin for this browser.\n    No biggie... you can click here to\n    download the PDF file."
+    "text": "It appears you don't have a PDF plugin for this browser.\n    No biggie... you can click here to\n    download the PDF file.\n\n\n\n    It appears you don't have a PDF plugin for this browser.\n    No biggie... you can click here to\n    download the PDF file.\n\n\n\n    It appears you don't have a PDF plugin for this browser.\n    No biggie... you can click here to\n    download the PDF file.\n\n\n    It appears you don't have a PDF plugin for this browser.\n    No biggie... you can click here to\n    download the PDF file."
   },
   {
     "objectID": "project.html",
@@ -163,9 +163,9 @@
   {
     "objectID": "presentations.html",
     "href": "presentations.html",
-    "title": "Mario’s Presentations",
+    "title": "My Presentations",
     "section": "",
-    "text": "It appears you don't have a PDF plugin for this browser.\n    No biggie... you can click here to\n    download the PDF file."
+    "text": "The McEliece Cryptosystem and Error-Correcting Codes\n\n\nUndergrad CAPSTONE\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects/hw3/index.html",
@@ -271,5 +271,33 @@
     "title": "TZ Gaming: Optimal Targeting of Mobile Ads",
     "section": "Conclusion",
     "text": "Conclusion\nThe Logit model leads in profit generation with $119,793.94, making it the top choice for revenue maximization, though its ROME stands at 1100.84, which, while strong, is not the highest. The Rnd model lags behind with a profit of $42,914.89 and a ROME of 429.73, reflecting lower efficiency and profitability. Similarly, the Spam model records $42,371.12 in profit, closely matching the Rnd model, but has the lowest ROME at 151.579877, making it the least effective approach. The Vneta model, on the other hand, secures a high profit of $108,245.98 and boasts the highest ROME at 2222.253, demonstrating superior marketing efficiency. This makes Vneta the optimal choice for balancing profit and marketing spend efficiency. Given its outstanding ROME, the Vneta model is the primary recommendation for maximizing investment returns. However, the Logit model remains a solid alternative for cases where absolute profit takes precedence over efficiency. The new data aligns with previous recommendations, reaffirming Vneta’s leadership in efficiency despite slightly lower profits than the Logit model. The results confirm that predictive models significantly outperform non-targeted approaches like the Rnd and Spam models. Ultimately, the Vneta model is best for those prioritizing a balance of high profit and peak efficiency, while the Logit model is the go-to option for pure profit maximization."
+  },
+  {
+    "objectID": "Research/research1/research1.html",
+    "href": "Research/research1/research1.html",
+    "title": "The Social Catalyst Effect of Dog Walking: A Causal Analysis of Verbal and Non-Verbal Interactions Across Personality Types",
+    "section": "",
+    "text": "It appears you don't have a PDF plugin for this browser.\n    No biggie... you can click here to\n    download the PDF file."
+  },
+  {
+    "objectID": "Research.html",
+    "href": "Research.html",
+    "title": "My Research",
+    "section": "",
+    "text": "The Social Catalyst Effect of Dog Walking: A Causal Analysis of Verbal and Non-Verbal Interactions Across Personality Types\n\n\nBehavioral Experimental Research\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "Research/research1/index.html",
+    "href": "Research/research1/index.html",
+    "title": "The Social Catalyst Effect of Dog Walking: A Causal Analysis of Verbal and Non-Verbal Interactions Across Personality Types",
+    "section": "",
+    "text": "It appears you don't have a PDF plugin for this browser.\n    No biggie... you can click here to\n    download the PDF file."
+  },
+  {
+    "objectID": "presentations/index.html",
+    "href": "presentations/index.html",
+    "title": "The McEliece Cryptosystem and Error-Correcting Codes",
+    "section": "",
+    "text": "It appears you don't have a PDF plugin for this browser.\n    No biggie... you can click here to\n    download the PDF file."
   }
 ]

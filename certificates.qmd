@@ -15,4 +15,15 @@ title: "Mario's Certificates"
     download the PDF file.</a></p>
 </object>
 
+<object data="other_documents/Power BI- Harnessing the Power of Data with Microsoft.pdf" type="application/pdf" width="100%" height="30%" style="min-height:100vh;">
+    <p>It appears you don't have a PDF plugin for this browser.
+    No biggie... you can <a href="other_documents/Power BI- Harnessing the Power of Data with Microsoft.pdf">click here to
+    download the PDF file.</a></p>
+</object>
+<object data="other_documents/Preparaing Data Analysis with Microsoft Excel.pdf" type="application/pdf" width="100%" height="30%" style="min-height:100vh;">
+    <p>It appears you don't have a PDF plugin for this browser.
+    No biggie... you can <a href="other_documents/Preparaing Data Analysis with Microsoft Excel.pdf">click here to
+    download the PDF file.</a></p>
+</object>
+
 ```

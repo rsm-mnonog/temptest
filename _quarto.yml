@@ -16,6 +16,8 @@ website:
         text: Certificates
       - href: presentations.qmd
         text: Presentations
+      - href: Research.qmd
+        text: Research
 
 format:
   html:

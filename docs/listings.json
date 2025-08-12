@@ -8,5 +8,17 @@
       "/projects/hw2/hw2_questions.html",
       "/projects/hw1/index1.html"
     ]
+  },
+  {
+    "listing": "/Research.html",
+    "items": [
+      "/Research/research1/index.html"
+    ]
+  },
+  {
+    "listing": "/presentations.html",
+    "items": [
+      "/presentations/index.html"
+    ]
   }
 ]

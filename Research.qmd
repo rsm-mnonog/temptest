@@ -1,7 +1,7 @@
 ---
-title: "My Presentations"
+title: "My Research"
 listing:
-    contents: presentations
+    contents: Research
     type: grid
     categories:  false
 ---
