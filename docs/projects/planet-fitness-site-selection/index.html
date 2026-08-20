@@ -359,6 +359,15 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
+<div class="pf-gate" id="pf-gate">
+  <h4 class="anchored">🔒 Want the exact addresses and the full deck?</h4>
+  <p>Enter your email to unlock the specific recommended site addresses below, and to download the full presentation (PDF &amp; PPTX).</p>
+  <form class="pf-gate-form" id="pf-gate-form">
+    <input type="email" id="pf-gate-email" placeholder="you@company.com" required="" aria-label="Email address">
+    <button type="submit">Unlock</button>
+  </form>
+  <div class="pf-gate-status" id="pf-gate-status"></div>
+</div>
 </section>
 <section id="the-maps" class="level2">
 <h2 class="anchored" data-anchor-id="the-maps">The maps</h2>
@@ -381,7 +390,7 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <p><strong>Why La Mesa?</strong> La Mesa emerged as the strongest jurisdiction based on three converging factors: median household incomes of $55,000–$75,000 directly aligned with Planet Fitness’s target market (demographic fit score 7.98); a working-age population making up 38–49% of residents; and, despite its central location, limited existing Planet Fitness presence within a 2-mile radius. The trade-off: only 8 candidate parcels meet all criteria, limiting site flexibility.</p>
-<p><strong>Top candidate sites:</strong> 7928 El Cajon Blvd (score 9.1, 4.19 acres, $67,500 income) · 7900 La Mesa Blvd (score 9.1, 3.53 acres, $67,500 income)</p>
+<p><strong>Top candidate sites:</strong> <span class="pf-locked-address">7928 El Cajon Blvd</span> (score 9.1, 4.19 acres, $67,500 income) · <span class="pf-locked-address">7900 La Mesa Blvd</span> (score 9.1, 3.53 acres, $67,500 income)</p>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="quarto-figure quarto-figure-center">
@@ -391,7 +400,7 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <p><strong>Why Oceanside?</strong> Oceanside ranked #2, distinguished by an exceptional site inventory: median household incomes aligned strongly with the $50,000–$75,000 target (demographic fit score 6.16), healthy working-age population concentration along the coastal and inland corridors, and 93 qualifying parcels — the largest pool of any top-3 city, allowing flexibility for optimal corner selection based on visibility, anchor co-tenancy, and traffic patterns.</p>
-<p><strong>Top candidate sites:</strong> 2005 Mission Ave (score 9.1, 9.52 acres, $71,371 income) · 1006 Mission Ave (score 9.1, 9.52 acres, $72,750 income) · 3308 Mission Ave (score 9.1, 2.53 acres, $51,607 income)</p>
+<p><strong>Top candidate sites:</strong> <span class="pf-locked-address">2005 Mission Ave</span> (score 9.1, 9.52 acres, $71,371 income) · <span class="pf-locked-address">1006 Mission Ave</span> (score 9.1, 9.52 acres, $72,750 income) · <span class="pf-locked-address">3308 Mission Ave</span> (score 9.1, 2.53 acres, $51,607 income)</p>
 </div>
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
 <div class="quarto-figure quarto-figure-center">
@@ -401,7 +410,7 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <p><strong>Why Escondido?</strong> Escondido ranked #3, offering a strong balance of demographic fit and inventory: incomes falling solidly within the $50,000–$75,000 target range with strong representation among working-class families (score 5.94), a working-age population concentrated along the I-15 corridor and downtown — high-traffic zones ideal for gym placement — and 55 qualifying parcels serving as a natural hub for North County Inland membership.</p>
-<p><strong>Top candidate sites:</strong> 2040 Valley Pkwy (score 9.1, 1.92 acres, $56,230 income) · 2315 Valley Pkwy (score 9.1, 2.54 acres, $56,230 income) · 2427 Valley Pkwy (score 9.1, 2.22 acres, $73,693 income)</p>
+<p><strong>Top candidate sites:</strong> <span class="pf-locked-address">2040 Valley Pkwy</span> (score 9.1, 1.92 acres, $56,230 income) · <span class="pf-locked-address">2315 Valley Pkwy</span> (score 9.1, 2.54 acres, $56,230 income) · <span class="pf-locked-address">2427 Valley Pkwy</span> (score 9.1, 2.22 acres, $73,693 income)</p>
 </div>
 </div>
 </div>
@@ -445,12 +454,79 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>04 VARIABLE COMPETITOR BUFFERS</strong> Tighter buffers (1.5 mi) in dense urban zones, wider buffers (4–5 mi) in North County to reflect real trade-area geometry.</p>
 </div>
 </div>
+<div id="pf-gated-downloads" class="pf-gated-downloads pf-locked">
 <div class="pf-downloads">
-<p><a href="other_docs/PlanetFitness_SiteSelection_Presentation.pdf" class="pf-download-btn" target="_blank">Download the full presentation (PDF)</a> <a href="other_docs/PlanetFitness_SiteSelection_Presentation.pptx" class="pf-download-btn pf-download-btn-outline">Download the original slides (.pptx)</a></p>
+<p><a href="other_docs/PlanetFitness_SiteSelection_Presentation.pdf" class="pf-download-btn" target="_blank" onclick="return window.pfGateUnlocked;">Download the full presentation (PDF)</a> <a href="other_docs/PlanetFitness_SiteSelection_Presentation.pptx" class="pf-download-btn pf-download-btn-outline" onclick="return window.pfGateUnlocked;">Download the original slides (.pptx)</a></p>
+</div>
+<p class="pf-gated-lock-msg" id="pf-gated-lock-msg">
+🔒 Enter your email above to unlock downloads.
+</p>
 </div>
 <p class="pf-footnote">
 Data sources: SanGIS Parcels (2024) · ACS 5-Year Estimates (2018–2022) · manually compiled competitor locations. Prepared by Mario Nonog, GIS Project, May 2026.
 </p>
+<script>
+(function () {
+  window.pfGateUnlocked = false;
+  var GATE_KEY = 'pf_gate_unlocked_planet_fitness';
+  var form = document.getElementById('pf-gate-form');
+  var statusEl = document.getElementById('pf-gate-status');
+  var gateBox = document.getElementById('pf-gate');
+  var downloadsWrap = document.getElementById('pf-gated-downloads');
+  var lockMsg = document.getElementById('pf-gated-lock-msg');
+
+  function unlock() {
+    window.pfGateUnlocked = true;
+    document.querySelectorAll('.pf-locked-address').forEach(function (el) {
+      el.classList.add('pf-unlocked');
+    });
+    if (downloadsWrap) downloadsWrap.classList.remove('pf-locked');
+    if (lockMsg) lockMsg.style.display = 'none';
+    if (gateBox) {
+      var h = gateBox.querySelector('h4');
+      var p = gateBox.querySelector('p');
+      if (h) h.textContent = '✅ Unlocked — thanks!';
+      if (p) p.textContent = 'The exact addresses are visible below and downloads are enabled.';
+      if (form) form.style.display = 'none';
+    }
+  }
+
+  if (localStorage.getItem(GATE_KEY) === 'true') {
+    unlock();
+  }
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var emailInput = document.getElementById('pf-gate-email');
+      var email = emailInput.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        statusEl.textContent = 'Please enter a valid email address.';
+        statusEl.className = 'pf-gate-status pf-error';
+        return;
+      }
+      statusEl.textContent = 'Unlocking…';
+      statusEl.className = 'pf-gate-status';
+      fetch('https://formsubmit.co/ajax/mariononog@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          _subject: 'Planet Fitness project page — download/address unlock',
+          page: window.location.href
+        })
+      }).then(function () {
+        localStorage.setItem(GATE_KEY, 'true');
+        unlock();
+      }).catch(function () {
+        // Don't block the visitor even if the notification email fails to send.
+        localStorage.setItem(GATE_KEY, 'true');
+        unlock();
+      });
+    });
+  }
+})();
+</script>
 
 
 </section>

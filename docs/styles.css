@@ -378,6 +378,86 @@ object[type="application/pdf"] {
   background: var(--mn-navy-light);
 }
 
+/* ---------- email gate (Planet Fitness project) ---------- */
+.pf-gate {
+  background: var(--mn-navy-light);
+  border: 1px solid #dde3f7;
+  border-radius: var(--mn-radius);
+  padding: 1.4rem 1.6rem;
+  margin: 1.6rem 0 2rem;
+}
+.pf-gate h4 {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  color: var(--mn-navy);
+}
+.pf-gate p {
+  color: var(--mn-muted);
+  margin-bottom: 1rem;
+}
+.pf-gate-form {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.pf-gate-form input[type="email"] {
+  flex: 1 1 240px;
+  padding: 0.65rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--mn-border);
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--mn-ink);
+}
+.pf-gate-form input[type="email"]:focus {
+  outline: 2px solid var(--mn-navy);
+  outline-offset: 1px;
+}
+.pf-gate-form button {
+  background: var(--mn-navy);
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.65rem 1.6rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.pf-gate-form button:hover {
+  background: var(--mn-navy-dark);
+  transform: translateY(-1px);
+}
+.pf-gate-status {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  min-height: 1.1em;
+}
+.pf-gate-status.pf-error { color: #b3261e; }
+.pf-gate-status.pf-success { color: #1a7a3d; }
+
+.pf-locked-address {
+  filter: blur(5px);
+  user-select: none;
+  transition: filter 0.3s ease;
+  display: inline-block;
+}
+.pf-locked-address.pf-unlocked {
+  filter: none;
+  user-select: text;
+}
+
+.pf-gated-downloads.pf-locked .pf-download-btn {
+  filter: blur(3px);
+  pointer-events: none;
+  user-select: none;
+}
+.pf-gated-lock-msg {
+  font-size: 0.85rem;
+  color: var(--mn-muted);
+  margin-top: 0.6rem;
+}
+
 @media (max-width: 700px) {
   .pf-hero { padding: 1.6rem 1.3rem; }
   .pf-hero h3 { font-size: 1.35rem; }
