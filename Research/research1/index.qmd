@@ -3,6 +3,11 @@ title: "The Social Catalyst Effect of Dog Walking:
 A Causal Analysis of Verbal and Non-Verbal Interactions Across Personality Types
 "
 description: " Behavioral Experimental Research"
+author: "Mario Nonog"
+date: today
+callout-appearance: minimal # this hides the blue "i" icon on .callout-notes
+theme: cosmo
+image: "../other_documents/HW_PHOTO.jpg"
 ---
 
 

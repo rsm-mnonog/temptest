@@ -4,4 +4,5 @@ listing:
     contents: Research
     type: grid
     categories:  false
+image: "Mario/images/HW_PHOTO.jpg"
 ---
