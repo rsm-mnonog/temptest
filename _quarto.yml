@@ -18,6 +18,11 @@ website:
         text: Presentations
       - href: Research.qmd
         text: Research
+    right:
+      - icon: github
+        href: https://github.com/rsm-mnonog
+        text: "GitHub"
+        target: _blank
   page-footer:
     center: "© 2026 Mario Nonog · built with Quarto"
     border: false

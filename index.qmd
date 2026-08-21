@@ -8,6 +8,8 @@ about:
           href: mailto:mariononog@gmail.com
         - icon: linkedin  ##getbootstrap.com
           href: https://www.linkedin.com/in/mnonog/
+        - icon: github
+          href: https://github.com/rsm-mnonog
 
 ---
 
