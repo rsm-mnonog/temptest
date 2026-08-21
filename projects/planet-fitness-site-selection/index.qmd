@@ -190,7 +190,15 @@ Mean final score across all candidate parcels, by jurisdiction.
 
 ### #1 La Mesa
 
-![La Mesa recommended sites overlaid on the demographic heat map.](other_docs/2_La_Mesa.jpg)
+```{=html}
+<div class="pf-map-wrap">
+<figure class="figure">
+<p><img src="other_docs/2_La_Mesa.jpg" class="img-fluid figure-img pf-locked-map" alt="La Mesa recommended sites overlaid on the demographic heat map."></p>
+<figcaption>La Mesa recommended sites overlaid on the demographic heat map.</figcaption>
+</figure>
+<div class="pf-map-lock-badge">🔒 Site list on this map is hidden — unlock below to reveal</div>
+</div>
+```
 
 **Why La Mesa?** La Mesa emerged as the strongest jurisdiction based on three converging factors: median household incomes of $55,000–$75,000 directly aligned with Planet Fitness's target market (demographic fit score 7.98); a working-age population making up 38–49% of residents; and, despite its central location, limited existing Planet Fitness presence within a 2-mile radius. The trade-off: only 8 candidate parcels meet all criteria, limiting site flexibility.
 
@@ -198,7 +206,15 @@ Mean final score across all candidate parcels, by jurisdiction.
 
 ### #2 Oceanside
 
-![Oceanside recommended sites overlaid on the demographic heat map.](other_docs/3_Oceanside.jpg)
+```{=html}
+<div class="pf-map-wrap">
+<figure class="figure">
+<p><img src="other_docs/3_Oceanside.jpg" class="img-fluid figure-img pf-locked-map" alt="Oceanside recommended sites overlaid on the demographic heat map."></p>
+<figcaption>Oceanside recommended sites overlaid on the demographic heat map.</figcaption>
+</figure>
+<div class="pf-map-lock-badge">🔒 Site list on this map is hidden — unlock below to reveal</div>
+</div>
+```
 
 **Why Oceanside?** Oceanside ranked #2, distinguished by an exceptional site inventory: median household incomes aligned strongly with the $50,000–$75,000 target (demographic fit score 6.16), healthy working-age population concentration along the coastal and inland corridors, and 93 qualifying parcels — the largest pool of any top-3 city, allowing flexibility for optimal corner selection based on visibility, anchor co-tenancy, and traffic patterns.
 
@@ -206,7 +222,15 @@ Mean final score across all candidate parcels, by jurisdiction.
 
 ### #3 Escondido
 
-![Escondido recommended sites overlaid on the demographic heat map.](other_docs/4_Escondido.jpg)
+```{=html}
+<div class="pf-map-wrap">
+<figure class="figure">
+<p><img src="other_docs/4_Escondido.jpg" class="img-fluid figure-img pf-locked-map" alt="Escondido recommended sites overlaid on the demographic heat map."></p>
+<figcaption>Escondido recommended sites overlaid on the demographic heat map.</figcaption>
+</figure>
+<div class="pf-map-lock-badge">🔒 Site list on this map is hidden — unlock below to reveal</div>
+</div>
+```
 
 **Why Escondido?** Escondido ranked #3, offering a strong balance of demographic fit and inventory: incomes falling solidly within the $50,000–$75,000 target range with strong representation among working-class families (score 5.94), a working-age population concentrated along the I-15 corridor and downtown — high-traffic zones ideal for gym placement — and 55 qualifying parcels serving as a natural hub for North County Inland membership.
 
@@ -278,6 +302,12 @@ Tighter buffers (1.5 mi) in dense urban zones, wider buffers (4–5 mi) in North
   function unlock() {
     window.pfGateUnlocked = true;
     document.querySelectorAll('.pf-locked-address').forEach(function (el) {
+      el.classList.add('pf-unlocked');
+    });
+    document.querySelectorAll('.pf-locked-map').forEach(function (el) {
+      el.classList.add('pf-unlocked');
+    });
+    document.querySelectorAll('.pf-map-wrap').forEach(function (el) {
       el.classList.add('pf-unlocked');
     });
     if (downloadsWrap) downloadsWrap.classList.remove('pf-locked');

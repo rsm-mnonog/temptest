@@ -349,6 +349,143 @@ object[type="application/pdf"] {
   padding-top: 1rem;
 }
 
+/* ---------- comparison bar charts (Netflix project) ---------- */
+.nx-chart {
+  background: var(--mn-card-bg);
+  border: 1px solid var(--mn-border);
+  border-radius: var(--mn-radius);
+  padding: 1.5rem 1.7rem 1.4rem;
+  box-shadow: var(--mn-shadow);
+  margin: 1.4rem 0;
+}
+.nx-chart-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+}
+.nx-chart-head h4 {
+  margin: 0;
+  font-size: 1.02rem;
+}
+.nx-legend {
+  display: flex;
+  gap: 1.1rem;
+  font-size: 0.8rem;
+  color: var(--mn-muted);
+  font-weight: 500;
+}
+.nx-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.nx-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex: 0 0 auto;
+}
+.nx-swatch-a { background: var(--mn-navy); }
+.nx-swatch-b { background: var(--mn-accent); }
+
+.nx-chart-group { margin-bottom: 1rem; }
+.nx-chart-group:last-child { margin-bottom: 0; }
+.nx-chart-group-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mn-muted);
+  margin-bottom: 0.4rem;
+}
+.nx-bar-row {
+  background: var(--mn-bg);
+  border-radius: 6px;
+  margin-bottom: 4px;
+  height: 27px;
+}
+.nx-bar-row:last-child { margin-bottom: 0; }
+.nx-bar {
+  height: 100%;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.55rem;
+  min-width: 2.8rem;
+  transition: width 0.4s ease;
+}
+.nx-bar span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+}
+.nx-bar-a { background: var(--mn-navy); }
+.nx-bar-b { background: var(--mn-accent); }
+
+.nx-stack-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.8rem;
+}
+.nx-stack-row:last-child { margin-bottom: 0; }
+.nx-stack-label {
+  flex: 0 0 68px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--mn-muted);
+}
+.nx-stack-bar {
+  flex: 1;
+  display: flex;
+  gap: 2px;
+  height: 36px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--mn-bg);
+}
+.nx-stack-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+}
+.nx-stack-equity { background: var(--mn-navy); }
+.nx-stack-debt { background: var(--mn-accent); }
+
+.nx-recommend {
+  background: linear-gradient(135deg, #1a7a3d 0%, #14602f 100%);
+  color: #ffffff;
+  border-radius: var(--mn-radius);
+  padding: 1.6rem 1.8rem;
+  margin: 1.6rem 0;
+  box-shadow: var(--mn-shadow-hover);
+}
+.nx-recommend h4 {
+  color: #ffffff;
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+}
+.nx-recommend p {
+  margin: 0;
+  line-height: 1.6;
+  opacity: 0.95;
+  max-width: 74ch;
+}
+
+@media (max-width: 700px) {
+  .nx-stack-label { flex-basis: 56px; font-size: 0.72rem; }
+}
+
 /* rankings table */
 .content table {
   border-collapse: separate;
@@ -445,6 +582,38 @@ object[type="application/pdf"] {
 .pf-locked-address.pf-unlocked {
   filter: none;
   user-select: text;
+}
+
+.pf-map-wrap {
+  position: relative;
+}
+.pf-map-wrap .pf-locked-map {
+  filter: blur(11px);
+  transition: filter 0.3s ease;
+  user-select: none;
+}
+.pf-map-wrap .pf-locked-map.pf-unlocked {
+  filter: none;
+  user-select: auto;
+}
+.pf-map-lock-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(15, 23, 42, 0.85);
+  color: #ffffff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25);
+}
+.pf-map-wrap.pf-unlocked .pf-map-lock-badge {
+  display: none;
 }
 
 .pf-gated-downloads.pf-locked .pf-download-btn {

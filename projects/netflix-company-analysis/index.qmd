@@ -1,0 +1,272 @@
+---
+title: "Netflix, Inc. — A Company & Valuation Analysis"
+description: "Cost of capital, capital structure, and comparable-company ratio analysis of Netflix (NFLX) benchmarked against The Walt Disney Company (DIS)"
+author: "Mario Nonog"
+date: 2026-07-15
+callout-appearance: minimal
+image: "other_docs/nflx_cover.jpg"
+---
+
+::: {.pf-hero}
+COMPANY &amp; VALUATION ANALYSIS &nbsp;·&nbsp; FI.300 CORPORATE FINANCE, GOLDEN GATE UNIVERSITY
+
+### Is Netflix still worth buying at today's price?
+
+A full financial analysis of Netflix, Inc. (NASDAQ: NFLX) — three years of ratio trends, a calculated cost of capital, and a capital-structure shift — benchmarked against The Walt Disney Company (NYSE: DIS) as the closest direct comparable.
+
+::: {.pf-stat-row}
+::: {.pf-stat}
+**16.79%**
+weighted average cost of capital
+:::
+::: {.pf-stat}
+**41.26%**
+return on equity, FY2025
+:::
+::: {.pf-stat}
+**$45.2B**
+FY2025 revenue, +16% YoY
+:::
+::: {.pf-stat}
+**BUY**
+recommendation
+:::
+:::
+:::
+
+## The question
+
+Netflix trades at a premium multiple, carries a beta well above the market, and just walked away from an $82.7 billion acquisition. The question this analysis answers is simple to ask and hard to answer well: is the company generating returns that justify its cost of capital and its risk — or is the market pricing in growth that isn't really there?
+
+The approach: calculate Netflix's actual weighted average cost of capital from first principles (CAPM, a market-sourced cost of debt, market-value weights), compare it against three years of realized return on equity, and benchmark both against the streaming company most structurally comparable to Netflix — Disney.
+
+## Company snapshot
+
+::: {.pf-card-grid}
+::: {.pf-source-card}
+**FOUNDED 1997**
+
+#### DVD-by-mail to global streaming
+Founded by Reed Hastings and Marc Randolph; launched streaming in 2007 and original content in 2013 with *House of Cards*.
+:::
+::: {.pf-source-card}
+**SCALE**
+
+#### 325M+ paid subscribers
+FY2025, across plans priced roughly $1–$37/month in USD-equivalent terms worldwide.
+:::
+::: {.pf-source-card}
+**MARKET VALUE**
+
+#### ~$306.6B market cap
+$72.82/share × 4,210M shares outstanding (June 2026).
+:::
+:::
+
+Netflix's primary competitors are Amazon Prime Video, Disney+, Hulu, Apple TV+, and HBO Max, inside a global streaming market valued at roughly $145.9B in 2025.
+
+**Recent developments.** In December 2025 Netflix agreed to acquire Warner Bros.'s film/TV studios plus HBO and Max for approximately $82.7 billion — the deal was terminated before closing, and Netflix recognized a $2.8 billion termination fee in Q1 2026. That same quarter, revenue grew 16% YoY to $12.25 billion (beating estimates), but the stock fell roughly 10% in after-hours trading on guidance pointing to decelerating growth and the announced departure of co-founder Reed Hastings from the board.
+
+## Financial performance: operating leverage at scale
+
+::: {.pf-card-grid}
+::: {.pf-insight-card}
+#### Margins are expanding faster than revenue
+
+Revenue grew 16% YoY (**$39.0B → $45.2B**), but operating income grew **28%** (**$10.4B → $13.3B**) — operating margin expanded from 26.7% to 29.5%, a 280 basis-point gain in one year. Content amortization ($16.4B), the largest cost line, doesn't scale proportionally with incremental revenue, so profit compounds faster than the top line as the subscriber base grows.
+:::
+::: {.pf-insight-card}
+#### Free cash flow confirms the earnings are real
+
+FY2025 operating cash flow of **$10.15B** and free cash flow of **$9.46B** (net of $688M capex) against net income of $10.98B — an 86% FCF-to-net-income conversion. Content amortization ($16.4B) is nearly in balance with cash content spend ($17.1B), meaning Netflix isn't inflating earnings by under-amortizing its content library.
+:::
+:::
+
+Netflix used its $9.46B in free cash flow to repurchase **$9.13B** of its own stock in FY2025 — returning nearly all of it to shareholders — while still holding a $9.03B cash balance.
+
+## Ratio trends: Netflix vs. Disney
+
+Disney was selected as the primary comparable because it competes directly with Netflix in streaming (Disney+, Hulu, ESPN+) and produces original content at comparable scale. Alternatives were rejected: Amazon, Peacock, and Apple TV+ sit inside parent companies whose consolidated financials are dominated by unrelated businesses, and Warner Bros. Discovery's financials are distorted by merger-related impairments.
+
+::: {.nx-chart}
+::: {.nx-chart-head}
+#### Return on equity, FY2023–FY2025
+
+::: {.nx-legend}
+<span class="nx-legend-item"><i class="nx-swatch nx-swatch-a"></i>Netflix (NFLX)</span> <span class="nx-legend-item"><i class="nx-swatch nx-swatch-b"></i>Disney (DIS)</span>
+:::
+:::
+
+::: {.nx-chart-group}
+::: {.nx-chart-group-label}
+FY2023
+:::
+<div class="nx-bar-row"><div class="nx-bar nx-bar-a" style="width:58.4%"><span>26.3%</span></div></div>
+<div class="nx-bar-row"><div class="nx-bar nx-bar-b" style="width:8%"><span>2.4%</span></div></div>
+:::
+::: {.nx-chart-group}
+::: {.nx-chart-group-label}
+FY2024
+:::
+<div class="nx-bar-row"><div class="nx-bar nx-bar-a" style="width:78.2%"><span>35.2%</span></div></div>
+<div class="nx-bar-row"><div class="nx-bar nx-bar-b" style="width:11.1%"><span>5.0%</span></div></div>
+:::
+::: {.nx-chart-group}
+::: {.nx-chart-group-label}
+FY2025
+:::
+<div class="nx-bar-row"><div class="nx-bar nx-bar-a" style="width:91.8%"><span>41.3%</span></div></div>
+<div class="nx-bar-row"><div class="nx-bar nx-bar-b" style="width:25.1%"><span>11.3%</span></div></div>
+:::
+:::
+
+::: {.nx-chart}
+::: {.nx-chart-head}
+#### Debt-to-asset ratio, FY2023–FY2025
+
+::: {.nx-legend}
+<span class="nx-legend-item"><i class="nx-swatch nx-swatch-a"></i>Netflix (NFLX)</span> <span class="nx-legend-item"><i class="nx-swatch nx-swatch-b"></i>Disney (DIS)</span>
+:::
+:::
+
+::: {.nx-chart-group}
+::: {.nx-chart-group-label}
+FY2023
+:::
+<div class="nx-bar-row"><div class="nx-bar nx-bar-a" style="width:91.4%"><span>32.0%</span></div></div>
+<div class="nx-bar-row"><div class="nx-bar nx-bar-b" style="width:64.6%"><span>22.6%</span></div></div>
+:::
+::: {.nx-chart-group}
+::: {.nx-chart-group-label}
+FY2024
+:::
+<div class="nx-bar-row"><div class="nx-bar nx-bar-a" style="width:81.7%"><span>28.6%</span></div></div>
+<div class="nx-bar-row"><div class="nx-bar nx-bar-b" style="width:66.9%"><span>23.4%</span></div></div>
+:::
+::: {.nx-chart-group}
+::: {.nx-chart-group-label}
+FY2025
+:::
+<div class="nx-bar-row"><div class="nx-bar nx-bar-a" style="width:78.3%"><span>27.4%</span></div></div>
+<div class="nx-bar-row"><div class="nx-bar nx-bar-b" style="width:60.9%"><span>21.3%</span></div></div>
+:::
+:::
+
+This pairing is what makes the trend analytically meaningful: Netflix's ROE nearly doubled (26.3% → 41.3%) **while its leverage simultaneously declined** (32.0% → 27.4% debt-to-assets). A company can mechanically inflate ROE by piling on debt — Netflix did the opposite, growing its equity base from $20.6B to $26.6B through retained earnings while paying down debt. The improvement is operational, not financial engineering.
+
+## Cost of capital
+
+Beta was calculated by regressing 60 months of Netflix returns (Jul 2021–Jun 2026) against the SPDR S&P 500 ETF (SPY) as the market proxy, yielding a beta of **1.5025** — versus Disney's Yahoo Finance beta of **1.39**. Netflix amplifies market moves about 1.5×; that higher systematic risk pushes its CAPM-required return to 17.34%, a 97 basis-point premium over Disney's 16.37%.
+
+::: {.pf-formula}
+r&#8347; = 4.392% + 1.5025 × (13.008% − 4.392%) = **17.34%**
+:::
+
+Risk-free rate 4.392% (CBOE 10-Year Treasury Yield, ^TNX) and market return 13.008% (60-month annualized SPY average). Pre-tax cost of debt of **5.00%** was sourced from the yield to maturity on a Netflix senior note (maturing June 2030) via the FINRA Bond Center.
+
+| WACC component | Value |
+|:---|:---:|
+| Weight of debt (w&#7496;) | 4.21% |
+| Weight of equity (w&#7480;) | 95.79% |
+| Pre-tax cost of debt (r&#7496;) | 5.00% |
+| Effective tax rate (T) | 13.69% |
+| Cost of equity (r&#7480;) | 17.34% |
+| **WACC** | **≈16.79%** |
+
+::: {.nx-recommend}
+#### The spread that matters most
+
+Netflix's calculated WACC — the minimum return it must deliver to satisfy debt and equity holders — is **16.79%**. Its FY2025 return on equity was **41.26%**, up from 26.27% three years earlier. That's roughly a **24-percentage-point spread above the cost of capital**, and it isn't coming from leverage — debt-to-assets fell over the same period. That combination is the core evidence behind the Buy call below.
+:::
+
+## Capital structure: a five-year shift
+
+Netflix's balance sheet has transformed from debt-heavy to equity-dominant. Two forces drove it: free cash flow turned sustainably positive from 2022 onward (letting Netflix pay down gross debt from $15.8B to $13.5B), and net income nearly quadrupled ($2.76B → $10.98B), compounding $15.6B of retained earnings directly into equity with no dividends paid out to offset it.
+
+::: {.nx-chart}
+::: {.nx-chart-head}
+#### Long-term debt vs. common equity, % of total capital
+:::
+
+::: {.nx-stack-row}
+::: {.nx-stack-label}
+FY2020
+:::
+<div class="nx-stack-bar"><div class="nx-stack-seg nx-stack-equity" style="width:41.2%">Equity 41.2%</div><div class="nx-stack-seg nx-stack-debt" style="width:58.8%">Debt 58.8%</div></div>
+:::
+::: {.nx-stack-row}
+::: {.nx-stack-label}
+FY2025
+:::
+<div class="nx-stack-bar"><div class="nx-stack-seg nx-stack-equity" style="width:66.4%">Equity 66.4%</div><div class="nx-stack-seg nx-stack-debt" style="width:33.6%">Debt 33.6%</div></div>
+:::
+:::
+
+Netflix carries no preferred stock. FY2025 book capital: $13,464M long-term debt (33.6%) and $26,615M common equity (66.4%), on $40,079M total capital.
+
+## Dividend policy
+
+Netflix has never paid a cash dividend — the trailing-twelve-month payout remains $0.00/share. Instead, it returns capital through buybacks ($9.13B in FY2025 alone). Three reasons: Netflix ran negative free cash flow from roughly 2015–2021, making dividends structurally impossible during the content-investment years; management continues to prefer the flexibility of buybacks; and elevated future content or technology spend makes a fixed distribution premature. Disney, by contrast, suspended its dividend in 2020, reinstated it in FY2023 at $0.30/share semi-annually, and raised it to an annual $1.00/share by FY2025 — a mature income-stock posture Netflix has deliberately avoided.
+
+## Where the growth comes from
+
+::: {.pf-funnel}
+::: {.pf-funnel-step}
+**ADVERTISING TIER**
+250M+ monthly active viewers (May 2026); tracking to ~$3B revenue in 2026 (2× 2025), $9B long-term target by 2030. 60%+ of new signups in eligible markets now choose the ad tier.
+:::
+::: {.pf-funnel-step}
+**LIVE SPORTS**
+10-year exclusive global WWE Raw deal from Jan 2025; NFL agreement expanded through 2029 (+5 broadcast windows/season); 3-year MLB deal; exclusive FIFA Women's World Cup rights for 2027 and 2031.
+:::
+::: {.pf-funnel-step}
+**GAMING**
+A longer-horizon, higher-uncertainty bet. Management is pursuing a cloud-first strategy explicitly framed as a retention tool, not a standalone revenue line.
+:::
+:::
+
+## Key risks
+
+::: {.pf-insight-card}
+#### What could break this thesis
+
+- **Mature-market saturation.** U.S./Canada broadband penetration already exceeds 70%, and the 2023 password-sharing crackdown tailwind is largely exhausted.
+- **Constrained M&A.** The failed $82.7B Warner Bros. deal — and its $2.8B termination fee — signals that large-scale content acquisitions face real limits, leaving organic investment as the primary growth lever.
+- **Decelerating guidance.** Q1 2026 guidance pointed to growth slowing to roughly 13%, which contributed to a meaningful stock decline.
+- **EU content quota.** The European Commission has proposed a 20% local-content quota that would force substantially more European programming investment.
+- **Rising sports-rights costs.** Live sports commitments are large, fixed, and multi-year — a real margin risk if advertising or subscriber growth underperforms.
+:::
+
+## Full ratio summary
+
+| Ratio | FY2023 | FY2024 | FY2025 |
+|:---|:---:|:---:|:---:|
+| **Liquidity** | | | |
+| Current ratio | 1.15x | 1.22x | 1.19x |
+| Quick ratio | 1.15x | 1.22x | 1.19x |
+| **Asset management** | | | |
+| Total asset turnover | 0.69x | 0.73x | 0.81x |
+| Fixed asset turnover | 9.45x | 10.55x | 10.73x |
+| **Debt management** | | | |
+| Debt-to-asset ratio | 32.0% | 28.6% | 27.4% |
+| Times interest earned | 9.94x | 14.49x | 17.16x |
+| **Profitability** | | | |
+| Operating margin | 20.62% | 26.71% | 29.49% |
+| Profit margin | 16.04% | 22.34% | 24.30% |
+| Basic earning power | 14.27% | 19.43% | 23.97% |
+| Return on assets | 11.10% | 16.24% | 19.75% |
+| Return on equity | 26.27% | 35.21% | 41.26% |
+| **Market value** | | | |
+| EPS | N/A | N/A | $2.61 |
+| P/E ratio | N/A | N/A | 27.92x |
+| Market-to-book ratio | N/A | N/A | 11.52x |
+
+## Recommendation: Buy
+
+The clearest signal in this analysis is the spread between what Netflix earns and what it costs Netflix to raise capital. Against a WACC of 16.79%, Netflix posted a 41.26% ROE in FY2025 — up from 26.27% three years prior — and that gain is not a leverage trick, since debt-to-assets fell over the same window. The second reason is diversification: a 24.30% net-margin subscription business (up from 16.04%) is now layering a fast-scaling advertising business on top, on pace for $3B in 2026 revenue against a $9B target by 2030. The acknowledged risks — a beta of 1.5025, saturating mature markets, and real limits on large-scale M&A — don't outweigh a company generating outsized returns on equity, expanding margins, and delevering at the same time.
+
+::: {.pf-downloads}
+[Download the full report (PDF)](other_docs/Netflix_Company_Analysis_Final.pdf){.pf-download-btn target="_blank"} [Download the Excel valuation model (.xlsx)](other_docs/NFLX_Company_Analysis_Model.xlsx){.pf-download-btn .pf-download-btn-outline}
+:::
+
+<p class="pf-footnote">Data sources: Netflix FY2025 Form 10-K &amp; Q4 2025 Shareholder Letter, Yahoo Finance (Disney beta), FINRA Bond Center (Netflix cost of debt), CBOE 10-Year Treasury Yield. Prepared by Mario Nonog for FI.300 Corporate Finance, Golden Gate University, July 2026.</p>

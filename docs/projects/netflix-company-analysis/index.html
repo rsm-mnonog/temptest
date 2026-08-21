@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Mario Nonog">
-<meta name="dcterms.date" content="2026-05-15">
-<meta name="description" content="GIS demographic &amp; competitive overlay analysis identifying the optimal San Diego County jurisdictions for a new franchise location">
+<meta name="dcterms.date" content="2026-07-15">
+<meta name="description" content="Cost of capital, capital structure, and comparable-company ratio analysis of Netflix (NFLX) benchmarked against The Walt Disney Company (DIS)">
 
-<title>Planet Fitness Site Suitability Analysis – Mario Nonog</title>
+<title>Netflix, Inc.&nbsp;— A Company &amp; Valuation Analysis – Mario Nonog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,12 +132,12 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Planet Fitness Site Suitability Analysis</h1>
+<h1 class="title">Netflix, Inc.&nbsp;— A Company &amp; Valuation Analysis</h1>
 </div>
 
 <div>
   <div class="description">
-    GIS demographic &amp; competitive overlay analysis identifying the optimal San Diego County jurisdictions for a new franchise location
+    Cost of capital, capital structure, and comparable-company ratio analysis of Netflix (NFLX) benchmarked against The Walt Disney Company (DIS)
   </div>
 </div>
 
@@ -154,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 15, 2026</p>
+      <p class="date">July 15, 2026</p>
     </div>
   </div>
   
@@ -167,375 +167,435 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="pf-hero">
-<p>GIS SITE SELECTION &nbsp;·&nbsp; SAN DIEGO COUNTY</p>
-<section id="where-should-planet-fitness-open-its-next-franchise" class="level3">
-<h3 class="anchored" data-anchor-id="where-should-planet-fitness-open-its-next-franchise">Where should Planet Fitness open its next franchise?</h3>
-<p>A demographic and competitive overlay analysis scoring every eligible parcel in San Diego County to identify the three most viable jurisdictions for a new location.</p>
+<p>COMPANY &amp; VALUATION ANALYSIS &nbsp;·&nbsp; FI.300 CORPORATE FINANCE, GOLDEN GATE UNIVERSITY</p>
+<section id="is-netflix-still-worth-buying-at-todays-price" class="level3">
+<h3 class="anchored" data-anchor-id="is-netflix-still-worth-buying-at-todays-price">Is Netflix still worth buying at today’s price?</h3>
+<p>A full financial analysis of Netflix, Inc.&nbsp;(NASDAQ: NFLX) — three years of ratio trends, a calculated cost of capital, and a capital-structure shift — benchmarked against The Walt Disney Company (NYSE: DIS) as the closest direct comparable.</p>
 <div class="pf-stat-row">
 <div class="pf-stat">
-<p><strong>1,054,840</strong> parcels countywide</p>
+<p><strong>16.79%</strong> weighted average cost of capital</p>
 </div>
 <div class="pf-stat">
-<p><strong>797</strong> candidate parcels evaluated</p>
+<p><strong>41.26%</strong> return on equity, FY2025</p>
 </div>
 <div class="pf-stat">
-<p><strong>28</strong> top recommended sites</p>
+<p><strong>$45.2B</strong> FY2025 revenue, +16% YoY</p>
 </div>
 <div class="pf-stat">
-<p><strong>55 / 45</strong> income vs.&nbsp;demographic weighting</p>
+<p><strong>BUY</strong> recommendation</p>
 </div>
 </div>
 </section>
 </div>
 <section id="the-question" class="level2">
 <h2 class="anchored" data-anchor-id="the-question">The question</h2>
-<p>Planet Fitness’s franchise model depends on a precise customer fit: value-conscious members with household incomes between <strong>$50K and $75K</strong>, a working-age population (18–44) dense enough to fill memberships, and enough distance from existing gyms to avoid cannibalizing an existing location.</p>
-<p>This analysis converts that open-ended business question into a measurable, defensible GIS workflow built on three pillars — <strong>income fit, demographic fit, and competitive distance</strong> — and produces a tiered jurisdiction ranking backed by parcel-level evidence.</p>
+<p>Netflix trades at a premium multiple, carries a beta well above the market, and just walked away from an $82.7 billion acquisition. The question this analysis answers is simple to ask and hard to answer well: is the company generating returns that justify its cost of capital and its risk — or is the market pricing in growth that isn’t really there?</p>
+<p>The approach: calculate Netflix’s actual weighted average cost of capital from first principles (CAPM, a market-sourced cost of debt, market-value weights), compare it against three years of realized return on equity, and benchmark both against the streaming company most structurally comparable to Netflix — Disney.</p>
 </section>
-<section id="the-data" class="level2">
-<h2 class="anchored" data-anchor-id="the-data">The data</h2>
-<p>Three authoritative datasets, integrated by geographic location.</p>
+<section id="company-snapshot" class="level2">
+<h2 class="anchored" data-anchor-id="company-snapshot">Company snapshot</h2>
 <div class="pf-card-grid">
 <div class="pf-source-card">
-<p><strong>SOURCE 01</strong></p>
-<section id="sangis-parcels" class="level4">
-<h4 class="anchored" data-anchor-id="sangis-parcels">SanGIS Parcels</h4>
-<p><em>2024</em></p>
-<p>Every taxable parcel in San Diego County, with assessor-coded land use, zoning, acreage, and address. Updated weekly.</p>
-<p><strong>1.05M</strong> total parcels countywide</p>
+<p><strong>FOUNDED 1997</strong></p>
+<section id="dvd-by-mail-to-global-streaming" class="level4">
+<h4 class="anchored" data-anchor-id="dvd-by-mail-to-global-streaming">DVD-by-mail to global streaming</h4>
+<p>Founded by Reed Hastings and Marc Randolph; launched streaming in 2007 and original content in 2013 with <em>House of Cards</em>.</p>
 </section>
 </div>
 <div class="pf-source-card">
-<p><strong>SOURCE 02</strong></p>
-<section id="acs-demographics" class="level4">
-<h4 class="anchored" data-anchor-id="acs-demographics">ACS Demographics</h4>
-<p><em>2018–2022</em></p>
-<p>U.S. Census Bureau American Community Survey 5-Year Estimates at the Census tract level: median household income and population by age.</p>
-<p><strong>736</strong> census tracts in San Diego County</p>
+<p><strong>SCALE</strong></p>
+<section id="m-paid-subscribers" class="level4">
+<h4 class="anchored" data-anchor-id="m-paid-subscribers">325M+ paid subscribers</h4>
+<p>FY2025, across plans priced roughly $1–$37/month in USD-equivalent terms worldwide.</p>
 </section>
 </div>
 <div class="pf-source-card">
-<p><strong>SOURCE 03</strong></p>
-<section id="competitor-locations" class="level4">
-<h4 class="anchored" data-anchor-id="competitor-locations">Competitor Locations</h4>
-<p><em>2026</em></p>
-<p>Existing Planet Fitness and 24 Hour Fitness storefronts, manually compiled from corporate websites and geocoded.</p>
-<p><strong>30+</strong> competitor sites mapped</p>
+<p><strong>MARKET VALUE</strong></p>
+<section id="b-market-cap" class="level4">
+<h4 class="anchored" data-anchor-id="b-market-cap">~$306.6B market cap</h4>
+<p>$72.82/share × 4,210M shares outstanding (June 2026).</p>
 </section>
 </div>
 </div>
+<p>Netflix’s primary competitors are Amazon Prime Video, Disney+, Hulu, Apple TV+, and HBO Max, inside a global streaming market valued at roughly $145.9B in 2025.</p>
+<p><strong>Recent developments.</strong> In December 2025 Netflix agreed to acquire Warner Bros.’s film/TV studios plus HBO and Max for approximately $82.7 billion — the deal was terminated before closing, and Netflix recognized a $2.8 billion termination fee in Q1 2026. That same quarter, revenue grew 16% YoY to $12.25 billion (beating estimates), but the stock fell roughly 10% in after-hours trading on guidance pointing to decelerating growth and the announced departure of co-founder Reed Hastings from the board.</p>
 </section>
-<section id="the-process" class="level2">
-<h2 class="anchored" data-anchor-id="the-process">The process</h2>
-<p>Five sequential filters reduce a million parcels to a defensible shortlist.</p>
-<div class="pf-funnel">
-<div class="pf-funnel-step">
-<p><strong>01 GATHER</strong> Load parcels, demographics, and competitor sites</p>
-</div>
-<div class="pf-funnel-step">
-<p><strong>02 EXCLUDE</strong> 2-mile buffer around existing gyms removed</p>
-</div>
-<div class="pf-funnel-step">
-<p><strong>03 FILTER</strong> Keep commercial zoning + acreage ≥ 1.5 acres</p>
-</div>
-<div class="pf-funnel-step">
-<p><strong>04 ENRICH</strong> Spatial join with income + age tract data</p>
-</div>
-<div class="pf-funnel-step">
-<p><strong>05 SCORE</strong> Weighted index: income 55%, demographics 45%</p>
-</div>
-</div>
-<div class="pf-outcome">
-<p><strong>1,054,840 → 797 → 28</strong> — from a million parcels to a shortlist of just 28 top recommended sites</p>
-</div>
-<section id="spatial-filtering" class="level3">
-<h3 class="anchored" data-anchor-id="spatial-filtering">Spatial filtering</h3>
-<p>Two spatial filters eliminated saturated zones and non-buildable land before scoring began.</p>
+<section id="financial-performance-operating-leverage-at-scale" class="level2">
+<h2 class="anchored" data-anchor-id="financial-performance-operating-leverage-at-scale">Financial performance: operating leverage at scale</h2>
 <div class="pf-card-grid">
-<div class="pf-source-card">
-<p><strong>FILTER 01 · COMPETITOR BUFFER</strong></p>
-<p>Exclude parcels within 2 miles of any existing Planet Fitness or 24 Hour Fitness location. ArcGIS’s Buffer tool created 2-mile rings around each competitor; the Erase tool then removed any parcel intersecting these rings, eliminating already-saturated trade areas.</p>
+<section id="margins-are-expanding-faster-than-revenue" class="level4 pf-insight-card">
+<h4 class="anchored" data-anchor-id="margins-are-expanding-faster-than-revenue">Margins are expanding faster than revenue</h4>
+<p>Revenue grew 16% YoY (<strong>$39.0B → $45.2B</strong>), but operating income grew <strong>28%</strong> (<strong>$10.4B → $13.3B</strong>) — operating margin expanded from 26.7% to 29.5%, a 280 basis-point gain in one year. Content amortization ($16.4B), the largest cost line, doesn’t scale proportionally with incremental revenue, so profit compounds faster than the top line as the subscriber base grows.</p>
+</section>
+<section id="free-cash-flow-confirms-the-earnings-are-real" class="level4 pf-insight-card">
+<h4 class="anchored" data-anchor-id="free-cash-flow-confirms-the-earnings-are-real">Free cash flow confirms the earnings are real</h4>
+<p>FY2025 operating cash flow of <strong>$10.15B</strong> and free cash flow of <strong>$9.46B</strong> (net of $688M capex) against net income of $10.98B — an 86% FCF-to-net-income conversion. Content amortization ($16.4B) is nearly in balance with cash content spend ($17.1B), meaning Netflix isn’t inflating earnings by under-amortizing its content library.</p>
+</section>
 </div>
-<div class="pf-source-card">
-<p><strong>FILTER 02 · LAND USE + SIZE</strong></p>
-<p>Kept only buildable commercial parcels of adequate size, via a SQL filter on SanGIS attributes: <code>NUCLEUS_US IN (200, 213, 215, 216, 230, 240, 250, 251, 252, 340) AND ACREAGE &gt;= 1.5 AND NUCLEUS_ZO IN (50, 60)</code> — vacant commercial, strip retail, shopping centers, and standalone retail.</p>
-</div>
-</div>
-<div class="pf-funnel-numbers">
-<p>1,054,840 <span>starting universe</span> → 778,615 <span>after 2-mile buffer</span> → 797 <span>after commercial filter</span></p>
+<p>Netflix used its $9.46B in free cash flow to repurchase <strong>$9.13B</strong> of its own stock in FY2025 — returning nearly all of it to shareholders — while still holding a $9.03B cash balance.</p>
+</section>
+<section id="ratio-trends-netflix-vs.-disney" class="level2">
+<h2 class="anchored" data-anchor-id="ratio-trends-netflix-vs.-disney">Ratio trends: Netflix vs.&nbsp;Disney</h2>
+<p>Disney was selected as the primary comparable because it competes directly with Netflix in streaming (Disney+, Hulu, ESPN+) and produces original content at comparable scale. Alternatives were rejected: Amazon, Peacock, and Apple TV+ sit inside parent companies whose consolidated financials are dominated by unrelated businesses, and Warner Bros.&nbsp;Discovery’s financials are distorted by merger-related impairments.</p>
+<div class="nx-chart">
+<section id="return-on-equity-fy2023fy2025" class="level4 nx-chart-head">
+<h4 class="anchored" data-anchor-id="return-on-equity-fy2023fy2025">Return on equity, FY2023–FY2025</h4>
+<div class="nx-legend">
+<p><span class="nx-legend-item"><i class="nx-swatch nx-swatch-a"></i>Netflix (NFLX)</span> <span class="nx-legend-item"><i class="nx-swatch nx-swatch-b"></i>Disney (DIS)</span></p>
 </div>
 </section>
+<div class="nx-chart-group">
+<div class="nx-chart-group-label">
+<p>FY2023</p>
+</div>
+<div class="nx-bar-row">
+<div class="nx-bar nx-bar-a" style="width:58.4%">
+<span>26.3%</span>
+</div>
+</div>
+<div class="nx-bar-row">
+<div class="nx-bar nx-bar-b" style="width:8%">
+<span>2.4%</span>
+</div>
+</div>
+</div>
+<div class="nx-chart-group">
+<div class="nx-chart-group-label">
+<p>FY2024</p>
+</div>
+<div class="nx-bar-row">
+<div class="nx-bar nx-bar-a" style="width:78.2%">
+<span>35.2%</span>
+</div>
+</div>
+<div class="nx-bar-row">
+<div class="nx-bar nx-bar-b" style="width:11.1%">
+<span>5.0%</span>
+</div>
+</div>
+</div>
+<div class="nx-chart-group">
+<div class="nx-chart-group-label">
+<p>FY2025</p>
+</div>
+<div class="nx-bar-row">
+<div class="nx-bar nx-bar-a" style="width:91.8%">
+<span>41.3%</span>
+</div>
+</div>
+<div class="nx-bar-row">
+<div class="nx-bar nx-bar-b" style="width:25.1%">
+<span>11.3%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="nx-chart">
+<section id="debt-to-asset-ratio-fy2023fy2025" class="level4 nx-chart-head">
+<h4 class="anchored" data-anchor-id="debt-to-asset-ratio-fy2023fy2025">Debt-to-asset ratio, FY2023–FY2025</h4>
+<div class="nx-legend">
+<p><span class="nx-legend-item"><i class="nx-swatch nx-swatch-a"></i>Netflix (NFLX)</span> <span class="nx-legend-item"><i class="nx-swatch nx-swatch-b"></i>Disney (DIS)</span></p>
+</div>
 </section>
-<section id="scoring-each-parcel" class="level2">
-<h2 class="anchored" data-anchor-id="scoring-each-parcel">Scoring each parcel</h2>
-<p>Two demographic dimensions, converted from raw data into comparable 1–10 scores, and combined into a single weighted index.</p>
-<div class="pf-card-grid">
-<div class="pf-source-card">
-<p><strong>INCOME SCORE · WEIGHT 55%</strong></p>
-<p>Median household income fit. Planet Fitness targets value-conscious customers, not luxury gym-goers — the scoring bracket peaks at $50K–$75K, the brand’s documented core demographic.</p>
+<div class="nx-chart-group">
+<div class="nx-chart-group-label">
+<p>FY2023</p>
 </div>
-<div class="pf-source-card">
-<p><strong>POPULATION SCORE · WEIGHT 45%</strong></p>
-<p>Working-age population concentration. Calculated for each tract as the percentage of population aged 18–44, summed from 16 ACS sex-and-age fields using a custom Arcade expression.</p>
+<div class="nx-bar-row">
+<div class="nx-bar nx-bar-a" style="width:91.4%">
+<span>32.0%</span>
 </div>
 </div>
+<div class="nx-bar-row">
+<div class="nx-bar nx-bar-b" style="width:64.6%">
+<span>22.6%</span>
+</div>
+</div>
+</div>
+<div class="nx-chart-group">
+<div class="nx-chart-group-label">
+<p>FY2024</p>
+</div>
+<div class="nx-bar-row">
+<div class="nx-bar nx-bar-a" style="width:81.7%">
+<span>28.6%</span>
+</div>
+</div>
+<div class="nx-bar-row">
+<div class="nx-bar nx-bar-b" style="width:66.9%">
+<span>23.4%</span>
+</div>
+</div>
+</div>
+<div class="nx-chart-group">
+<div class="nx-chart-group-label">
+<p>FY2025</p>
+</div>
+<div class="nx-bar-row">
+<div class="nx-bar nx-bar-a" style="width:78.3%">
+<span>27.4%</span>
+</div>
+</div>
+<div class="nx-bar-row">
+<div class="nx-bar nx-bar-b" style="width:60.9%">
+<span>21.3%</span>
+</div>
+</div>
+</div>
+</div>
+<p>This pairing is what makes the trend analytically meaningful: Netflix’s ROE nearly doubled (26.3% → 41.3%) <strong>while its leverage simultaneously declined</strong> (32.0% → 27.4% debt-to-assets). A company can mechanically inflate ROE by piling on debt — Netflix did the opposite, growing its equity base from $20.6B to $26.6B through retained earnings while paying down debt. The improvement is operational, not financial engineering.</p>
+</section>
+<section id="cost-of-capital" class="level2">
+<h2 class="anchored" data-anchor-id="cost-of-capital">Cost of capital</h2>
+<p>Beta was calculated by regressing 60 months of Netflix returns (Jul 2021–Jun 2026) against the SPDR S&amp;P 500 ETF (SPY) as the market proxy, yielding a beta of <strong>1.5025</strong> — versus Disney’s Yahoo Finance beta of <strong>1.39</strong>. Netflix amplifies market moves about 1.5×; that higher systematic risk pushes its CAPM-required return to 17.34%, a 97 basis-point premium over Disney’s 16.37%.</p>
 <div class="pf-formula">
-<p>Final Score = (Income Score × 0.55) + (Population Score × 0.45)</p>
+<p>rₛ = 4.392% + 1.5025 × (13.008% − 4.392%) = <strong>17.34%</strong></p>
 </div>
-<p>Income is the slightly stronger predictor of Planet Fitness performance, since the brand’s pricing model depends on a specific household-income band. Population density of the 18–44 demographic is a close second — without enough target-age residents nearby, even a perfect income match will struggle to fill memberships.</p>
-</section>
-<section id="the-rankings" class="level2">
-<h2 class="anchored" data-anchor-id="the-rankings">The rankings</h2>
-<p>Mean final score across all candidate parcels, by jurisdiction.</p>
+<p>Risk-free rate 4.392% (CBOE 10-Year Treasury Yield, ^TNX) and market return 13.008% (60-month annualized SPY average). Pre-tax cost of debt of <strong>5.00%</strong> was sourced from the yield to maturity on a Netflix senior note (maturing June 2030) via the FINRA Bond Center.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: center;">Rank</th>
-<th style="text-align: left;">Jurisdiction</th>
-<th style="text-align: center;">Mean score</th>
-<th style="text-align: center;">Candidate parcels</th>
+<th style="text-align: left;">WACC component</th>
+<th style="text-align: center;">Value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">1</td>
-<td style="text-align: left;"><strong>La Mesa</strong></td>
-<td style="text-align: center;"><strong>7.98</strong></td>
-<td style="text-align: center;">8</td>
+<td style="text-align: left;">Weight of debt (wᵈ)</td>
+<td style="text-align: center;">4.21%</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">2</td>
-<td style="text-align: left;"><strong>Oceanside</strong></td>
-<td style="text-align: center;"><strong>6.16</strong></td>
-<td style="text-align: center;">93</td>
+<td style="text-align: left;">Weight of equity (wᴸ)</td>
+<td style="text-align: center;">95.79%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">3</td>
-<td style="text-align: left;"><strong>Escondido</strong></td>
-<td style="text-align: center;"><strong>5.94</strong></td>
-<td style="text-align: center;">55</td>
+<td style="text-align: left;">Pre-tax cost of debt (rᵈ)</td>
+<td style="text-align: center;">5.00%</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">4</td>
-<td style="text-align: left;">Imperial Beach</td>
-<td style="text-align: center;">5.55</td>
-<td style="text-align: center;">2</td>
+<td style="text-align: left;">Effective tax rate (T)</td>
+<td style="text-align: center;">13.69%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">5</td>
-<td style="text-align: left;">San Marcos</td>
-<td style="text-align: center;">5.36</td>
-<td style="text-align: center;">60</td>
+<td style="text-align: left;">Cost of equity (rᴸ)</td>
+<td style="text-align: center;">17.34%</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">6</td>
-<td style="text-align: left;">National City</td>
-<td style="text-align: center;">5.29</td>
-<td style="text-align: center;">17</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">7</td>
-<td style="text-align: left;">Vista</td>
-<td style="text-align: center;">5.16</td>
-<td style="text-align: center;">45</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">8</td>
-<td style="text-align: left;">San Diego</td>
-<td style="text-align: center;">5.08</td>
-<td style="text-align: center;">113</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">9</td>
-<td style="text-align: left;">Chula Vista</td>
-<td style="text-align: center;">4.98</td>
-<td style="text-align: center;">52</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">10</td>
-<td style="text-align: left;">El Cajon</td>
-<td style="text-align: center;">4.71</td>
-<td style="text-align: center;">5</td>
+<td style="text-align: left;"><strong>WACC</strong></td>
+<td style="text-align: center;"><strong>≈16.79%</strong></td>
 </tr>
 </tbody>
 </table>
-<div class="pf-gate" id="pf-gate">
-  <h4 class="anchored">🔒 Want the exact addresses and the full deck?</h4>
-  <p>Enter your email to unlock the specific recommended site addresses below, and to download the full presentation (PDF &amp; PPTX).</p>
-  <form class="pf-gate-form" id="pf-gate-form">
-    <input type="email" id="pf-gate-email" placeholder="you@company.com" required="" aria-label="Email address">
-    <button type="submit">Unlock</button>
-  </form>
-  <div class="pf-gate-status" id="pf-gate-status"></div>
-</div>
+<section id="the-spread-that-matters-most" class="level4 nx-recommend">
+<h4 class="anchored" data-anchor-id="the-spread-that-matters-most">The spread that matters most</h4>
+<p>Netflix’s calculated WACC — the minimum return it must deliver to satisfy debt and equity holders — is <strong>16.79%</strong>. Its FY2025 return on equity was <strong>41.26%</strong>, up from 26.27% three years earlier. That’s roughly a <strong>24-percentage-point spread above the cost of capital</strong>, and it isn’t coming from leverage — debt-to-assets fell over the same period. That combination is the core evidence behind the Buy call below.</p>
 </section>
-<section id="the-maps" class="level2">
-<h2 class="anchored" data-anchor-id="the-maps">The maps</h2>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Countywide</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">#1 La Mesa</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">#2 Oceanside</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">#3 Escondido</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="other_docs/1_County_Overview.jpg" class="img-fluid figure-img"></p>
-<figcaption>All 28 top-scoring parcels (stars) plotted across San Diego County, shaded by percent population aged 18–44. The bright red area in the north is Camp Pendleton — high working-age population but no commercial land, correctly excluded as a candidate.</figcaption>
-</figure>
-</div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="pf-map-wrap">
-<figure class="figure">
-<p><img src="other_docs/2_La_Mesa.jpg" class="img-fluid figure-img pf-locked-map" alt="La Mesa recommended sites overlaid on the demographic heat map."></p>
-<figcaption>La Mesa recommended sites overlaid on the demographic heat map.</figcaption>
-</figure>
-<div class="pf-map-lock-badge">🔒 Site list on this map is hidden — unlock below to reveal</div>
-</div>
-<p><strong>Why La Mesa?</strong> La Mesa emerged as the strongest jurisdiction based on three converging factors: median household incomes of $55,000–$75,000 directly aligned with Planet Fitness’s target market (demographic fit score 7.98); a working-age population making up 38–49% of residents; and, despite its central location, limited existing Planet Fitness presence within a 2-mile radius. The trade-off: only 8 candidate parcels meet all criteria, limiting site flexibility.</p>
-<p><strong>Top candidate sites:</strong> <span class="pf-locked-address">7928 El Cajon Blvd</span> (score 9.1, 4.19 acres, $67,500 income) · <span class="pf-locked-address">7900 La Mesa Blvd</span> (score 9.1, 3.53 acres, $67,500 income)</p>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="pf-map-wrap">
-<figure class="figure">
-<p><img src="other_docs/3_Oceanside.jpg" class="img-fluid figure-img pf-locked-map" alt="Oceanside recommended sites overlaid on the demographic heat map."></p>
-<figcaption>Oceanside recommended sites overlaid on the demographic heat map.</figcaption>
-</figure>
-<div class="pf-map-lock-badge">🔒 Site list on this map is hidden — unlock below to reveal</div>
-</div>
-<p><strong>Why Oceanside?</strong> Oceanside ranked #2, distinguished by an exceptional site inventory: median household incomes aligned strongly with the $50,000–$75,000 target (demographic fit score 6.16), healthy working-age population concentration along the coastal and inland corridors, and 93 qualifying parcels — the largest pool of any top-3 city, allowing flexibility for optimal corner selection based on visibility, anchor co-tenancy, and traffic patterns.</p>
-<p><strong>Top candidate sites:</strong> <span class="pf-locked-address">2005 Mission Ave</span> (score 9.1, 9.52 acres, $71,371 income) · <span class="pf-locked-address">1006 Mission Ave</span> (score 9.1, 9.52 acres, $72,750 income) · <span class="pf-locked-address">3308 Mission Ave</span> (score 9.1, 2.53 acres, $51,607 income)</p>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<div class="pf-map-wrap">
-<figure class="figure">
-<p><img src="other_docs/4_Escondido.jpg" class="img-fluid figure-img pf-locked-map" alt="Escondido recommended sites overlaid on the demographic heat map."></p>
-<figcaption>Escondido recommended sites overlaid on the demographic heat map.</figcaption>
-</figure>
-<div class="pf-map-lock-badge">🔒 Site list on this map is hidden — unlock below to reveal</div>
-</div>
-<p><strong>Why Escondido?</strong> Escondido ranked #3, offering a strong balance of demographic fit and inventory: incomes falling solidly within the $50,000–$75,000 target range with strong representation among working-class families (score 5.94), a working-age population concentrated along the I-15 corridor and downtown — high-traffic zones ideal for gym placement — and 55 qualifying parcels serving as a natural hub for North County Inland membership.</p>
-<p><strong>Top candidate sites:</strong> <span class="pf-locked-address">2040 Valley Pkwy</span> (score 9.1, 1.92 acres, $56,230 income) · <span class="pf-locked-address">2315 Valley Pkwy</span> (score 9.1, 2.54 acres, $56,230 income) · <span class="pf-locked-address">2427 Valley Pkwy</span> (score 9.1, 2.22 acres, $73,693 income)</p>
-</div>
-</div>
-</div>
 </section>
-<section id="key-insights-limitations" class="level2">
-<h2 class="anchored" data-anchor-id="key-insights-limitations">Key insights &amp; limitations</h2>
-<div class="pf-card-grid">
-<section id="insights" class="level4 pf-insight-card">
-<h4 class="anchored" data-anchor-id="insights">Insights</h4>
-<ul>
-<li><strong>Demographics matter more than density.</strong> Coastal areas (Del Mar, Solana Beach, Encinitas) ranked lowest despite high population — incomes far above Planet Fitness’s target band.</li>
-<li><strong>The single best site is in National City.</strong> 0 Bay Marina Dr scored a perfect 10.0, but with only 17 candidate parcels citywide, National City didn’t crack the top 3 by mean score.</li>
-<li><strong>Valley Parkway is a hot corridor.</strong> Four of the top 28 sites cluster along Valley Pkwy in Escondido, suggesting strong demographic alignment along that commercial strip.</li>
-<li><strong>Inventory matters as much as mean score.</strong> La Mesa scored highest but offers only 8 sites; Oceanside’s 93 sites give a franchise team far more room to negotiate.</li>
-</ul>
+<section id="capital-structure-a-five-year-shift" class="level2">
+<h2 class="anchored" data-anchor-id="capital-structure-a-five-year-shift">Capital structure: a five-year shift</h2>
+<p>Netflix’s balance sheet has transformed from debt-heavy to equity-dominant. Two forces drove it: free cash flow turned sustainably positive from 2022 onward (letting Netflix pay down gross debt from $15.8B to $13.5B), and net income nearly quadrupled ($2.76B → $10.98B), compounding $15.6B of retained earnings directly into equity with no dividends paid out to offset it.</p>
+<div class="nx-chart">
+<section id="long-term-debt-vs.-common-equity-of-total-capital" class="level4 nx-chart-head">
+<h4 class="anchored" data-anchor-id="long-term-debt-vs.-common-equity-of-total-capital">Long-term debt vs.&nbsp;common equity, % of total capital</h4>
 </section>
-<section id="limitations" class="level4 pf-insight-card">
-<h4 class="anchored" data-anchor-id="limitations">Limitations</h4>
-<ul>
-<li><strong>Two dimensions, not all dimensions.</strong> Foot traffic, parking, visibility from major roads, anchor co-tenancy, and lease availability aren’t captured — all matter to real franchise decisions.</li>
-<li><strong>Tract-level demographics smooth out neighborhoods.</strong> A single Census tract may contain very different micro-neighborhoods; block-group data would be sharper for site-level decisions.</li>
-<li><strong>Land-use codes lag reality.</strong> SanGIS warns its land-use field updates irregularly — a parcel listed “vacant commercial” may have a new tenant, so ground-truthing is essential.</li>
-<li><strong>Buffer assumption.</strong> The 2-mile competitor radius fits urban San Diego but is conservative for North County; a variable buffer would refine results.</li>
-</ul>
-</section>
+<div class="nx-stack-row">
+<div class="nx-stack-label">
+<p>FY2020</p>
 </div>
+<div class="nx-stack-bar">
+<div class="nx-stack-seg nx-stack-equity" style="width:41.2%">
+Equity 41.2%
+</div>
+<div class="nx-stack-seg nx-stack-debt" style="width:58.8%">
+Debt 58.8%
+</div>
+</div>
+</div>
+<div class="nx-stack-row">
+<div class="nx-stack-label">
+<p>FY2025</p>
+</div>
+<div class="nx-stack-bar">
+<div class="nx-stack-seg nx-stack-equity" style="width:66.4%">
+Equity 66.4%
+</div>
+<div class="nx-stack-seg nx-stack-debt" style="width:33.6%">
+Debt 33.6%
+</div>
+</div>
+</div>
+</div>
+<p>Netflix carries no preferred stock. FY2025 book capital: $13,464M long-term debt (33.6%) and $26,615M common equity (66.4%), on $40,079M total capital.</p>
 </section>
-<section id="recommendations" class="level2">
-<h2 class="anchored" data-anchor-id="recommendations">Recommendations</h2>
+<section id="dividend-policy" class="level2">
+<h2 class="anchored" data-anchor-id="dividend-policy">Dividend policy</h2>
+<p>Netflix has never paid a cash dividend — the trailing-twelve-month payout remains $0.00/share. Instead, it returns capital through buybacks ($9.13B in FY2025 alone). Three reasons: Netflix ran negative free cash flow from roughly 2015–2021, making dividends structurally impossible during the content-investment years; management continues to prefer the flexibility of buybacks; and elevated future content or technology spend makes a fixed distribution premature. Disney, by contrast, suspended its dividend in 2020, reinstated it in FY2023 at $0.30/share semi-annually, and raised it to an annual $1.00/share by FY2025 — a mature income-stock posture Netflix has deliberately avoided.</p>
+</section>
+<section id="where-the-growth-comes-from" class="level2">
+<h2 class="anchored" data-anchor-id="where-the-growth-comes-from">Where the growth comes from</h2>
 <div class="pf-funnel">
 <div class="pf-funnel-step">
-<p><strong>01 GROUND-TRUTH THE TOP 10</strong> Visit highest-scoring parcels in person to check visibility, parking, anchor co-tenancy, and adjacent retail mix that GIS can’t capture.</p>
+<p><strong>ADVERTISING TIER</strong> 250M+ monthly active viewers (May 2026); tracking to ~$3B revenue in 2026 (2× 2025), $9B long-term target by 2030. 60%+ of new signups in eligible markets now choose the ad tier.</p>
 </div>
 <div class="pf-funnel-step">
-<p><strong>02 ADD A THIRD DIMENSION</strong> Drive-time analysis using ArcGIS Network Analyst — a site with strong demographics but poor accessibility won’t perform.</p>
+<p><strong>LIVE SPORTS</strong> 10-year exclusive global WWE Raw deal from Jan 2025; NFL agreement expanded through 2029 (+5 broadcast windows/season); 3-year MLB deal; exclusive FIFA Women’s World Cup rights for 2027 and 2031.</p>
 </div>
 <div class="pf-funnel-step">
-<p><strong>03 REFINE WITH BLOCK-GROUP DATA</strong> Re-run the demographic overlay at the Census block-group level for sharper neighborhood-scale precision in dense areas.</p>
-</div>
-<div class="pf-funnel-step">
-<p><strong>04 VARIABLE COMPETITOR BUFFERS</strong> Tighter buffers (1.5 mi) in dense urban zones, wider buffers (4–5 mi) in North County to reflect real trade-area geometry.</p>
+<p><strong>GAMING</strong> A longer-horizon, higher-uncertainty bet. Management is pursuing a cloud-first strategy explicitly framed as a retention tool, not a standalone revenue line.</p>
 </div>
 </div>
-<div id="pf-gated-downloads" class="pf-gated-downloads pf-locked">
+</section>
+<section id="key-risks" class="level2">
+<h2 class="anchored" data-anchor-id="key-risks">Key risks</h2>
+<section id="what-could-break-this-thesis" class="level4 pf-insight-card">
+<h4 class="anchored" data-anchor-id="what-could-break-this-thesis">What could break this thesis</h4>
+<ul>
+<li><strong>Mature-market saturation.</strong> U.S./Canada broadband penetration already exceeds 70%, and the 2023 password-sharing crackdown tailwind is largely exhausted.</li>
+<li><strong>Constrained M&amp;A.</strong> The failed $82.7B Warner Bros.&nbsp;deal — and its $2.8B termination fee — signals that large-scale content acquisitions face real limits, leaving organic investment as the primary growth lever.</li>
+<li><strong>Decelerating guidance.</strong> Q1 2026 guidance pointed to growth slowing to roughly 13%, which contributed to a meaningful stock decline.</li>
+<li><strong>EU content quota.</strong> The European Commission has proposed a 20% local-content quota that would force substantially more European programming investment.</li>
+<li><strong>Rising sports-rights costs.</strong> Live sports commitments are large, fixed, and multi-year — a real margin risk if advertising or subscriber growth underperforms.</li>
+</ul>
+</section>
+</section>
+<section id="full-ratio-summary" class="level2">
+<h2 class="anchored" data-anchor-id="full-ratio-summary">Full ratio summary</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Ratio</th>
+<th style="text-align: center;">FY2023</th>
+<th style="text-align: center;">FY2024</th>
+<th style="text-align: center;">FY2025</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Liquidity</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Current ratio</td>
+<td style="text-align: center;">1.15x</td>
+<td style="text-align: center;">1.22x</td>
+<td style="text-align: center;">1.19x</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Quick ratio</td>
+<td style="text-align: center;">1.15x</td>
+<td style="text-align: center;">1.22x</td>
+<td style="text-align: center;">1.19x</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Asset management</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total asset turnover</td>
+<td style="text-align: center;">0.69x</td>
+<td style="text-align: center;">0.73x</td>
+<td style="text-align: center;">0.81x</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fixed asset turnover</td>
+<td style="text-align: center;">9.45x</td>
+<td style="text-align: center;">10.55x</td>
+<td style="text-align: center;">10.73x</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Debt management</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Debt-to-asset ratio</td>
+<td style="text-align: center;">32.0%</td>
+<td style="text-align: center;">28.6%</td>
+<td style="text-align: center;">27.4%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Times interest earned</td>
+<td style="text-align: center;">9.94x</td>
+<td style="text-align: center;">14.49x</td>
+<td style="text-align: center;">17.16x</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Profitability</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Operating margin</td>
+<td style="text-align: center;">20.62%</td>
+<td style="text-align: center;">26.71%</td>
+<td style="text-align: center;">29.49%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Profit margin</td>
+<td style="text-align: center;">16.04%</td>
+<td style="text-align: center;">22.34%</td>
+<td style="text-align: center;">24.30%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Basic earning power</td>
+<td style="text-align: center;">14.27%</td>
+<td style="text-align: center;">19.43%</td>
+<td style="text-align: center;">23.97%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Return on assets</td>
+<td style="text-align: center;">11.10%</td>
+<td style="text-align: center;">16.24%</td>
+<td style="text-align: center;">19.75%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Return on equity</td>
+<td style="text-align: center;">26.27%</td>
+<td style="text-align: center;">35.21%</td>
+<td style="text-align: center;">41.26%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Market value</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EPS</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">$2.61</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P/E ratio</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">27.92x</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Market-to-book ratio</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">11.52x</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="recommendation-buy" class="level2">
+<h2 class="anchored" data-anchor-id="recommendation-buy">Recommendation: Buy</h2>
+<p>The clearest signal in this analysis is the spread between what Netflix earns and what it costs Netflix to raise capital. Against a WACC of 16.79%, Netflix posted a 41.26% ROE in FY2025 — up from 26.27% three years prior — and that gain is not a leverage trick, since debt-to-assets fell over the same window. The second reason is diversification: a 24.30% net-margin subscription business (up from 16.04%) is now layering a fast-scaling advertising business on top, on pace for $3B in 2026 revenue against a $9B target by 2030. The acknowledged risks — a beta of 1.5025, saturating mature markets, and real limits on large-scale M&amp;A — don’t outweigh a company generating outsized returns on equity, expanding margins, and delevering at the same time.</p>
 <div class="pf-downloads">
-<p><a href="other_docs/PlanetFitness_SiteSelection_Presentation.pdf" class="pf-download-btn" target="_blank" onclick="return window.pfGateUnlocked;">Download the full presentation (PDF)</a> <a href="other_docs/PlanetFitness_SiteSelection_Presentation.pptx" class="pf-download-btn pf-download-btn-outline" onclick="return window.pfGateUnlocked;">Download the original slides (.pptx)</a></p>
-</div>
-<p class="pf-gated-lock-msg" id="pf-gated-lock-msg">
-🔒 Enter your email above to unlock downloads.
-</p>
+<p><a href="other_docs/Netflix_Company_Analysis_Final.pdf" class="pf-download-btn" target="_blank">Download the full report (PDF)</a> <a href="other_docs/NFLX_Company_Analysis_Model.xlsx" class="pf-download-btn pf-download-btn-outline">Download the Excel valuation model (.xlsx)</a></p>
 </div>
 <p class="pf-footnote">
-Data sources: SanGIS Parcels (2024) · ACS 5-Year Estimates (2018–2022) · manually compiled competitor locations. Prepared by Mario Nonog, GIS Project, May 2026.
+Data sources: Netflix FY2025 Form 10-K &amp; Q4 2025 Shareholder Letter, Yahoo Finance (Disney beta), FINRA Bond Center (Netflix cost of debt), CBOE 10-Year Treasury Yield. Prepared by Mario Nonog for FI.300 Corporate Finance, Golden Gate University, July 2026.
 </p>
-<script>
-(function () {
-  window.pfGateUnlocked = false;
-  var GATE_KEY = 'pf_gate_unlocked_planet_fitness';
-  var form = document.getElementById('pf-gate-form');
-  var statusEl = document.getElementById('pf-gate-status');
-  var gateBox = document.getElementById('pf-gate');
-  var downloadsWrap = document.getElementById('pf-gated-downloads');
-  var lockMsg = document.getElementById('pf-gated-lock-msg');
-
-  function unlock() {
-    window.pfGateUnlocked = true;
-    document.querySelectorAll('.pf-locked-address').forEach(function (el) {
-      el.classList.add('pf-unlocked');
-    });
-    document.querySelectorAll('.pf-locked-map').forEach(function (el) {
-      el.classList.add('pf-unlocked');
-    });
-    document.querySelectorAll('.pf-map-wrap').forEach(function (el) {
-      el.classList.add('pf-unlocked');
-    });
-    if (downloadsWrap) downloadsWrap.classList.remove('pf-locked');
-    if (lockMsg) lockMsg.style.display = 'none';
-    if (gateBox) {
-      var h = gateBox.querySelector('h4');
-      var p = gateBox.querySelector('p');
-      if (h) h.textContent = '✅ Unlocked — thanks!';
-      if (p) p.textContent = 'The exact addresses are visible below and downloads are enabled.';
-      if (form) form.style.display = 'none';
-    }
-  }
-
-  if (localStorage.getItem(GATE_KEY) === 'true') {
-    unlock();
-  }
-
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var emailInput = document.getElementById('pf-gate-email');
-      var email = emailInput.value.trim();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        statusEl.textContent = 'Please enter a valid email address.';
-        statusEl.className = 'pf-gate-status pf-error';
-        return;
-      }
-      statusEl.textContent = 'Unlocking…';
-      statusEl.className = 'pf-gate-status';
-      fetch('https://formsubmit.co/ajax/mariononog@gmail.com', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          email: email,
-          _subject: 'Planet Fitness project page — download/address unlock',
-          page: window.location.href
-        })
-      }).then(function () {
-        localStorage.setItem(GATE_KEY, 'true');
-        unlock();
-      }).catch(function () {
-        // Don't block the visitor even if the notification email fails to send.
-        localStorage.setItem(GATE_KEY, 'true');
-        unlock();
-      });
-    });
-  }
-})();
-</script>
 
 
 </section>
