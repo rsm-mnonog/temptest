@@ -8,6 +8,8 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - href: my-story.qmd
+        text: My Story
       - href: resume.qmd
         text: Resume
       - href: project.qmd

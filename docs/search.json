@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Mario P. Nonog Jr.",
     "section": "",
-    "text": "I’m a data science professional with 10 years of operational leadership experience in the U.S. Navy and have Master’s in Business Analytics/Data Science at UC San Diego. My work bridges real-world problem-solving with technical expertise in Python, SQL, Power BI and machine learning. I specialize in turning raw data into actionable insights through predictive modeling, data visualization, and dashboard development. From leading analytics-driven decisions in high-stakes environments to building uplift models, xgboost, regressions, neural network, random forest, churn prediction pipelines, and interactive dashboards, I bring a structured, results-oriented approach to solving business problems. I’m passionate about using data to drive measurable impact and I thrive in collaborative environments where curiosity, adaptability, and continuous learning are valued."
+    "text": "∫ Calculus Tutor Business Analytics Finance Cryptography\n\nI’m a mathematics tutor based in San Diego, specializing in Precalculus and Calculus I for community college students. I also work with high school and elementary students. I hold a B.S. in Mathematics from the U.S. Naval Academy and an M.S. in Business Analytics from UC San Diego, and I’m completing an M.S. in Finance at Golden Gate University.\nBefore tutoring, I served 10 years in the U.S. Navy as a Hospital Corpsman and a commissioned officer, and I bring the structure and discipline of that service to my teaching. My next goal is a master’s in mathematics and, ultimately, teaching at the college level."
   },
   {
     "objectID": "certificates.html",
@@ -446,5 +446,26 @@
     "title": "Netflix, Inc. — A Company & Valuation Analysis",
     "section": "Recommendation: Buy",
     "text": "Recommendation: Buy\nThe clearest signal in this analysis is the spread between what Netflix earns and what it costs Netflix to raise capital. Against a WACC of 16.79%, Netflix posted a 41.26% ROE in FY2025 — up from 26.27% three years prior — and that gain is not a leverage trick, since debt-to-assets fell over the same window. The second reason is diversification: a 24.30% net-margin subscription business (up from 16.04%) is now layering a fast-scaling advertising business on top, on pace for $3B in 2026 revenue against a $9B target by 2030. The acknowledged risks — a beta of 1.5025, saturating mature markets, and real limits on large-scale M&A — don’t outweigh a company generating outsized returns on equity, expanding margins, and delevering at the same time.\n\n  📧 Want the full report or the Excel model?\n  These aren't posted as a direct download — email me and I'll send over the PDF report and the Excel valuation model.\n  Email me for the report\n\n\nData sources: Netflix FY2025 Form 10-K & Q4 2025 Shareholder Letter, Yahoo Finance (Disney beta), FINRA Bond Center (Netflix cost of debt), CBOE 10-Year Treasury Yield. Prepared by Mario Nonog for FI.300 Corporate Finance, Golden Gate University, July 2026."
+  },
+  {
+    "objectID": "my-story.html",
+    "href": "my-story.html",
+    "title": "Every path led back to math",
+    "section": "",
+    "text": "My Story\n\n\nMy path to teaching math wasn’t a straight line. It took me from a small town in the Philippines to Okinawa, Annapolis, and the deck of a warship, and back to the subject I loved first."
+  },
+  {
+    "objectID": "my-story.html#recognition",
+    "href": "my-story.html#recognition",
+    "title": "Every path led back to math",
+    "section": "Recognition",
+    "text": "Recognition\n\n\n\n🏅\n\n\nBlue Jacket of the Year 2016\n\n\nU.S. Naval Hospital Okinawa, Japan. Selected from all junior sailors at the hospital.\n\n\n\n\n📐\n\n\nBest in Mathematics\n\n\nNaval Academy Preparatory School, 2018. One recipient out of roughly 250 students.\n\n\n\n\n⭐\n\n\nCaptain Joseph K. Taussig Jr. Award\n\n\nU.S. Naval Academy, Class of 2022. Named for Captain Taussig (USNA ’41), who earned the Navy Cross for his actions aboard USS Nevada at Pearl Harbor."
+  },
+  {
+    "objectID": "my-story.html#outside-the-classroom",
+    "href": "my-story.html#outside-the-classroom",
+    "title": "Every path led back to math",
+    "section": "Outside the classroom",
+    "text": "Outside the classroom\n\n\nWhen I’m not doing math, you’ll find me at the chessboard, writing code, out on a walk or at the beach, or taking care of my dog. I also love racket sports.\n\n\nChess &lt;/&gt; Coding Walks outside The beach My dog\n\n\nBadminton Tennis Pickleball"
   }
 ]

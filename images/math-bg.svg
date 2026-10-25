@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+  <defs>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M 42 0 L 0 0 0 42" fill="none" stroke="#1F3A93" stroke-width="1" opacity="0.055"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="900" fill="url(#grid)"/>
+
+  <!-- faint decorative curves -->
+  <path d="M 20 760 C 160 560, 260 560, 340 700 S 520 860, 640 640" fill="none" stroke="#1F3A93" stroke-width="2" opacity="0.07"/>
+  <path d="M 540 60 Q 660 20 760 120 T 880 260" fill="none" stroke="#e8622c" stroke-width="2" opacity="0.07"/>
+  <circle cx="150" cy="150" r="70" fill="none" stroke="#1F3A93" stroke-width="1.4" opacity="0.07"/>
+  <path d="M 90 150 L 760 150" stroke="#1F3A93" stroke-width="1" opacity="0.05"/>
+
+  <g font-family="Source Serif 4, Georgia, serif" fill="#1F3A93">
+    <text x="40" y="60" font-size="18" opacity="0.10">f&#8242;(a) = lim</text>
+    <text x="40" y="78" font-size="13" opacity="0.10">h&#8594;0</text>
+    <text x="700" y="90" font-size="17" opacity="0.10">&#8747; f(x) dx</text>
+    <text x="620" y="200" font-size="16" opacity="0.09">F(b) &#8722; F(a)</text>
+    <text x="760" y="330" font-size="17" opacity="0.10">e&#691; + 1 = 0</text>
+    <text x="30" y="330" font-size="16" opacity="0.09">c &#8801; m&#7497; (mod n)</text>
+    <text x="40" y="430" font-size="16" opacity="0.10">A = P(1 + r/n)&#8319;&#691;</text>
+    <text x="520" y="470" font-size="16" opacity="0.09">&#931; x&#7522; &#8201;&#916;x</text>
+    <text x="150" y="560" font-size="15" opacity="0.09">y = f(x)</text>
+    <text x="330" y="640" font-size="15" opacity="0.09">N(&#956;, &#963;&#178;)</text>
+    <text x="600" y="640" font-size="14" opacity="0.08">P(a &#8804; X &#8804; b)</text>
+    <text x="700" y="760" font-size="15" opacity="0.09">P + Q</text>
+    <text x="40" y="820" font-size="14" opacity="0.08">NPV = &#931; CF&#7606; / (1+r)&#7605;</text>
+    <text x="420" y="850" font-size="14" opacity="0.08">ed &#8801; 1 (mod &#966;(n))</text>
+    <text x="560" y="40" font-size="13" opacity="0.07">1011 0110 0010 1101</text>
+    <text x="230" y="260" font-size="14" opacity="0.08">y&#178; = x&#179; &#8722; 2x + 2</text>
+  </g>
+</svg>

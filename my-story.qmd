@@ -1,0 +1,156 @@
+---
+pagetitle: "My Story"
+title-block-banner: false
+---
+
+::: {.ms-hero}
+<img src="images/HEADSHOT.jpeg" class="ms-photo" alt="Mario Nonog">
+
+<span class="ms-label">My Story</span>
+
+# Every path led back to math
+
+My path to teaching math wasn't a straight line. It took me from a small town in the Philippines to Okinawa, Annapolis, and the deck of a warship, and back to the subject I loved first.
+:::
+
+::: {.ms-timeline}
+
+::: {.ms-entry}
+::: {.ms-entry-card}
+<span class="ms-entry-date">2013 &middot; Philippines</span>
+
+### Where it started
+
+I grew up in the Philippines, the youngest of four and the only son, in a loving and supportive home. My mom taught math and my dad taught science, first as college professors and later as high school teachers. Teaching doesn't pay much in the Philippines, so money was often tight. There were times we didn't have enough food, and my mom borrowed from relatives and friends, and even pawned her jewelry, to support us.
+
+In high school, I was in the Special Science Class program. My days started at 5:30 a.m. and ended around 7 p.m., with 10 to 12 classes a day. I gave up my summers to prepare for academic competitions and do science research. I ranked first in my class for all four years and graduated as valedictorian of Tayug National High School's class of 2013, giving the valedictory speech to my classmates at graduation. I then spent a year as a math major at the University of the Philippines.
+:::
+:::
+
+::: {.ms-entry}
+::: {.ms-entry-card}
+<span class="ms-entry-date">2014 &middot; San Diego</span>
+
+### A new start at 17
+
+In August 2014, at 17, I left the Philippines for the United States, hoping for a better life. I started out as a cashier at Jollibee while I figured out my next step. The road was rough, but it was worth it.
+:::
+:::
+
+::: {.ms-entry}
+::: {.ms-entry-card}
+<span class="ms-entry-date">2015&ndash;2017 &middot; Okinawa, Japan</span>
+
+### Hospital Corpsman
+
+I left for Navy boot camp in March 2015 and was stationed at U.S. Naval Hospital Okinawa, Japan, my first look at the medical field. In October 2016 I was named Blue Jacket of the Year, selected from all the junior sailors at the hospital. That same year, I applied to the U.S. Naval Academy and was accepted.
+:::
+:::
+
+::: {.ms-entry}
+::: {.ms-entry-card}
+<span class="ms-entry-date">2017&ndash;2018 &middot; Newport, Rhode Island</span>
+
+### Naval Academy Preparatory School
+
+Before Annapolis, I spent a year at the Naval Academy Preparatory School. At Recognition Day I received the Best in Mathematics award, given to just one student out of roughly 250.
+:::
+:::
+
+::: {.ms-entry}
+::: {.ms-entry-card}
+<span class="ms-entry-date">2018&ndash;2022 &middot; Annapolis, Maryland</span>
+
+### The U.S. Naval Academy, and the hardest part
+
+The Academy tested me in ways that had nothing to do with grades. Many of my classmates had grown up with things I was still learning as a young adult, and the physical standards pushed me too:
+
+::: {.ms-mini-grid}
+<div class="ms-mini-card"><strong>Culture shock</strong><span>Adjusting to American life and Academy traditions all at once.</span></div>
+<div class="ms-mini-card"><strong>Language</strong><span>Studying, speaking up, and leading in English, a language I was still growing into.</span></div>
+<div class="ms-mini-card"><strong>Swimming</strong><span>Learning to swim later than most. I woke up early, put in extra pool time, and passed every swim test the Academy gave me.</span></div>
+<div class="ms-mini-card"><strong>Running</strong><span>I ran my first Navy 1.5-mile in 12:40. With steady training, I ran my fastest at the Academy: 9:00.</span></div>
+:::
+
+I handled it the way I handle every test: show up early, put in the work, and don't quit. I started as an Electrical Engineering major, found I loved the math far more than the lab work, and graduated with a B.S. in Mathematics as part of the Class of 2022. Along the way I received the Captain Joseph K. Taussig Jr. Award at the Academy's Prizes and Awards Ceremony.
+:::
+:::
+
+::: {.ms-entry}
+::: {.ms-entry-card}
+<span class="ms-entry-date">At sea</span>
+
+### Naval officer
+
+As an officer, I led sailors at sea, served as my ship's administrative officer, and learned anti-submarine warfare, making decisions under pressure along the way. It taught me a lot about leadership, but it wasn't my calling.
+:::
+:::
+
+::: {.ms-entry}
+::: {.ms-entry-card}
+<span class="ms-entry-date">2025 &middot; San Diego</span>
+
+### Exploring
+
+After 10 years of service, I left the Navy in May 2025. I became executive assistant to the executive director of a nonprofit serving underrepresented communities, including Black, Latino, and Asian communities, women, and veterans. I also pursued tech: my M.S. in Business Analytics from UC San Diego, completed in December 2025, taught me to solve real business cases with Python, SQL, VS Code, and GitHub. I received a data analyst offer in San Antonio, Texas, but my family needed me here, so I chose to stay in San Diego.
+:::
+:::
+
+::: {.ms-entry .ms-current}
+::: {.ms-entry-card}
+<span class="ms-entry-date">2026 &middot; Today</span>
+
+### Tutoring, and finally it clicked
+
+While looking for opportunities, I answered a Facebook Marketplace post from someone who needed help with math. My first student, a high school senior, started with me in January 2026. Since then I've tutored community college students, ages 18 to 40, in Precalculus and Calculus I, and a third grader too.
+
+I grew up in a family of educators, and now I see why they loved it. I'm currently earning an M.S. in Finance at Golden Gate University, which I'll finish in July 2027. After that, I plan to earn a master's in mathematics so that one day I can teach math as a college professor.
+:::
+:::
+
+:::
+
+## Recognition {.ms-section-heading}
+
+::: {.ms-recognition-grid}
+<div class="ms-recognition-card">
+<div class="ms-rec-icon">🏅</div>
+<h4>Blue Jacket of the Year 2016</h4>
+<p>U.S. Naval Hospital Okinawa, Japan. Selected from all junior sailors at the hospital.</p>
+</div>
+<div class="ms-recognition-card">
+<div class="ms-rec-icon">📐</div>
+<h4>Best in Mathematics</h4>
+<p>Naval Academy Preparatory School, 2018. One recipient out of roughly 250 students.</p>
+</div>
+<div class="ms-recognition-card">
+<div class="ms-rec-icon">⭐</div>
+<h4>Captain Joseph K. Taussig Jr. Award</h4>
+<p>U.S. Naval Academy, Class of 2022. Named for Captain Taussig (USNA '41), who earned the Navy Cross for his actions aboard USS Nevada at Pearl Harbor.</p>
+</div>
+:::
+
+## Outside the classroom {.ms-section-heading}
+
+::: {.ms-outside}
+<p>When I'm not doing math, you'll find me at the chessboard, writing code, out on a walk or at the beach, or taking care of my dog. I also love racket sports.</p>
+
+<div class="ms-tag-row">
+<span class="ms-tag">Chess</span>
+<span class="ms-tag">&lt;/&gt; Coding</span>
+<span class="ms-tag">Walks outside</span>
+<span class="ms-tag">The beach</span>
+<span class="ms-tag">My dog</span>
+</div>
+<div class="ms-tag-row">
+<span class="ms-tag ms-tag-accent">Badminton</span>
+<span class="ms-tag ms-tag-accent">Tennis</span>
+<span class="ms-tag ms-tag-accent">Pickleball</span>
+</div>
+
+<div class="ms-social-row">
+<a href="mailto:mariononog@gmail.com" aria-label="Email"><i class="bi bi-envelope"></i></a>
+<a href="https://www.linkedin.com/in/mnonog/" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+<a href="https://github.com/rsm-mnonog" target="_blank" aria-label="GitHub"><i class="bi bi-github"></i></a>
+</div>
+:::

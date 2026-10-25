@@ -13,4 +13,13 @@ about:
 
 ---
 
-I'm a data science professional  with 10 years of operational leadership experience in the U.S. Navy and have Master’s in Business Analytics/Data Science at UC San Diego. My work bridges real-world problem-solving with technical expertise in Python, SQL, Power BI and machine learning. I specialize in turning raw data into actionable insights through predictive modeling, data visualization, and dashboard development.  From leading analytics-driven decisions in high-stakes environments to building uplift models, xgboost, regressions, neural network, random forest, churn prediction pipelines, and interactive dashboards, I bring a structured, results-oriented approach to solving business problems. I’m passionate about using data to drive measurable impact and I thrive in collaborative environments where curiosity, adaptability, and continuous learning are valued.   
+::: {.mn-badge-row}
+<span class="mn-badge">&#8747; Calculus Tutor</span>
+<span class="mn-badge">Business Analytics</span>
+<span class="mn-badge">Finance</span>
+<span class="mn-badge">Cryptography</span>
+:::
+
+I'm a mathematics tutor based in San Diego, specializing in Precalculus and Calculus I for community college students. I also work with high school and elementary students. I hold a B.S. in Mathematics from the U.S. Naval Academy and an M.S. in Business Analytics from UC San Diego, and I'm completing an M.S. in Finance at Golden Gate University.
+
+Before tutoring, I served 10 years in the U.S. Navy as a Hospital Corpsman and a commissioned officer, and I bring the structure and discipline of that service to my teaching. My next goal is a master's in mathematics and, ultimately, teaching at the college level.

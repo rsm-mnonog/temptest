@@ -10,7 +10,7 @@
   --mn-navy-light: #eef1fb;
   --mn-ink: #1a2033;
   --mn-muted: #5b6272;
-  --mn-bg: #f7f8fb;
+  --mn-bg: #eef1f8;
   --mn-card-bg: #ffffff;
   --mn-border: #e4e7ef;
   --mn-accent: #e8622c;
@@ -22,9 +22,16 @@
 /* ---------- base ---------- */
 body {
   background-color: var(--mn-bg) !important;
+  background-image: url('images/math-bg.svg');
+  background-repeat: repeat;
+  background-size: 620px 620px;
+  background-attachment: fixed;
   color: var(--mn-ink);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 760px) {
+  body { background-attachment: scroll; background-size: 420px 420px; }
 }
 
 h1, h2, h3, h4, .title, .navbar-title {
@@ -88,6 +95,26 @@ main.content, .quarto-title-banner {
 .navbar-nav .nav-link.active {
   color: var(--mn-navy) !important;
   font-weight: 700;
+}
+
+/* ---------- about badges (homepage) ---------- */
+.mn-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 0.2rem 0 1.3rem;
+}
+.mn-badge {
+  display: inline-block;
+  background: #ffffff;
+  border: 1px solid var(--mn-border);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--mn-navy);
+  box-shadow: var(--mn-shadow);
 }
 
 /* ---------- about / homepage (jolla template) ---------- */
@@ -630,4 +657,225 @@ object[type="application/pdf"] {
 @media (max-width: 700px) {
   .pf-hero { padding: 1.6rem 1.3rem; }
   .pf-hero h3 { font-size: 1.35rem; }
+}
+
+/* =========================================================
+   My Story page — reusable "ms-" component classes
+   ========================================================= */
+
+.ms-hero {
+  text-align: center;
+  max-width: 62ch;
+  margin: 0.5rem auto 2.6rem;
+}
+.ms-photo {
+  display: block;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1.1rem;
+  border: 4px solid #ffffff;
+  outline: 1px solid var(--mn-border);
+  box-shadow: var(--mn-shadow-hover);
+}
+.ms-label {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mn-accent);
+  margin-bottom: 0.6rem;
+}
+.ms-hero h1 {
+  margin: 0 0 0.9rem;
+  font-size: 2.1rem;
+}
+.ms-hero p {
+  color: var(--mn-muted);
+  font-size: 1.04rem;
+  line-height: 1.6;
+}
+
+.ms-timeline {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+  padding-left: 2.1rem;
+}
+.ms-timeline::before {
+  content: "";
+  position: absolute;
+  left: 0.3rem;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  width: 2px;
+  background: var(--mn-border);
+}
+.ms-entry {
+  position: relative;
+  margin-bottom: 1.6rem;
+}
+.ms-entry::before {
+  content: "";
+  position: absolute;
+  left: -2.1rem;
+  top: 0.35rem;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--mn-navy);
+  box-shadow: 0 0 0 4px var(--mn-bg);
+}
+.ms-entry.ms-current::before {
+  background: var(--mn-accent);
+}
+.ms-entry-card {
+  background: var(--mn-card-bg);
+  border: 1px solid var(--mn-border);
+  border-radius: var(--mn-radius);
+  padding: 1.5rem 1.7rem;
+  box-shadow: var(--mn-shadow);
+}
+.ms-entry-date {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mn-accent);
+  margin-bottom: 0.3rem;
+}
+.ms-entry-card h3 {
+  margin: 0 0 0.7rem;
+  font-size: 1.28rem;
+}
+.ms-entry-card p {
+  line-height: 1.65;
+  margin-bottom: 0.9rem;
+}
+.ms-entry-card p:last-child {
+  margin-bottom: 0;
+}
+
+.ms-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.9rem;
+  margin: 1.1rem 0 1.3rem;
+}
+.ms-mini-card {
+  background: var(--mn-navy-light);
+  border: 1px solid #dde3f7;
+  border-radius: var(--mn-radius);
+  padding: 1rem 1.1rem;
+}
+.ms-mini-card strong {
+  display: block;
+  color: var(--mn-navy);
+  font-size: 0.82rem;
+  margin-bottom: 0.35rem;
+}
+.ms-mini-card span {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--mn-ink);
+}
+
+.ms-recognition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.1rem;
+  max-width: 900px;
+  margin: 1.4rem auto 0;
+}
+.ms-recognition-card {
+  background: var(--mn-card-bg);
+  border: 1px solid var(--mn-border);
+  border-radius: var(--mn-radius);
+  padding: 1.3rem 1.4rem;
+  box-shadow: var(--mn-shadow);
+  text-align: center;
+}
+.ms-recognition-card .ms-rec-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.ms-recognition-card h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--mn-navy);
+}
+.ms-recognition-card p {
+  font-size: 0.86rem;
+  color: var(--mn-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.ms-section-heading {
+  text-align: center;
+  margin: 3.2rem 0 1.2rem;
+}
+
+.ms-outside {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+.ms-outside p {
+  color: var(--mn-muted);
+  line-height: 1.6;
+}
+.ms-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  margin: 1rem 0;
+}
+.ms-tag {
+  display: inline-block;
+  background: var(--mn-navy-light);
+  border: 1px solid #dde3f7;
+  color: var(--mn-navy);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.ms-tag.ms-tag-accent {
+  background: #fff1e9;
+  border-color: #f6d9c7;
+  color: #8a3d16;
+}
+
+.ms-social-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 2.4rem 0 1rem;
+}
+.ms-social-row a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--mn-border);
+  background: #ffffff;
+  color: var(--mn-navy) !important;
+}
+.ms-social-row a:hover {
+  background: var(--mn-navy);
+  color: #ffffff !important;
+  border-color: var(--mn-navy);
+}
+
+@media (max-width: 700px) {
+  .ms-timeline { padding-left: 1.6rem; }
+  .ms-entry::before { left: -1.6rem; }
+  .ms-hero h1 { font-size: 1.6rem; }
 }
